@@ -1,0 +1,29 @@
+﻿@using FarmMartUI.helper
+
+    @{
+        
+        var alerts = TempData.ContainsKey(Alert.TempDataKey) ? (List<Alert>)TempData[Alert.TempDataKey] : new List<Alert>();
+        @*<span class="kwrd">if</span> (alerts.Any())
+{
+                &lt; hr / &gt;
+            }
+<span class="kwrd">foreach</span> (var alert <span class="kwrd">in</span> alerts)
+{
+var dismissableClass = alert.Dismissable ? < span class="str">"alertdismissable"</
+span> : <span class="kwrd">null</span>;
+&lt;div<span class="kwrd">class</span>=<span class="str">"alert alert-
+@alert.AlertStyle @dismissableClass"</span>&gt;
+            @<span class="kwrd">if</span> (alert.Dismissable)
+{
+&lt;button type =< span class="str">"button"</span> <span
+class="kwrd">class</span>=<span class="str">"close"</span> data-dismiss=<span
+class="str">"alert"</span> aria-hidden=<span
+class="str">"true"</span>&gt;&amp;times;&lt;/button&gt;
+}
+            @Html.Raw(alert.Message)
+&lt;/div&gt;
+}*@
+        
+            
+
+            

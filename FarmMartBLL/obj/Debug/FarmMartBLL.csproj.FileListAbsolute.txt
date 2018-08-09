@@ -1,0 +1,24 @@
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.csprojAssemblyReference.cache
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.csproj.CoreCompileInputs.cache
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartBLL.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartBLL.pdb
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartDAL.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\EntityFramework.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartDAL.pdb
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartDAL.dll.config
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Debug\EntityFramework.xml
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.csproj.CopyComplete
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.pdb
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartBLL.dll
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartBLL.pdb
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartDAL.dll
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\EntityFramework.dll
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartDAL.pdb
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\FarmMartDAL.dll.config
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\bin\Debug\EntityFramework.xml
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.csprojAssemblyReference.cache
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.csproj.CoreCompileInputs.cache
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.csproj.CopyComplete
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.dll
+C:\Users\tesli\Documents\GitHub\FarmMartUI\FarmMartBLL\obj\Debug\FarmMartBLL.pdb

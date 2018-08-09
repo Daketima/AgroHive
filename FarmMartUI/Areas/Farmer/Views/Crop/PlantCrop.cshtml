@@ -1,0 +1,79 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.PlantingViewModel
+
+@{
+    ViewBag.Title = "PlantCrop";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+@section scripts{
+    
+    <!-- Slimscroll -->
+    <script src="~/backend/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='plugins/fastclick/fastclick.min.js'></script>
+    <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
+    <script src="~/backend/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script>
+        $('#DatePlanted').datepicker(
+            {
+                format: 'dd/mm/yyyy'
+            });
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Plant Crop</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                @using (Html.BeginForm("PlantCrop", "Crop", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.FarmCropId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Planting Date:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.DatePlanted, new { @class = "form-control", @id = "DatePlanted" })
+                                @Html.ValidationMessageFor(model => model.DatePlanted, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Due in Months:</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.MonthToGrowId, Model.HarvestPeriodDropDown, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MonthToGrowId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Hecterage:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Hectarage, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Hectarage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Yield Per Hecter:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.YieldPerHectar, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.YieldPerHectar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Plant Crop" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>

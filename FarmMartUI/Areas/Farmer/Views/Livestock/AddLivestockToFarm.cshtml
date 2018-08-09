@@ -1,0 +1,91 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.FarmLivestockViewModel
+
+@{
+    ViewBag.Title = "AddLivestockToFarm";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+@section scripts{
+    <script src="~/backend/plugins/datatables/jquery.dataTables.js"></script>
+    <link href="~/backend/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- Slimscroll -->
+    <script src="~/backend/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='plugins/fastclick/fastclick.min.js'></script>
+    <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
+    <script src="~/backend/plugins/datepicker/bootstrap-datepicker.js"></script>
+    
+    <script>
+        $('#HitMarketDate').datepicker(
+            {
+                format: 'dd/MM/yyyy'
+            });
+    </script>
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Add Livestock</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                @using (Html.BeginForm("AddLivestockToFarm", "FarmLivestock", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.FarmId)
+                    @Html.HiddenFor(m => m.LivestockBreedId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Gender:</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.GenderId, Model.AnimalGenderDropDown,
+                               new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Population:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Population, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Population, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Quantity Available:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.QuantityAvailable, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.QuantityAvailable, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Weight:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Weight, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Hit Market Date:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.HitMarketDate, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.HitMarketDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Add Livestock" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>

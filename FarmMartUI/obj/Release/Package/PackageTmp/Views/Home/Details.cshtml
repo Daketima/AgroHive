@@ -1,0 +1,181 @@
+﻿@model FarmMartUI.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Controller = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section scripts{
+    <script>
+            $('a[name="Pharvest"]').click(function () {
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: "@Url.Action("CropHarvest", "FarmCrop")",
+                    data: { farmcropId: id },
+                    datatype: "html",
+                    type: "POST",
+                    success: function (data) {
+                        var html = data
+                        $("#HarvestContainer").html(data);
+                    },
+                    error: function () {
+                        alert("An error occured");
+                    }
+                });
+            });
+
+    </script>
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="box">
+            <h1>@Model.ThisFarm.FarmName</h1>
+
+            @if (Model.ThisFarm.IsVerified)
+            {
+                <p class="lead">This farm has been verified</p>
+
+            }
+            else
+            {
+                <p class="lead">This farm has not been verified, we advice not to do business with this farm.</p>
+            }
+
+            <p class="text-muted">
+                Availabel crops in @Model.ThisFarm.FarmName <a href="@Url.Action("Contact","Home")">Contact this farm</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="col-md-6" id="customer-orders">
+        <div class="box">
+            <h4>Crops in this Farm</h4>
+            <hr>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Image</th>
+                            <th>Crop</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody style="overflow-y:auto; height:200px">
+                       
+                        @if (Model.FarmCrops.Any())
+                        {
+                            var count = 0;
+                            foreach (var fc in Model.FarmCrops.OrderBy(x => x.Crop.Name))
+                            {
+                                count++;
+                                <tr>
+                                    <th>@count</th>
+                                    @if (!string.IsNullOrEmpty(fc.Crop.Photopath))
+                                    {
+                                        <td> <img src="~/CropProfile/@fc.Crop.Photopath" /></td>
+                                    }
+                                    else
+                                    {
+                                        <td> <img src="~/Front/img/fm.jpg" /></td>
+                                    }
+                                    <td>@fc.Crop.Name</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm">You Can</button>
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                @*<li><a href=""  name="Pharvest" data-id="@fc.Id">Planting/Harvest</a></li>*@
+                                                <li><a href="@Url.Action("CropHarvest","FarmCrop", new { farmCropId = fc.Id})" name="Pharvest" data-id="@fc.Id">View Planting/Harvest date</a></li>
+                                                @*<li><a name="FarmCr" data-id="@fc.Id">Plant</a></li>*@
+                                                <li><a href="#">View Crop price</a></li>
+                                                <li><a href="#">Send Message to Farmer</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    <p>Crops are not available in this farm</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-8 -->
+    <div class="col-md-6" id="customer-orders">
+        <div class="box">
+            <h4>Livestock in this Farm</h4>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Image</th>
+                            <th>Livestock</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    @if (Model.FarmLivestocks.Any())
+                    {
+                        var count = 0;
+                        <tbody style="overflow-y:auto; height:200px">
+                            @foreach (var fc in Model.FarmLivestocks.OrderBy(x => x.Livestock.Name))
+                            {
+                                count++;
+                                <tr>
+                                    <th>@count</th>
+                                    @if (!string.IsNullOrEmpty(fc.Livestock.PhotoPath))
+                                    {
+                                        <td> <img src="~/LivestockProfile/@fc.Livestock.PhotoPath" /></td>
+                                    }
+                                    else
+                                    {
+                                        <td> <img src="~/Front/img/fm.jpg" /></td>
+                                    }
+                                    <td>@fc.Livestock.Name</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm">You Can</button>
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="" name="Pharvest" data-id="@fc.Id">See Selling Price</a></li>
+                                                <li><a href="#" name="Pharvest" data-id="@fc.Id">Send Message to Farmer</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

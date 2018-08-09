@@ -1,0 +1,68 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.FarmViewModel
+
+@{
+    ViewBag.Title = "DeleteFarm";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+
+@section scripts{
+    <script>
+        
+            $('#btnDeleteFarm').click(function () {
+                var cnfrm = confirm('Are you sure you want to delete this farm')
+                if (cnfrm) {
+                    $('#formDeleteFarm').submit();
+                }
+            });
+       
+    </script>
+    }
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Update Farm</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                @using (Html.BeginForm("DeleteFarm", "Farm", new { enctype = "multipart/form-data" },FormMethod.Post, new { @id = "formDeleteFarm"} ))
+                {
+                    @Html.HiddenFor(model => model.ApplicationUserId)
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Farm Name:</label>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.FarmName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FarmName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Email Address:</label>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <a id="btnDeleteFarm" class="btn btn-primary">Delete Farm</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div>
+                    @Html.ActionLink("Back to Farms", "Index")
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+
+</div>

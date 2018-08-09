@@ -1,0 +1,176 @@
+﻿@model FarmMartUI.Models.AddressViewModel
+@{
+    ViewBag.Title = "Faarm Address";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+@section scripts{
+    <script>
+        $('#StateId').change(function () {
+            var id = $("#StateId option:selected").val();
+            $.ajax({
+                url: "@Url.Action("GetLgasNew", "FarmAddress")",
+                data: { id: id },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var items = "";
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                    });
+                    $("#LocalGovermentId").html(items);
+                },
+                error: function () {
+                    alert("An error occured");
+                },
+            });
+        });
+    </script>
+}
+
+
+@*<div class="example-modal" >*@
+@*<div class="modal" role="dialog" id="formAddFarmAddressDialog" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Farm Address</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "FarmAddress", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => Model.FarmId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <hr />
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(m => m.StateId, Model.StateDropDown, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LocalGovermentId, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(m => m.LocalGovermentId, Model.LocalGovernmentAreaDropDown, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LocalGovermentId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>*@<!-- /.modal -->
+@*</div>*@<!-- /.example-modal -->
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Add Farm Address</h3>
+            </div><!-- /.box-header -->
+            <div class="modal-body">
+                @using (Html.BeginForm("AddFarmAddress", "FarmAddress", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => Model.FarmId)
+                    @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <hr />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="FullAddress" class="control-label col-md-4"> Full Address:</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(m => m.FullAddress, new { @class = "form-control", @placeholder = "Address" })
+                            @Html.ValidationMessageFor(model => model.FullAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StateId" class="control-label col-md-4"> State:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.StateId, Model.StateDropDown, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LocalGovermentId" class="control-label col-md-4"> Local Goverment:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.LocalGovermentId, Model.LocalGovernmentAreaDropDown, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LocalGovermentId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="LandMark" class="control-label col-md-4"> Land Mark:</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.LandMark, new { @class = "form-control", @placeholder = "A bus stop, eatry etc close to your farm" })
+                            @Html.ValidationMessageFor(model => model.LandMark, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Longitude" class="control-label col-md-4"> Longitude:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Latitude" class="control-label col-md-4"> Latitude:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <input type="submit" value="Add Address" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+                }
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>

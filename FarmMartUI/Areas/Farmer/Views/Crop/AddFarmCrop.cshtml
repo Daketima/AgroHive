@@ -1,0 +1,99 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.FarmCropViewModel
+
+@{
+    ViewBag.Title = "Add Crop";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Add Crop</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Crop Image</th>
+                            <th>Crop Name</th>
+                            <th>Crop Type</th>
+                            <th>Crop Variety</th>
+                            <th>Variety Note</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int count = 0;}
+                        @foreach (var cv in Model.CropListItem)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>Crop Image</td>
+                                <td>@cv.Crop.Name</td>
+                                <td>@cv.Crop.CropType.Name</td>
+                                <td>@cv.Name</td>
+                                <td>@cv.Note</td>
+                                <td><a class="btn btn-primary" name="AddCrop" data-CropId="@cv.Id" data-Farmid="@Model.FarmId">Add Crop</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+                <div>
+                    @Html.ActionLink("Crop not listed, add it", "AddCrop", "Crop")
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/backend/plugins/datatables/jquery.dataTables.js"></script>
+    <link href="~/backend/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- Slimscroll -->
+    <script src="~/backend/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='plugins/fastclick/fastclick.min.js'></script>
+    <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
+
+    <script>
+        $(function () {
+
+            $('#example2').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": false
+            });
+        });
+
+        $('a[name = "AddCrop"]').click(function () {
+            var cropVarietyId = $(this).attr('data-CropId');
+            var farmId = $(this).attr('data-Farmid');
+
+
+            $.ajax({
+                url: "@Url.Action("AddCropToFarm", "FarmCrop", new { area = ""})",
+                data: { FarmId: farmId, CropVarietyId: cropVarietyId },
+                type: "POST",
+                //dataType: "json",
+                //success: function () {
+                //    alert("you clicked me")
+                //},
+                //error: function () {
+                //    alert("An error occured");
+                //}
+            });
+        });
+    </script>
+}

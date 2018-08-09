@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmerMartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FarmerMartEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="FarmerMartModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="FarmerMartModel.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="FarmerMartModel.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="FarmerMartModel.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="FarmerMartModel.AspNetUsers" />
+    <EntitySet Name="Crop" EntityType="FarmerMartModel.Crop" />
+    <EntitySet Name="CropType" EntityType="FarmerMartModel.CropType" />
+    <EntitySet Name="Farm" EntityType="FarmerMartModel.Farm" />
+    <EntitySet Name="FarmAddress" EntityType="FarmerMartModel.FarmAddress" />
+    <EntitySet Name="FarmCrop" EntityType="FarmerMartModel.FarmCrop" />
+    <EntitySet Name="HarvestPeriod" EntityType="FarmerMartModel.HarvestPeriod" />
+    <EntitySet Name="LocalGovernment" EntityType="FarmerMartModel.LocalGovernment" />
+    <EntitySet Name="Measurement" EntityType="FarmerMartModel.Measurement" />
+    <EntitySet Name="Person" EntityType="FarmerMartModel.Person" />
+    <EntitySet Name="Planting" EntityType="FarmerMartModel.Planting" />
+    <EntitySet Name="Pricing" EntityType="FarmerMartModel.Pricing" />
+    <EntitySet Name="State" EntityType="FarmerMartModel.State" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="FarmerMartModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="FarmerMartModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Person_ApplicationUser" Association="FarmerMartModel.FK_Person_Person_ApplicationUser">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Crop_CropType" Association="FarmerMartModel.FK_Crop_CropType">
+      <End Role="CropType" EntitySet="CropType" />
+      <End Role="Crop" EntitySet="Crop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmCrop_Crop" Association="FarmerMartModel.FK_FarmCrop_Crop">
+      <End Role="Crop" EntitySet="Crop" />
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Farm_Farm_Address" Association="FarmerMartModel.FK_Farm_Farm_Address">
+      <End Role="FarmAddress" EntitySet="FarmAddress" />
+      <End Role="Farm" EntitySet="Farm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Farm_Farm_Person" Association="FarmerMartModel.FK_Farm_Farm_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Farm" EntitySet="Farm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmCrop_Farm" Association="FarmerMartModel.FK_FarmCrop_Farm">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmAddress_LocalGovernment" Association="FarmerMartModel.FK_FarmAddress_LocalGovernment">
+      <End Role="LocalGovernment" EntitySet="LocalGovernment" />
+      <End Role="FarmAddress" EntitySet="FarmAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmAddress_State" Association="FarmerMartModel.FK_FarmAddress_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="FarmAddress" EntitySet="FarmAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Planting_FarmCrop" Association="FarmerMartModel.FK_Planting_FarmCrop">
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
+      <End Role="Planting" EntitySet="Planting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pricing_FarmCrop" Association="FarmerMartModel.FK_Pricing_FarmCrop">
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
+      <End Role="Pricing" EntitySet="Pricing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocalGovernment_State" Association="FarmerMartModel.FK_LocalGovernment_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="LocalGovernment" EntitySet="LocalGovernment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pricing_Measurement" Association="FarmerMartModel.FK_Pricing_Measurement">
+      <End Role="Measurement" EntitySet="Measurement" />
+      <End Role="Pricing" EntitySet="Pricing" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="FarmerMartModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="FarmerMartModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="FarmerMartModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="FarmerMartModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="FarmerMartModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="FarmerMartModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="Person" Relationship="FarmerMartModel.FK_Person_Person_ApplicationUser" FromRole="AspNetUsers" ToRole="Person" />
+    <NavigationProperty Name="AspNetRoles" Relationship="FarmerMartModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Crop">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CropTypeId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Photopath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CropType" Relationship="FarmerMartModel.FK_Crop_CropType" FromRole="Crop" ToRole="CropType" />
+    <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_FarmCrop_Crop" FromRole="Crop" ToRole="FarmCrop" />
+  </EntityType>
+  <EntityType Name="CropType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Crop" Relationship="FarmerMartModel.FK_Crop_CropType" FromRole="CropType" ToRole="Crop" />
+  </EntityType>
+  <EntityType Name="Farm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonId" Type="Int32" />
+    <Property Name="FarmName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhotoPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="AddressId" Type="Int32" />
+    <NavigationProperty Name="FarmAddress" Relationship="FarmerMartModel.FK_Farm_Farm_Address" FromRole="Farm" ToRole="FarmAddress" />
+    <NavigationProperty Name="Person" Relationship="FarmerMartModel.FK_Farm_Farm_Person" FromRole="Farm" ToRole="Person" />
+    <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_FarmCrop_Farm" FromRole="Farm" ToRole="FarmCrop" />
+  </EntityType>
+  <EntityType Name="FarmAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="LocalGovermentId" Type="Int32" />
+    <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Farm" Relationship="FarmerMartModel.FK_Farm_Farm_Address" FromRole="FarmAddress" ToRole="Farm" />
+    <NavigationProperty Name="LocalGovernment" Relationship="FarmerMartModel.FK_FarmAddress_LocalGovernment" FromRole="FarmAddress" ToRole="LocalGovernment" />
+    <NavigationProperty Name="State" Relationship="FarmerMartModel.FK_FarmAddress_State" FromRole="FarmAddress" ToRole="State" />
+  </EntityType>
+  <EntityType Name="FarmCrop">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmId" Type="Int32" />
+    <Property Name="CropId" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="IsSelected" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Crop" Relationship="FarmerMartModel.FK_FarmCrop_Crop" FromRole="FarmCrop" ToRole="Crop" />
+    <NavigationProperty Name="Farm" Relationship="FarmerMartModel.FK_FarmCrop_Farm" FromRole="FarmCrop" ToRole="Farm" />
+    <NavigationProperty Name="Planting" Relationship="FarmerMartModel.FK_Planting_FarmCrop" FromRole="FarmCrop" ToRole="Planting" />
+    <NavigationProperty Name="Pricing" Relationship="FarmerMartModel.FK_Pricing_FarmCrop" FromRole="FarmCrop" ToRole="Pricing" />
+  </EntityType>
+  <EntityType Name="HarvestPeriod">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LocalGovernment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="FarmAddress" Relationship="FarmerMartModel.FK_FarmAddress_LocalGovernment" FromRole="LocalGovernment" ToRole="FarmAddress" />
+    <NavigationProperty Name="State" Relationship="FarmerMartModel.FK_LocalGovernment_State" FromRole="LocalGovernment" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Measurement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pricing" Relationship="FarmerMartModel.FK_Pricing_Measurement" FromRole="Measurement" ToRole="Pricing" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsVerified" Type="Boolean" />
+    <Property Name="ApplicationUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUsers" Relationship="FarmerMartModel.FK_Person_Person_ApplicationUser" FromRole="Person" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Farm" Relationship="FarmerMartModel.FK_Farm_Farm_Person" FromRole="Person" ToRole="Farm" />
+  </EntityType>
+  <EntityType Name="Planting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmCropId" Type="Int32" />
+    <Property Name="DatePlanted" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpectedHarvestDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_Planting_FarmCrop" FromRole="Planting" ToRole="FarmCrop" />
+  </EntityType>
+  <EntityType Name="Pricing">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmId" Type="Int32" />
+    <Property Name="FarmCropId" Type="Int32" />
+    <Property Name="MeasurementId" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_Pricing_FarmCrop" FromRole="Pricing" ToRole="FarmCrop" />
+    <NavigationProperty Name="Measurement" Relationship="FarmerMartModel.FK_Pricing_Measurement" FromRole="Pricing" ToRole="Measurement" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="FarmAddress" Relationship="FarmerMartModel.FK_FarmAddress_State" FromRole="State" ToRole="FarmAddress" />
+    <NavigationProperty Name="LocalGovernment" Relationship="FarmerMartModel.FK_LocalGovernment_State" FromRole="State" ToRole="LocalGovernment" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="FarmerMartModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="FarmerMartModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="FarmerMartModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="FarmerMartModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Person_ApplicationUser">
+    <End Type="FarmerMartModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="ApplicationUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Crop_CropType">
+    <End Type="FarmerMartModel.CropType" Role="CropType" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Crop" Role="Crop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CropType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Crop">
+        <PropertyRef Name="CropTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmCrop_Crop">
+    <End Type="FarmerMartModel.Crop" Role="Crop" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Crop">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmCrop">
+        <PropertyRef Name="CropId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Farm_Farm_Address">
+    <End Type="FarmerMartModel.FarmAddress" Role="FarmAddress" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Farm" Role="Farm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Farm">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Farm_Farm_Person">
+    <End Type="FarmerMartModel.Person" Role="Person" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Farm" Role="Farm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Farm">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmCrop_Farm">
+    <End Type="FarmerMartModel.Farm" Role="Farm" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmCrop">
+        <PropertyRef Name="FarmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmAddress_LocalGovernment">
+    <End Type="FarmerMartModel.LocalGovernment" Role="LocalGovernment" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.FarmAddress" Role="FarmAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LocalGovernment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmAddress">
+        <PropertyRef Name="LocalGovermentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmAddress_State">
+    <End Type="FarmerMartModel.State" Role="State" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.FarmAddress" Role="FarmAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmAddress">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Planting_FarmCrop">
+    <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Planting" Role="Planting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmCrop">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Planting">
+        <PropertyRef Name="FarmCropId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pricing_FarmCrop">
+    <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Pricing" Role="Pricing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmCrop">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pricing">
+        <PropertyRef Name="FarmCropId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocalGovernment_State">
+    <End Type="FarmerMartModel.State" Role="State" Multiplicity="1" />
+    <End Type="FarmerMartModel.LocalGovernment" Role="LocalGovernment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocalGovernment">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pricing_Measurement">
+    <End Type="FarmerMartModel.Measurement" Role="Measurement" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Pricing" Role="Pricing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Measurement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pricing">
+        <PropertyRef Name="MeasurementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="FarmerMartModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="FarmerMartModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
+</Schema>

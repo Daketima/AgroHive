@@ -1,0 +1,32 @@
+﻿@model FarmMartUI.Models.FarmCropViewModel
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date Planted</th>
+                <th>Expected Harvest Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Harvest != null)
+            {
+                <tr>
+                    <td>#</td>
+                    <td>@Model.Harvest.DatePlanted</td>
+                    <td>@Model.Harvest.ExpectedHarvestDate</td>
+                </tr>
+
+            }
+            else
+            {
+               <tr>
+                   <td><p>The farmer may not have planted this crop yet</p></td>
+               </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

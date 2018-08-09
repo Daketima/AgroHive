@@ -1,0 +1,104 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.FarmLivestockViewModel
+
+@{
+    ViewBag.Title = "Add Livestock";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+@section scripts{
+    <script src="~/backend/plugins/datatables/jquery.dataTables.js"></script>
+    <link href="~/backend/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- Slimscroll -->
+    <script src="~/backend/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='plugins/fastclick/fastclick.min.js'></script>
+    <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
+    <script>
+        $('a[name = "AddLivestock"]').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "@Url.Action("AddLivestockToFarm", "FarmLivestock")",
+                data: { farmId: id },
+                dataType: "html",
+                type: "POST",
+                success: function (data) {
+                    var items = "";
+                    //$.each(data, function (i, item) {
+                    //    items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                    //});
+                    $("#farmAddressDialogContainer").html(data);
+                    $("#formAddFarmAddressDialog").modal({ show: true });
+
+                },
+                error: function () {
+                    alert("An error occured");
+                },
+            });
+        });
+    </script>
+}
+
+@Html.HiddenFor(m => m.FarmId)
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Add Crop</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Breed Image</th>
+                            <th>Breed Name</th>
+                            <th>Breed Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.LivestockBreedList.Any())
+                        {
+                            int count = 0;
+                            foreach (var fb in Model.LivestockBreedList)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@fb.PhotoPath</td>
+                                    <td>@fb.Name</td>
+                                    <td>@fb.Livestock.LivestockType.Name </td>
+                                    <td><a class="btn btn-primary" href="@Url.Action("AddLivestockToFarm", "FarmLivestock", new {  farmId = Model.FarmId, BreedId = fb.Id })">Add to Farm</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <div>
+                    @*@Html.ActionLink("Crop not listed, add it", "AddCrop", "Crop")*@
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>
+
+@*<tbody>
+        @{ int count = 0;}
+        @foreach (var cv in Model.FarmLivestockList)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>Crop Image</td>
+                <td>@cv.LivestockBreed.Livestock.LivestockType.Name</td>
+                <td>@cv.LivestockBreed.Name</td>
+                <td>@cv.LivestockBreed.Note</td>
+                <td><a href="@Url.Action()" class="btn btn-primary" name="AddCrop" data-CropId="@cv.Id" data-Farmid="@Model.FarmId">Add Crop</a></td>
+            </tr>
+        }
+    </tbody>*@

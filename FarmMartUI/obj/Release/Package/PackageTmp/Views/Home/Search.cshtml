@@ -1,0 +1,200 @@
+﻿@model FarmMartUI.Models.HomeViewModel
+
+@{
+    ViewBag.Controller = "Home";
+    ViewBag.Title = "Search Result";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="col-md-3">
+        <!-- *** PAGES MENU ***
+        _________________________________________________________ -->
+        <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Crop/Livestock List</h3>
+            </div>
+
+            <div class="panel-body" style="height:500px; overflow:auto">
+                <ul class="nav nav-pills nav-stacked">
+                    @if (Model.CropList.Any())
+                    {
+                        foreach (var c in Model.CropList)
+                        {
+                            <li>
+                                <a href="@Url.Action("Search", "Home", new { cropId = c.Id})">@c.Name</a>
+                            </li>
+                        }
+                    }
+                    @if (Model.LivestockList.Any())
+                    {
+                        foreach (var c in Model.LivestockList.OrderBy(x => x.Name))
+                        {
+                            <li>
+                                <a href="@Url.Action("Search", "Home", new { livestockId = c.Id})">@c.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- *** PAGES MENU END *** -->
+        @*<div class="banner">
+                <a href="#">
+                    <img src="~/Front/img/banner.jpg" alt="sales 2014" class="img-responsive">
+                </a>
+            </div>*@
+    </div>
+
+    <div class="col-md-9">
+
+        <div class="box">
+            <h1>Available farms</h1>
+            @*<p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>*@
+        </div>
+
+        <div class="box info-bar">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 products-showing">
+                    Showing <strong>12</strong> of <strong>25</strong> products
+                </div>
+
+                <div class="col-sm-12 col-md-8  products-number-sort">
+                    <div class="row">
+                        <form class="form-inline">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="products-number">
+                                    <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary">12</a>  <a href="#" class="btn btn-default btn-sm">24</a>  <a href="#" class="btn btn-default btn-sm">All</a> products
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="products-sort-by">
+                                    <strong>Sort by</strong>
+                                    <select name="sort-by" class="form-control">
+                                        <option>Price</option>
+                                        <option>Name</option>
+                                        <option>Sales first</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Farms.Any())
+        {
+            <div class="row products">
+                @foreach (var f in Model.Farms)
+                {
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    @if (string.IsNullOrEmpty(f.PhotoPath))
+                                    {
+                                        <div class="front">
+                                            <a href="@Url.Action("Details", "Home", new { id = f.Id})">
+                                                <img src="~/Front/img/this farm.jpg" alt="" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="back">
+                                            <a href="@Url.Action("Details", "Home", new { id = f.Id})">
+                                                <img src="~/Front/img/this farm.jpg" alt="" class="img-responsive">
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="front">
+                                            <a href="@Url.Action("Details", "Home", new { id = f.Id})">
+                                                <img src="~/FarmProfile/@f.PhotoPath" alt="" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="back">
+                                            <a href="@Url.Action("Details", "Home", new { id = f.Id})">
+                                                <img src="~/FarmProfile/@f.PhotoPath" alt="" class="img-responsive">
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            @if (string.IsNullOrEmpty(f.PhotoPath))
+                            {
+                                <a href="@Url.Action("Details", "Home", new { id = f.Id})" class="invisible">
+                                    <img src="~/Front/img/this farm.jpg" alt="" class="img-responsive">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Details", "Home", new { id = f.Id})" class="invisible">
+                                    <img src="~/FarmProfile/@f.PhotoPath" alt="" class="img-responsive">
+                                </a>
+                            }
+                            
+                            <div class="text">
+                                <h3><a href="@Url.Action("Details", "Home", new { id = f.Id})">@f.FarmName</a></h3>
+                                @*<p class="price">$143.00</p>*@
+                                <p class="buttons">
+                                    <a href="@Url.Action("Details", "Home", new { id = f.Id})" class="btn btn-default">View detail</a>
+                                    @*<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>*@
+                                </p>
+                            </div>
+                            <!-- /.text -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="row products">
+                <p>There are not farms available</p>
+            </div>
+        }
+
+
+        <!-- /.products -->
+
+        <div class="pages">
+
+            <p class="loadMore">
+                <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a>
+            </p>
+
+            <ul class="pagination">
+                <li>
+                    <a href="#">&laquo;</a>
+                </li>
+                <li class="active">
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+    <!-- /.col-md-9 -->
+
+</div>

@@ -1,0 +1,47 @@
+﻿@model FarmMartUI.Models.FarmCropViewModel
+
+
+@*<div class="example-modal" >*@
+<div class="modal" role="dialog" id="formAddFarmCropDialog" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Crop List</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "FarmCrop", FormMethod.Post, new { enctype = "multipart/form - data" }))
+                {
+                    @Html.HiddenFor(model => Model.FarmId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <div class="row col-md-offset-1" style="padding:10px;">
+                            @foreach (var crop in Model.CropListItem)
+                            {
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="CropId" id="chck_@crop.Id" , value="@crop.Id" />
+                                        <label for="chck_@crop.Id">@crop.Name</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <br />
+                        <div class="row col-md-offset-0">
+                            <div class="form-group">
+                                <div class="col-md-offset-0 col-md-4">
+                                    <input type="submit" value="Add Crop" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div>
+                    @Html.ActionLink("Crop not listed, add it", "AddCrop", "Crop")
+                </div>
+            </div>
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*</div>*@<!-- /.example-modal -->

@@ -1,0 +1,56 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Crop price list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-8" id="customer-orders">
+        <div class="box">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CropPrice != null)
+                        {
+                            var count = 0;
+                            foreach (var cp in Model.CropPrice)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@cp.Measurement.Name</td>
+                                    <td>@cp.UnitPrice</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    <p>Price is not available at this time</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-8 -->
+    @*<div class="col-md-4" id="customer-orders">
+            <div class="box">
+                <h5>Planting/Harverst Details</h5>
+                <div id="HarvestContainer">
+
+                </div>
+            </div>
+        </div>*@
+</div>

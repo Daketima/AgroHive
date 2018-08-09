@@ -1,0 +1,39 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.FarmLivestockViewModel
+
+
+<div class="box-body">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th style="width: 10px">#</th>
+                <th>Livestock Type</th>
+                <th>Livestock Breed</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:auto; height:200px">
+            @foreach (var f in Model.FarmLivestockList)
+            {
+            <tr>
+                <td style="width: 10px">#</td>
+                <td>@f.LivestockBreed.Livestock.Name.</td>
+                <td>@f.LivestockBreed.Name.</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger">You Can</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("AddLivestockPrice","Livestock", new { farmLivestockId = f.Id, farmId = f.FarmId})">Add Price</a></li>
+
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div><!-- /.box-body -->

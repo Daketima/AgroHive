@@ -1,0 +1,49 @@
+﻿@model FarmMartUI.Models.FarmCropViewModel
+
+@{
+    ViewBag.Title = "Add Crop";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Add Crop</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                @using (Html.BeginForm("AddFarmCrop", "FarmCrop", FormMethod.Post, new { enctype = "multipart/form - data" }))
+                {
+                    @Html.HiddenFor(model => Model.FarmId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                    <hr />
+                        <div class="row col-md-offset-0" style="padding:10px;">
+                            @foreach (var crop in Model.CropListItem.OrderBy(x => x.Name))
+                            {
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="CropId" id="chck_@crop.Id" , value="@crop.Id" />
+                                        <label for="chck_@crop.Id">@crop.Name</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="row col-md-offset-0" style="padding:10px;">
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-1">
+                                    <input type="submit" value="Add Crop to Farm" class="btn btn-primary btn-block" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div>
+                    @Html.ActionLink("Crop not listed, add it", "AddCrop", "Crop")
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@model FarmMartUI.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    @Html.Partial("AdminDashboard")
+}
+else
+{
+   @Html.Partial("FarmerDashboard")
+}

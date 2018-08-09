@@ -1,0 +1,202 @@
+﻿@model FarmMartUI.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Contact";
+    ViewBag.Controller = "Home";
+}
+
+<div class="container">
+
+    @*<div class="col-md-3">
+            <!-- *** PAGES MENU ***
+            _________________________________________________________ -->
+            <div class="panel panel-default sidebar-menu">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Pages</h3>
+                </div>
+
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="text.html">Text page</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact page</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">FAQ</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- *** PAGES MENU END *** -->
+
+
+            <div class="banner">
+                <a href="#">
+                    <img src="~/Front/img/banner.jpg" alt="sales 2014" class="img-responsive">
+                </a>
+            </div>
+        </div>*@
+
+    <div class="col-md-12">
+
+
+        <div class="box" id="contact">
+            <h1>Contact</h1>
+
+            <p class="lead">Are you curious about something? Do you have question to ask? You have better idea to make Farmer's Mart better?</p>
+            <p>Please feel free to contact us, our customer service center is working for you 24/7.</p>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3><i class="fa fa-map-marker"></i> Address</h3>
+                    <p>
+                        Ikeja, Lagos
+                        @*<br>New Heaven
+                        <br>45Y 73J
+                        <br>England
+                        <br>*@
+                        <strong>Nigeria</strong>
+                    </p>
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <h3><i class="fa fa-phone"></i> Call center</h3>
+                    <p class="text-muted">Our call center is availabel 24/7.</p>
+                    <p>
+                        <strong>+234 818 600 9746</strong>
+                    </p>
+                </div>
+                <!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <h3><i class="fa fa-envelope"></i> Electronic support</h3>
+                    <p class="text-muted">Gives your feedback and ideas how to improve Farmers' Mart. We are here to support your business hence your ideas and opinion is valuable to us.</p>
+                    <ul>
+                        <li>
+                            <strong><a href="mailto:">info@farmersmart.com</a></strong>
+                        </li>
+                        @*<li><strong><a href="#"></a></strong> - our ticketing support platform</li>*@
+                    </ul>
+                </div>
+                <!-- /.col-sm-4 -->
+            </div>
+            <!-- /.row -->
+
+            <hr>
+
+            <div id="map">
+
+            </div>
+
+            <hr>
+            <h2>Contact form/Feedback</h2>
+
+            @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+            {
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @*<label for="Name">Full Name</label>*@
+                            @Html.TextBoxFor(m => Model.Name, new { @class= "form-control", @placeholder = "Full name" })
+                            @Html.ValidationMessageFor(m => Model.Name, "", new { @class = "text-danger"})
+                            @*<input type="text" class="form-control" id="lastname">*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @*<label for="Email">Email</label>*@
+                            @Html.TextBoxFor(m => Model.Email, new { @class = "form-control", @placeholder = "Email Address" })
+                            @Html.ValidationMessageFor(m => Model.Email, "", new { @class = "text-danger" })
+                            @*<input type="text" class="form-control" id="email">*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @*<label for="Subject">Subject</label>*@
+                            @Html.TextBoxFor(m => Model.Subject, new { @class = "form-control", @placeholder = "Feedback caption" })
+                            @Html.ValidationMessageFor(m => Model.Subject, "", new { @class = "text-danger" })
+                            @*<input type="text" class="form-control" id="subject">*@
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @*<label for="Message">Message</label>*@
+                            @Html.TextAreaFor(m => Model.Message, new { @class = "form-control", @placeholder = "Message" })
+                            @Html.ValidationMessageFor(m => Model.Message, "", new { @class = "text-danger" })
+                            @*<textarea id="message" class="form-control"></textarea>*@
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send message</button>
+
+                    </div>
+                </div>
+            }
+            @*<form>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" class="form-control" id="firstname">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" class="form-control" id="lastname">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send message</button>
+
+                    </div>
+                </div>
+                 /.row 
+            </form>*@
+
+
+        </div>
+
+
+    </div>
+    <!-- /.col-md-9 -->
+</div>
+
+@*<address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>*@

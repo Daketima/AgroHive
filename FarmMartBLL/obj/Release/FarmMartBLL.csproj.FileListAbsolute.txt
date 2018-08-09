@@ -1,0 +1,11 @@
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\FarmMartBLL.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\FarmMartBLL.pdb
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\FarmMartDAL.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\EntityFramework.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\FarmMartDAL.pdb
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\FarmMartDAL.dll.config
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\bin\Release\EntityFramework.xml
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Release\FarmMartBLL.csprojResolveAssemblyReference.cache
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Release\FarmMartBLL.csproj.CoreCompileInputs.cache
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Release\FarmMartBLL.dll
+C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartBLL\obj\Release\FarmMartBLL.pdb

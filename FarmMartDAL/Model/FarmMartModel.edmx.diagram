@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="12ef1b2374424cb4952e5eb593d401e9" Name="Diagram1">
+        <EntityTypeShape EntityType="FarmerMartModel.C__MigrationHistory" Width="1.5" PointX="11.75" PointY="2" />
+        <EntityTypeShape EntityType="FarmerMartModel.Address" Width="1.5" PointX="3" PointY="5.875" />
+        <EntityTypeShape EntityType="FarmerMartModel.AnimalGender" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="23.75" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="21.125" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetUsers" Width="1.5" PointX="3" PointY="10.5" />
+        <EntityTypeShape EntityType="FarmerMartModel.Crop" Width="1.5" PointX="3" PointY="16" />
+        <EntityTypeShape EntityType="FarmerMartModel.CropPrice" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="FarmerMartModel.CropType" Width="1.5" PointX="0.75" PointY="16.25" />
+        <EntityTypeShape EntityType="FarmerMartModel.CropVariety" Width="1.5" PointX="5.25" PointY="15.875" />
+        <EntityTypeShape EntityType="FarmerMartModel.Farm" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="FarmerMartModel.FarmCrop" Width="1.5" PointX="7.5" PointY="7.125" />
+        <EntityTypeShape EntityType="FarmerMartModel.FarmLivestock" Width="1.5" PointX="10.5" PointY="6.75" />
+        <EntityTypeShape EntityType="FarmerMartModel.HarvestPeriod" Width="1.5" PointX="12.75" PointY="5" />
+        <EntityTypeShape EntityType="FarmerMartModel.LgisticsOffice" Width="1.5" PointX="8.25" PointY="11.5" />
+        <EntityTypeShape EntityType="FarmerMartModel.Livestock" Width="1.5" PointX="6" PointY="27.125" />
+        <EntityTypeShape EntityType="FarmerMartModel.LivestockBreed" Width="1.5" PointX="8.25" PointY="27.25" />
+        <EntityTypeShape EntityType="FarmerMartModel.LivestockPrice" Width="1.5" PointX="8.25" PointY="14.875" />
+        <EntityTypeShape EntityType="FarmerMartModel.LivestockType" Width="1.5" PointX="3.75" PointY="27.375" />
+        <EntityTypeShape EntityType="FarmerMartModel.Measurement" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="FarmerMartModel.MessageReply" Width="1.5" PointX="13" PointY="12.375" />
+        <EntityTypeShape EntityType="FarmerMartModel.Messaging" Width="1.5" PointX="10.75" PointY="12.25" />
+        <EntityTypeShape EntityType="FarmerMartModel.Planting" Width="1.5" PointX="9.75" PointY="3.5" />
+        <EntityTypeShape EntityType="FarmerMartModel.ResearchInstituteOffice" Width="1.5" PointX="5.25" PointY="11.5" />
+        <EntityTypeShape EntityType="FarmerMartModel.State" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FarmerMartModel.sysdiagrams" Width="1.5" PointX="12.75" PointY="8" />
+        <AssociationConnector Association="FarmerMartModel.FK_Farm_Farm_Address" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmAddress_State" />
+        <AssociationConnector Association="FarmerMartModel.FK_LgisticsOffice_Address" />
+        <AssociationConnector Association="FarmerMartModel.FK_ResearchInstituteOffice_Address" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmLivestock_Gender" />
+        <AssociationConnector Association="FarmerMartModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FarmerMartModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FarmerMartModel.FK_Farm_Farm_ApplicationUser" />
+        <AssociationConnector Association="FarmerMartModel.FK_LgisticsOffice_ApplicationUser" />
+        <AssociationConnector Association="FarmerMartModel.FK_ResearchInstituteOffice_ApplicationUser" />
+        <AssociationConnector Association="FarmerMartModel.FK_Crop_CropType" />
+        <AssociationConnector Association="FarmerMartModel.FK_CropVariety_Crop" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmCrop_CropPrice" />
+        <AssociationConnector Association="FarmerMartModel.FK_Pricing_Measurement" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmCrop_CropVariety" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmCrop_Farm" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmLivestock_Farm" />
+        <AssociationConnector Association="FarmerMartModel.FK_Planting_FarmCrop" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmLivestock_LivestockBreed" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmLivestock_Price" />
+        <AssociationConnector Association="FarmerMartModel.FK_Livestock_LivestockTyper" />
+        <AssociationConnector Association="FarmerMartModel.FK_LivestockBreed_Livestock" />
+        <AssociationConnector Association="FarmerMartModel.FK_LivestockPricing_Measurement" />
+        <AssociationConnector Association="FarmerMartModel.FK_MessageReply_Message" />
+        <AssociationConnector Association="FarmerMartModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

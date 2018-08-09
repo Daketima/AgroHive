@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="12ef1b2374424cb4952e5eb593d401e9" Name="Diagram1">
+        <EntityTypeShape EntityType="FarmerMartModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="16.625" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="FarmerMartModel.AspNetUsers" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="FarmerMartModel.Crop" Width="1.5" PointX="7.5" PointY="11.25" />
+        <EntityTypeShape EntityType="FarmerMartModel.CropType" Width="1.5" PointX="5.25" PointY="11.5" />
+        <EntityTypeShape EntityType="FarmerMartModel.Farm" Width="1.5" PointX="7.5" PointY="6.875" />
+        <EntityTypeShape EntityType="FarmerMartModel.FarmAddress" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="FarmerMartModel.FarmCrop" Width="1.5" PointX="9.75" PointY="7" />
+        <EntityTypeShape EntityType="FarmerMartModel.HarvestPeriod" Width="1.5" PointX="7.75" PointY="2.375" />
+        <EntityTypeShape EntityType="FarmerMartModel.LocalGovernment" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="FarmerMartModel.Measurement" Width="1.5" PointX="9.75" PointY="4.625" />
+        <EntityTypeShape EntityType="FarmerMartModel.Person" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="FarmerMartModel.Planting" Width="1.5" PointX="12" PointY="10.5" />
+        <EntityTypeShape EntityType="FarmerMartModel.Pricing" Width="1.5" PointX="12" PointY="7.25" />
+        <EntityTypeShape EntityType="FarmerMartModel.State" Width="1.5" PointX="0.75" PointY="5.625" />
+        <AssociationConnector Association="FarmerMartModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FarmerMartModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FarmerMartModel.FK_Person_Person_ApplicationUser" />
+        <AssociationConnector Association="FarmerMartModel.FK_Crop_CropType" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmCrop_Crop" />
+        <AssociationConnector Association="FarmerMartModel.FK_Farm_Farm_Address" />
+        <AssociationConnector Association="FarmerMartModel.FK_Farm_Farm_Person" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmCrop_Farm" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmAddress_LocalGovernment" />
+        <AssociationConnector Association="FarmerMartModel.FK_FarmAddress_State" />
+        <AssociationConnector Association="FarmerMartModel.FK_Planting_FarmCrop" />
+        <AssociationConnector Association="FarmerMartModel.FK_Pricing_FarmCrop" />
+        <AssociationConnector Association="FarmerMartModel.FK_LocalGovernment_State" />
+        <AssociationConnector Association="FarmerMartModel.FK_Pricing_Measurement" />
+        <AssociationConnector Association="FarmerMartModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

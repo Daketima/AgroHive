@@ -1,0 +1,51 @@
+﻿@model FarmMartUI.Models.LivestockPricingViewModel
+
+@{
+    ViewBag.Title = "AddLivestockPrice";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Add Livestock Pricing</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                @using (Html.BeginForm("AddLivestockPrice", "Livestock", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.FarmLivestockId)
+                    @Html.HiddenFor(model => model.FarmId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Measurement</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.MeasurementId, Model.MeasurementDropDown, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MeasurementId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Unit Price</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.UnitPrice, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </div>
+</div>
+

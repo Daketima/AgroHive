@@ -1,0 +1,113 @@
+﻿@model FarmMartUI.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    ViewBag.Controller = "Account";
+}
+
+<div id="content">
+
+    <div class="container">
+
+        <div class="col-md-9">
+            <div class="box">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="active" data-target="#Registration">
+                        <a href="#"><i class="fa fa-users"></i><br>Register</a>
+                    </li>
+                </ul>
+                <div class="content" id="Registration">
+                    <div class="box">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="UserRole" class="col-md-4 control-label">Account Type</label>
+                                <div class="col-md-8">
+                                    @Html.DropDownList("UserRole", (SelectList)ViewBag.UserRole, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            @*<div class="box-footer">
+                    <div class="pull-left">
+                        <a href="basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                    </div>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">
+                            Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>*@
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="box">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="active" data-target="#Registration">
+                        <a href="#"><i class="fa fa-users"></i><br>Or Login Here</a>
+                    </li>
+                </ul>
+                <div class="content" id="Registration">
+                    <div class="box">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email-modal" name="Email" placeholder="email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password-modal" name="Password" placeholder="password">
+                            </div>
+
+                            <p class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

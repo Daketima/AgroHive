@@ -1,0 +1,56 @@
+﻿@model FarmMartUI.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    @Html.Partial("AdminDashboard")
+}
+@if (User.IsInRole("Farmer"))
+{
+    @Html.Partial("FarmerDashboard")
+}
+@if (User.IsInRole("Logistics"))
+{
+    @Html.Partial("LogisticsDashboard")
+}
+@if (User.IsInRole("Research Institute"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+@if (User.IsInRole("Non-Governmental Organisation (Local)"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+@if (User.IsInRole("Non-Governmental Organisation (International)"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+@if (User.IsInRole("State Government"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+@if (User.IsInRole("Cooperatives"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+@if (User.IsInRole("Agro Processors"))
+{
+    @Html.Partial("Agro ResearchInstituteDashboard")
+}
+@if (User.IsInRole("Federal Government"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+@if (User.IsInRole("Federal Government"))
+{
+    @Html.Partial("ResearchInstituteDashboard")
+}
+
+@section scripts{
+    <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
+}

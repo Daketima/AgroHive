@@ -1,0 +1,331 @@
+﻿@model FarmMartUI.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <div id="main-slider">
+            <div class="item">
+                <img src="~/Front/img/rice.jpg" alt="" class="img-responsive">
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="~/Front/img/cassava.jpg" alt="">
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="~/Front/img/corn.jpg" alt="">
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="~/Front/img/wheat.jpg" alt="">
+            </div>
+        </div>
+        <!-- /#main-slider -->
+    </div>
+</div>
+
+<!-- *** ADVANTAGES HOMEPAGE ***
+_________________________________________________________ -->
+<div id="advantages">
+    <div class="container">
+        <div class="same-height-row">
+            <div class="col-sm-4">
+                <div class="box same-height clickable carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                   
+                    @*<div class="icon">
+                        <i class="fa fa-heart"></i>
+                    </div>
+
+                    <h3><a href="#">We love our customers</a></h3>
+                    <p>We are known to provide best possible service ever</p>*@
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="box same-height clickable carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+
+                    @*<div class="icon">
+                <i class="fa fa-heart"></i>
+            </div>
+
+            <h3><a href="#">We love our customers</a></h3>
+            <p>We are known to provide best possible service ever</p>*@
+                </div>
+                @*<div class="box same-height clickable">
+                    <div class="icon">
+                        <i class="fa fa-tags"></i>
+                    </div>
+
+                    <h3><a href="#">Best prices</a></h3>
+                    <p>You can check that the height of the boxes adjust when longer text like this one is used in one of them.</p>
+                </div>*@
+            </div>
+
+            <div class="col-sm-4">
+                <div class="box same-height clickable carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="~/Front/img/advert.jpg" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+
+                    @*<div class="icon">
+                <i class="fa fa-heart"></i>
+            </div>
+
+            <h3><a href="#">We love our customers</a></h3>
+            <p>We are known to provide best possible service ever</p>*@
+                </div>
+                @*<div class="box same-height clickable">
+                    <div class="icon">
+                        <i class="fa fa-thumbs-up"></i>
+                    </div>
+
+                    <h3><a href="#">100% satisfaction guaranteed</a></h3>
+                    <p>Free returns on everything for 3 months.</p>
+                </div>*@
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /#advantages -->
+<!-- *** ADVANTAGES END *** -->
+<!-- *** HOT PRODUCT SLIDESHOW ***
+ _________________________________________________________ -->
+<div id="hot">
+
+    <div class="box">
+        <div class="container">
+            <div class="col-md-12">
+                <h2>New Farm is week</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="product-slider">
+            @if (Model.Farms.Any())
+            {
+                foreach (var f in Model.Farms)
+                {
+                    <div class="item">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front">
+                                        <a href="@Url.Action("Details", "Home", new { id = f.Id})">
+                                            @if (!string.IsNullOrEmpty(f.PhotoPath))
+                                            {
+                                                <img src="~/FarmProfile/@f.PhotoPath" alt="" class="img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Front/img/this farm.jpg" alt="" class="img-responsive">
+                                            }
+                                            
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="@Url.Action("Details", "Home", new { id = f.Id})">
+                                            @if (!string.IsNullOrEmpty(f.PhotoPath))
+                                            {
+                                                <img src="~/FarmProfile/@f.PhotoPath" alt="" class="img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Front/img/this farm.jpg" alt="" class="img-responsive">
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="@Url.Action("Details", "Home", new { id = f.Id})" class="invisible">
+                                <img src="~/Front/img/product1.jpg" alt="" class="img-responsive">
+                            </a>
+                            <div class="text">
+                                <h3><a href="@Url.Action("Details", "Home", new { id = f.Id})">@f.FarmName</a></h3>
+                                @*   @if (!@f.Pricing.Any())
+                                    {
+                                        <p class="price">No Price Yet</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="price">@f.Pricing.First().UnitPrice</p>
+                                    }*@
+                            </div>
+                            <!-- /.text -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                }
+            }
+
+
+        </div>
+        <!-- /.product-slider -->
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /#hot -->
+<!-- *** HOT END *** -->
+<!-- *** GET INSPIRED ***
+_________________________________________________________ -->
+<div class="container" data-animate="fadeInUpBig">
+    <div class="col-md-12">
+        <div class="box slideshow">
+            <h3>Get Inspired</h3>
+            <p class="lead">For the big Advertisers</p>
+            <div id="get-inspired" class="owl-carousel owl-theme">
+                <div class="item">
+                    <a href="#">
+                        <img src="~/Front/img/advert.jpg" alt="Advert Image" class="img-responsive">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img src="~/Front/img/advert.jpg" alt="Advert Image" class="img-responsive">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img src="~/Front/img/advert.jpg" alt="Advert Image" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- *** GET INSPIRED END *** -->
+<!-- *** BLOG HOMEPAGE ***
+_________________________________________________________ -->
+
+<div class="box text-center" data-animate="fadeInUp">
+    <div class="container">
+        <div class="col-md-12">
+            <h3 class="text-uppercase">You have a few words to share?</h3>
+
+            <p class="lead">
+                Check our blog!<a href="#">Feature coming soon</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12" data-animate="fadeInUp">
+        <div id="blog-homepage" class="row">
+            <div class="col-sm-6">
+                <div class="post">
+                    <h4><a href="#">We are here for you!</a></h4>
+                    <p class="author-category">
+                        <a href="#">Message</a> <a href="">From Farmer Mart</a>
+                    </p>
+                    <hr>
+                    <p class="intro">
+                        We are to serve the interest of the farmers and their potential customers. Farmer and customers can share ideas with us on how to improve this market. To share you ideas please send a feed back to us. Go <a href="@Url.Action("Contact", "Home")">here</a>
+                    </p>
+                    <p class="read-more">
+                        <a href="" class="btn btn-primary">Continue reading</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="post">
+                    <h4><a href="#">We are here for you!</a></h4>
+                    <p class="author-category">
+                        By <a href="#">Message</a> <a href="">From Farmer Mart</a>
+                    </p>
+                    <hr>
+                    <p class="intro">
+                        We are to serve the interest of the farmers and their potential customers. Farmer and customers can share ideas with us on how to improve this market. To share you ideas please send a feed back to us. Go <a href="@Url.Action("Contact", "Home")">here</a>
+                    </p>
+                    <p class="read-more">
+                        <a href="post.html" class="btn btn-primary">Continue reading</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- /#blog-homepage -->
+    </div>
+</div>
+<!-- /.container -->
+<!-- *** BLOG HOMEPAGE END *** -->
+@*<div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
