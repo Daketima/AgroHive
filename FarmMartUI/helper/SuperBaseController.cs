@@ -21,7 +21,6 @@ namespace FarmMartUI.helper
     public class SuperBaseController : Controller
     {
         private IRepositoryService<Farm> FarmService;
-       
         private IRepositoryService<CropVariety> CropVarietyService;
         private IRepositoryService<AnimalGender> AnimalGengerService;
         private IRepositoryService<Livestock> LivetockService;

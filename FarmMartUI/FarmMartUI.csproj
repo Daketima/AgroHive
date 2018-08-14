@@ -226,6 +226,7 @@
     <Compile Include="Controllers\LivestockController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlantingController.cs" />
+    <Compile Include="Extensions\HtmlHelperExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1055,6 +1056,7 @@
     <Content Include="Areas\Farmer\Views\Livestock\AddLivestockPrice.cshtml" />
     <Content Include="Areas\Farmer\Views\Pricing\AddCropPrice.cshtml" />
     <Content Include="Areas\Farmer\Views\Crop\AddCropPrice.cshtml" />
+    <Content Include="Areas\Farmer\Views\Shared\EditorTemplate\_addCrop.cshtml" />
     <None Include="Properties\PublishProfiles\farmsonline - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -114,7 +114,7 @@ namespace FarmMartUI.Areas.Consumer.Controllers
 
                 if (address != null)
                 {
-                    thisUserFarm = farm
+                    thisUserFarm = farm;
                     thisUser.AddressId = address.Id;
                     PersonService.Update(thisUser);
                 }

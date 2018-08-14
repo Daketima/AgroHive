@@ -24,16 +24,21 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         private IRepositoryService<Planting> PlantingService;
         private IRepositoryService<CropPrice> CropPriceService;
         private IRepositoryService<HarvestPeriod> HarvestMonthService;
+        private IRepositoryService<Crop> CropService;
+        private IRepositoryService<CropType> CroparietyService;
+
 
 
         public CropController(IRepositoryService<CropVariety> cropVarietyService,
-            IRepositoryService<FarmCrop> farmCropService, IRepositoryService<Planting> plantingService, IRepositoryService<CropPrice> cropPriceService, IRepositoryService<HarvestPeriod> harvestMonthService)
+            IRepositoryService<FarmCrop> farmCropService, IRepositoryService<Planting> plantingService, IRepositoryService<CropPrice> cropPriceService, IRepositoryService<HarvestPeriod> harvestMonthService, IRepositoryService<Crop> cropService, IRepositoryService<CropType> cropTypeService)
         {
             CropVarietyService = cropVarietyService;
             FarmCropService = farmCropService;
             PlantingService = plantingService;
             CropPriceService = cropPriceService;
             HarvestMonthService = harvestMonthService;
+            CropService = cropService;
+            CroparietyService = cropTypeService;
         }
 
         private IEnumerable<SelectListItem> GetCropDueMonths(int? selected)
@@ -45,6 +50,57 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             allMeasurement.Insert(0, new HarvestPeriod { Id = 0, Name = "Please Select" });
             return allMeasurement.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
+
+        private IEnumerable<SelectListItem> GetCrop(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCrop =  CropService.Get().ToList();
+            allCrop.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            return allCrop.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetCropType(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropType = CroparietyService.Get().ToList();
+            allCropType.Insert(0, new CropType { Id = 0, Name = "Please Select" });
+            return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetCropVariety(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropVariety = CropVarietyService.Get().ToList();
+            allCropVariety.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
+            return allCropVariety.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetCropEmpty(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropType = new List<Crop>();
+            allCropType.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        [HttpGet]
+        public ActionResult GetCropNew(int cropTypeId)
+        {
+            List<Crop> allCropType = CropService.Get().Where(x => x.CropTypeId == cropTypeId).ToList();
+            allCropType.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            return Json(new SelectList(allCropType, "Id", "Name"));
+            
+        }
+
+
 
         private List<CropVariety> GetCropList()
         {
@@ -66,9 +122,14 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         // GET: Crop
         public ActionResult Index(int? farmId)
         {
+            string userId = User.Identity.GetUserId();
             var model = new FarmCropViewModel
             {
-                FarmDropDown = base.GetMyFarm(null)
+                FarmCropList = FarmCropService.Get().Where(x => x.Farm.ApplicationUserId == userId).ToList(),
+                //FarmDropDown = base.GetMyFarm(null)
+                CropDropDown = GetCrop(null),
+                CropTypeDropDown = GetCropType(null),
+                CropVarietyDropDown = GetCropVariety(null)
             };
             return View(model);
         }
