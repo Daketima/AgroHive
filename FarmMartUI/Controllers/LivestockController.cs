@@ -82,7 +82,7 @@ namespace FarmMartUI.Controllers
         {
             var model = new FarmLivestockViewModel
             {
-                FarmLivestockList = FarmLivestockService.Get().Where(x => x.FarmId == farmId.Value).ToList()
+                MyFarmLivestock = FarmLivestockService.Get().Where(x => x.FarmId == farmId.Value).ToList()
             };
             return PartialView("_FarmLivestockList", model);
         }

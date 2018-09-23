@@ -15,27 +15,27 @@ namespace FarmMartBLL.ServiceAPI
 
         public IList<CropVariety> Get()
         {
-            return unitOfWork.CropVarietyReplyRepository.Get().ToList();
+            return unitOfWork.CropVarietyRepository.Get().ToList();
         }
 
         public CropVariety GetById(int? id)
         {
-            return unitOfWork.CropVarietyReplyRepository.GetByID(id);
+            return unitOfWork.CropVarietyRepository.GetByID(id);
         }
 
         public CropVariety Create(CropVariety CropVariety)
         {
-            return unitOfWork.CropVarietyReplyRepository.Insert(CropVariety);
+            return unitOfWork.CropVarietyRepository.Insert(CropVariety);
         }
 
         public void Update(CropVariety CropVariety)
         {
-            unitOfWork.CropVarietyReplyRepository.Update(CropVariety);
+            unitOfWork.CropVarietyRepository.Update(CropVariety);
         }
 
         public void Delete(CropVariety CropVariety)
         {
-            unitOfWork.CropVarietyReplyRepository.Delete(CropVariety);
+            unitOfWork.CropVarietyRepository.Delete(CropVariety);
         }
 
         public void Dispose()

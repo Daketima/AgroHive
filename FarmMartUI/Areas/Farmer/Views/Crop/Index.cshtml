@@ -5,9 +5,11 @@
     Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
 }
 
+@Html.HiddenFor(model => model.FarmId)
 
 @section scripts{
-    <script src='plugins/fastclick/fastclick.min.js'></script>
+
+    <script src="~/backend/plugins/datepicker/bootstrap-datepicker.js"></script>
     <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
     <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
     <script>
@@ -18,6 +20,12 @@
                 radioClass: 'iradio_flat-green'
             });
         });
+
+        $('#DatePlanted').datepicker(
+            {
+                format: 'dd/mm/yyyy'
+            });
+
         $('#_FarmId').change(function () {
             var id = $('#_FarmId option:selected').val();
             $.ajax({
@@ -26,7 +34,8 @@
                 dataType: "html",
                 type: "GET",
                 success: function (data) {
-                    $('#FarmCrLst').html(data);
+                    $('#addCropBox').html(data);
+                    $("#_AddCropToFarmDialog").modal({ show: true });
                 },
                 error: function () {
                     alert("Something went wrong!")
@@ -51,7 +60,77 @@
                 },
                 error: function () {
                     alert("An error occured");
+                }
+            });
+        });
+
+        $('a[name ="UpdateCrop"]').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "@Url.Action("EditCrop", "Crop")",
+                data: { FarmCropId: id },
+                dataType: "html",
+                type: "GET",
+                success: function (data) {
+                    $("#addCropBox").html(data);
+                    $("#formAddFarmCropDialog").modal({ show: true });
+
                 },
+                error: function () {
+                    alert("An error occured");
+                }
+            });
+        });
+
+        $('a[name ="UpdatePlanting"]').click(function () {
+            var farmCropId = $(this).attr('data-id');
+            $.ajax({
+                url: "@Url.Action("PlantCrop", "Planting")",
+                data: { farmCropId: farmCropId },
+                dataType: "html",
+                type: "GET",
+                success: function (data) {
+                    $("#addPlantingBox").html(data);
+                    $("#FormAddCropPlantingDialog").modal({ show: true });
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        });
+
+        $('a[name ="UpdatePricing"]').click(function () {
+            var farmCropId = $(this).attr('data-id');
+            $.ajax({
+                url: "@Url.Action("AddCropPrice", "Pricing")",
+                data: { farmCropId: farmCropId },
+                dataType: "html",
+                type: "GET",
+                success: function (data) {
+                    $("#addPricingBox").html(data);
+                    $("#FormAddCropPricingDialog").modal({ show: true });
+                    
+                },
+                error: function (err) {
+                    alert("An error occoured");
+                }
+            });
+        });
+
+        $('a[name = "RePlant"]').click(function () {
+            var Id = $(this).attr('data-id');
+            $.ajax({
+                url: "@Url.Action("UdatePlanting", "Planting")",
+                data: { id: Id },
+                dataType: "html",
+                type: "GET",
+                success: function (data) {
+                    $("#rePlantingBox").html(data);
+                    $("#FormAddCropPlantingDialog").modal({ show: true });
+                },
+                error: function (err) {
+                    alert("An error occoured");
+                }
             });
         });
 
@@ -73,70 +152,99 @@
                                 <th>Farm</th>
                                 <th>Crop Type</th>
                                 <th>Crop Variety</th>
+                                <th>Hectarage</th>
+                                <th>Yield/Hectar</th>
                                 <th>Variety Note</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @{ int count = 0;}
-                            @foreach (var cv in Model.CropListItem)
+
+                            @if (Model.FarmCropList != null)
                             {
-                                count++;
-                                <tr>
-                                    <td>@count</td>
-                                    <td>Crop Image</td>
-                                    <td>@cv.Crop.Name</td>
-                                    <td>@cv.Crop.CropType.Name</td>
-                                    <td>@cv.Name</td>
-                                    <td>@cv.Note</td>
-                                    <td><a class="btn btn-primary" name="AddCrop" data-CropId="@cv.Id" data-Farmid="@Model.FarmId">Add Crop</a></td>
-                                </tr>
+                                int count = 0;
+                                foreach (var cv in Model.FarmCropList)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@cv.Farm.FarmName</td>
+                                        <td>@cv.CropVariety.Crop.CropType.Name</td>
+                                        <td>@cv.CropVariety.Name</td>
+                                        <td>@cv.Hectarage</td>
+                                        <td>@cv.YieldPerHectar</td>
+                                        <td>@cv.CropVarietyNote</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger">Actions</button>
+                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#" data-id="@cv.Id" name="UpdateCrop">Update Crop</a></li>
+                                                    <li><a href="#" data-id="@cv.Id" name="UpdatePlanting">Plant Crop</a></li>
+                                                    <li><a href="#" data-id="@cv.PlantingId" name="RePlant">Re-Plant</a></li>
+                                                    <li><a href="#" data-id="@cv.Id" name="UpdatePricing">Meansurement and Price</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                         <tfoot>
-
                         </tfoot>
                     </table>
                     <div>
-                        @Html.ActionLink("Crop not listed, add it", "AddCrop", "Crop")
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
 
         </div>
         <div id="addCropBox">
-            @Html.Partial("_AddCropToFarmDialog", Model)
+
+        </div>
+
+        <div id="addPlantingBox">
+
+        </div>
+        <div id="rePlantingBox">
+
+        </div>
+        <div id="addPricingBox">
+
         </div>
     </div>
 
 
 @*<div class="row">
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">In this Farm</h3>
-            </div><!-- /.box-header -->
-            <div class="box-body">
-                @Html.DropDownListFor(m => m._FarmId, Model.FarmDropDown, new { @class = "form-control", @id = "_FarmId" })
-            </div>
-        </div><!-- /.box-body -->
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">In this Farm</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    @Html.DropDownListFor(m => m._FarmId, Model.FarmDropDown, new { @class = "form-control", @id = "_FarmId" })
+                </div>
+            </div><!-- /.box-body -->
 
-    </div><!-- /.box -->
-</div>*@
+        </div><!-- /.box -->
+    </div>*@
 
 @*<div class="row">
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">My Farm</h3>
-            </div><!-- /.box-header -->
-            <div id="FarmCrLst">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">My Farm</h3>
+                </div><!-- /.box-header -->
+                <div id="FarmCrLst">
 
-            </div>
-        </div><!-- /.box-body -->
+                </div>
+            </div><!-- /.box-body -->
 
-    </div><!-- /.box -->
-</div>*@
+        </div><!-- /.box -->
+    </div>*@
 
 
 

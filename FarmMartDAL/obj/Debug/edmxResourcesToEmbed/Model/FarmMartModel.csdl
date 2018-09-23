@@ -101,9 +101,9 @@
       <End Role="Farm" EntitySet="Farm" />
       <End Role="FarmLivestock" EntitySet="FarmLivestock" />
     </AssociationSet>
-    <AssociationSet Name="FK_Planting_FarmCrop" Association="FarmerMartModel.FK_Planting_FarmCrop">
-      <End Role="FarmCrop" EntitySet="FarmCrop" />
+    <AssociationSet Name="FK_FarmCrop_Planting" Association="FarmerMartModel.FK_FarmCrop_Planting">
       <End Role="Planting" EntitySet="Planting" />
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
     </AssociationSet>
     <AssociationSet Name="FK_FarmLivestock_LivestockBreed" Association="FarmerMartModel.FK_FarmLivestock_LivestockBreed">
       <End Role="LivestockBreed" EntitySet="LivestockBreed" />
@@ -310,14 +310,16 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FarmId" Type="Int32" Nullable="false" />
     <Property Name="CropVarietyId" Type="Int32" Nullable="false" />
-    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IsSelected" Type="Boolean" Nullable="false" />
+    <Property Name="Hectarage" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="YieldPerHectar" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CropVarietyNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="CropPriceId" Type="Int32" />
+    <Property Name="PlantingId" Type="Int32" />
     <NavigationProperty Name="CropPrice" Relationship="FarmerMartModel.FK_FarmCrop_CropPrice" FromRole="FarmCrop" ToRole="CropPrice" />
     <NavigationProperty Name="CropVariety" Relationship="FarmerMartModel.FK_FarmCrop_CropVariety" FromRole="FarmCrop" ToRole="CropVariety" />
     <NavigationProperty Name="Farm" Relationship="FarmerMartModel.FK_FarmCrop_Farm" FromRole="FarmCrop" ToRole="Farm" />
-    <NavigationProperty Name="Planting" Relationship="FarmerMartModel.FK_Planting_FarmCrop" FromRole="FarmCrop" ToRole="Planting" />
+    <NavigationProperty Name="Planting" Relationship="FarmerMartModel.FK_FarmCrop_Planting" FromRole="FarmCrop" ToRole="Planting" />
   </EntityType>
   <EntityType Name="FarmLivestock">
     <Key>
@@ -444,13 +446,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FarmCropId" Type="Int32" />
-    <Property Name="Hectarage" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="YieldPerHectar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DatePlanted" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ExpectedHarvestDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_Planting_FarmCrop" FromRole="Planting" ToRole="FarmCrop" />
+    <Property Name="FarmCropId" Type="Int32" />
+    <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_FarmCrop_Planting" FromRole="Planting" ToRole="FarmCrop" />
   </EntityType>
   <EntityType Name="ResearchInstituteOffice">
     <Key>
@@ -704,15 +703,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Planting_FarmCrop">
-    <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="0..1" />
-    <End Type="FarmerMartModel.Planting" Role="Planting" Multiplicity="*" />
+  <Association Name="FK_FarmCrop_Planting">
+    <End Type="FarmerMartModel.Planting" Role="Planting" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="FarmCrop">
+      <Principal Role="Planting">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Planting">
-        <PropertyRef Name="FarmCropId" />
+      <Dependent Role="FarmCrop">
+        <PropertyRef Name="PlantingId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

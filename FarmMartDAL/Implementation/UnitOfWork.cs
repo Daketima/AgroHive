@@ -12,11 +12,11 @@ namespace FarmMartDAL.Implementation
     {
         private readonly FarmerMartEntities _context = new FarmerMartEntities();
 
-        private GenericRepository<AspNetUsers> _personRepository;
+        //private GenericRepository<AspNetUsers> _personRepository;
         private GenericRepository<Farm> _farmRepository;
         private GenericRepository<FarmCrop> _farmCropRepository;
         private GenericRepository<Address> _farmAddressRepository;
-        private GenericRepository<CropVariety> _cropRepository;
+        private GenericRepository<Crop> _cropRepository;
         private GenericRepository<Measurement> _measurementRepository;
         private GenericRepository<CropPrice> _CropPricetRepository;
         private GenericRepository<Planting> _plantingRepository;
@@ -32,9 +32,25 @@ namespace FarmMartDAL.Implementation
         private GenericRepository<CropVariety> _cropVarietyReplyRepository;
         private GenericRepository<LivestockBreed> _livestockBreedReplyRepository;
         private GenericRepository<AnimalGender> _animalGenderRepository;
+        private GenericRepository<CropType> _cropTypeRepository;
 
 
 
+
+
+
+        public GenericRepository<CropType> CropTypeRepository
+        {
+            get
+            {
+                if (this._cropTypeRepository == null)
+                {
+                    this._cropTypeRepository = new GenericRepository<CropType>(_context);
+                }
+
+                return _cropTypeRepository;
+            }
+        }
 
         public GenericRepository<AnimalGender> AnimalGenderRepository
         {
@@ -62,7 +78,7 @@ namespace FarmMartDAL.Implementation
             }
         }
 
-        public GenericRepository<CropVariety> CropVarietyReplyRepository
+        public GenericRepository<CropVariety> CropVarietyRepository
         {
             get
             {
@@ -246,13 +262,13 @@ namespace FarmMartDAL.Implementation
             }
         }
 
-        public GenericRepository<CropVariety> CropRepository
+        public GenericRepository<Crop> CropRepository
         {
             get
             {
                 if (this._cropRepository == null)
                 {
-                    this._cropRepository = new GenericRepository<CropVariety>(_context);
+                    this._cropRepository = new GenericRepository<Crop>(_context);
                 }
 
                 return _cropRepository;

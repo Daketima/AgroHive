@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace FarmMartUI.Areas.Farmer.Models
 {
-    public class CropPriceViewModel : BaseViewModel
+    public class PriceViewModel : BaseViewModel
     {
         public int? FarmCropId { get; set; }
 

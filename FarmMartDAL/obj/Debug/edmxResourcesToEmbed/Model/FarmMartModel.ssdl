@@ -143,10 +143,12 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FarmId" Type="int" Nullable="false" />
     <Property Name="CropVarietyId" Type="int" Nullable="false" />
-    <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="IsSelected" Type="bit" Nullable="false" />
+    <Property Name="Hectarage" Type="nvarchar" MaxLength="128" />
+    <Property Name="YieldPerHectar" Type="nvarchar" MaxLength="128" />
+    <Property Name="CropVarietyNote" Type="nvarchar" MaxLength="500" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CropPriceId" Type="int" />
+    <Property Name="PlantingId" Type="int" />
   </EntityType>
   <EntityType Name="FarmLivestock">
     <Key>
@@ -265,12 +267,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FarmCropId" Type="int" />
-    <Property Name="Hectarage" Type="nvarchar" MaxLength="256" />
-    <Property Name="YieldPerHectar" Type="nvarchar" MaxLength="50" />
     <Property Name="DatePlanted" Type="datetime" Nullable="false" />
     <Property Name="ExpectedHarvestDate" Type="datetime" Nullable="false" />
-    <Property Name="Note" Type="nvarchar" MaxLength="500" />
+    <Property Name="FarmCropId" Type="int" />
   </EntityType>
   <EntityType Name="ResearchInstituteOffice">
     <Key>
@@ -464,6 +463,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FarmCrop_Planting">
+    <End Role="Planting" Type="Self.Planting" Multiplicity="0..1" />
+    <End Role="FarmCrop" Type="Self.FarmCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmCrop">
+        <PropertyRef Name="PlantingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FarmLivestock_Farm">
     <End Role="Farm" Type="Self.Farm" Multiplicity="1" />
     <End Role="FarmLivestock" Type="Self.FarmLivestock" Multiplicity="*" />
@@ -596,18 +607,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Planting_FarmCrop">
-    <End Role="FarmCrop" Type="Self.FarmCrop" Multiplicity="0..1" />
-    <End Role="Planting" Type="Self.Planting" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FarmCrop">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Planting">
-        <PropertyRef Name="FarmCropId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Pricing_Measurement">
     <End Role="Measurement" Type="Self.Measurement" Multiplicity="0..1" />
     <End Role="CropPrice" Type="Self.CropPrice" Multiplicity="*" />
@@ -726,6 +725,10 @@
       <End Role="Farm" EntitySet="Farm" />
       <End Role="FarmCrop" EntitySet="FarmCrop" />
     </AssociationSet>
+    <AssociationSet Name="FK_FarmCrop_Planting" Association="Self.FK_FarmCrop_Planting">
+      <End Role="Planting" EntitySet="Planting" />
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
+    </AssociationSet>
     <AssociationSet Name="FK_FarmLivestock_Farm" Association="Self.FK_FarmLivestock_Farm">
       <End Role="Farm" EntitySet="Farm" />
       <End Role="FarmLivestock" EntitySet="FarmLivestock" />
@@ -769,10 +772,6 @@
     <AssociationSet Name="FK_MessageReply_Message" Association="Self.FK_MessageReply_Message">
       <End Role="Messaging" EntitySet="Messaging" />
       <End Role="MessageReply" EntitySet="MessageReply" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Planting_FarmCrop" Association="Self.FK_Planting_FarmCrop">
-      <End Role="FarmCrop" EntitySet="FarmCrop" />
-      <End Role="Planting" EntitySet="Planting" />
     </AssociationSet>
     <AssociationSet Name="FK_Pricing_Measurement" Association="Self.FK_Pricing_Measurement">
       <End Role="Measurement" EntitySet="Measurement" />

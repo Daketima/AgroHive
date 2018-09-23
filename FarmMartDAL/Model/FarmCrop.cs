@@ -14,24 +14,19 @@ namespace FarmMartDAL.Model
     
     public partial class FarmCrop
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FarmCrop()
-        {
-            this.Planting = new HashSet<Planting>();
-        }
-    
         public int Id { get; set; }
         public int FarmId { get; set; }
         public int CropVarietyId { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public bool IsSelected { get; set; }
+        public string Hectarage { get; set; }
+        public string YieldPerHectar { get; set; }
+        public string CropVarietyNote { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> CropPriceId { get; set; }
+        public Nullable<int> PlantingId { get; set; }
     
         public virtual CropPrice CropPrice { get; set; }
         public virtual CropVariety CropVariety { get; set; }
         public virtual Farm Farm { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Planting> Planting { get; set; }
+        public virtual Planting Planting { get; set; }
     }
 }

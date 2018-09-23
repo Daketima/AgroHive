@@ -208,6 +208,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Consumer\ConsumerAreaRegistration.cs" />
+    <Compile Include="Areas\Farmer\Controllers\PlantingController.cs" />
+    <Compile Include="Areas\Farmer\Controllers\PricingController.cs" />
     <Compile Include="Controllers\CropVarietyController.cs" />
     <Compile Include="Areas\Farmer\FarmerAreaRegistration.cs" />
     <Compile Include="Areas\Logistics\Controllers\HomeController.cs" />
@@ -231,6 +233,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="helper\Alert.cs" />
+    <Compile Include="helper\DropDownController.cs" />
     <Compile Include="helper\SuperBaseController.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseViewModel.cs" />
@@ -245,7 +248,7 @@
     <Compile Include="Models\LivestockViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Areas\Farmer\Models\PlantingViewModel.cs" />
-    <Compile Include="Areas\Farmer\Models\CropPriceViewModel.cs" />
+    <Compile Include="Areas\Farmer\Models\PriceViewModel.cs" />
     <Compile Include="Models\MessagingViewModel.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1057,6 +1060,8 @@
     <Content Include="Areas\Farmer\Views\Pricing\AddCropPrice.cshtml" />
     <Content Include="Areas\Farmer\Views\Crop\AddCropPrice.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\EditorTemplate\_addCrop.cshtml" />
+    <Content Include="Areas\Farmer\Views\Shared\_AddCropPlantingDialog.cshtml" />
+    <Content Include="Areas\Farmer\Views\Shared\_PlantCropDialog.cshtml" />
     <None Include="Properties\PublishProfiles\farmsonline - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1131,7 +1136,7 @@
     <Content Include="Views\Crop\Index.cshtml" />
     <Content Include="Areas\Farmer\Views\Farm\EditFarm.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\AddFarmLivestock.cshtml" />
-    <Content Include="Areas\Farmer\Views\Shared\_AddLivestockToFarmDialog.cshtml" />
+    <Content Include="Areas\Farmer\Views\Shared\_AddLivestockDialog.cshtml" />
     <Content Include="Areas\Farmer\Views\Address\EditFarmAddress.cshtml" />
     <Content Include="Views\Shared\_UserProfileDropdown.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\Index.cshtml" />
@@ -1160,10 +1165,12 @@
     <Folder Include="Areas\Consumer\Models\" />
     <Folder Include="Areas\Consumer\Views\Shared\" />
     <Folder Include="Areas\Farmer\Views\CropVariety\" />
+    <Folder Include="Areas\Farmer\Views\Planting\" />
     <Folder Include="Areas\Logistics\Models\" />
     <Folder Include="Areas\Logistics\Views\Shared\" />
     <Folder Include="Areas\ResearchInstitute\Models\" />
     <Folder Include="Areas\ResearchInstitute\Views\Shared\" />
+    <Folder Include="Views\DropDown\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

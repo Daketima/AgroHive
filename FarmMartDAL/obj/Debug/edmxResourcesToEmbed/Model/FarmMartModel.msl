@@ -151,10 +151,12 @@
     <EntitySetMapping Name="FarmCrop">
       <EntityTypeMapping TypeName="FarmerMartModel.FarmCrop">
         <MappingFragment StoreEntitySet="FarmCrop">
+          <ScalarProperty Name="PlantingId" ColumnName="PlantingId" />
           <ScalarProperty Name="CropPriceId" ColumnName="CropPriceId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CropVarietyNote" ColumnName="CropVarietyNote" />
+          <ScalarProperty Name="YieldPerHectar" ColumnName="YieldPerHectar" />
+          <ScalarProperty Name="Hectarage" ColumnName="Hectarage" />
           <ScalarProperty Name="CropVarietyId" ColumnName="CropVarietyId" />
           <ScalarProperty Name="FarmId" ColumnName="FarmId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -277,12 +279,9 @@
     <EntitySetMapping Name="Planting">
       <EntityTypeMapping TypeName="FarmerMartModel.Planting">
         <MappingFragment StoreEntitySet="Planting">
-          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="FarmCropId" ColumnName="FarmCropId" />
           <ScalarProperty Name="ExpectedHarvestDate" ColumnName="ExpectedHarvestDate" />
           <ScalarProperty Name="DatePlanted" ColumnName="DatePlanted" />
-          <ScalarProperty Name="YieldPerHectar" ColumnName="YieldPerHectar" />
-          <ScalarProperty Name="Hectarage" ColumnName="Hectarage" />
-          <ScalarProperty Name="FarmCropId" ColumnName="FarmCropId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

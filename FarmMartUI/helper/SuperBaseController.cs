@@ -25,14 +25,17 @@ namespace FarmMartUI.helper
         private IRepositoryService<AnimalGender> AnimalGengerService;
         private IRepositoryService<Livestock> LivetockService;
         private IRepositoryService<Measurement> MeasurementService;
+        private IRepositoryService<CropType> CropTypeService;
+        
 
         public SuperBaseController()
         {
-            this.FarmService = new FarmService();
-            this.AnimalGengerService = new AnimalGenderService();
-            this.CropVarietyService = new CropVarietyService();
-            this.LivetockService = new LivestockService();
+             FarmService = new FarmService();
+            AnimalGengerService = new AnimalGenderService();
+            CropVarietyService = new CropVarietyService();
+            LivetockService = new LivestockService();
             MeasurementService = new MeasurementService();
+            CropTypeService = new CropTypeService();
         }
 
         public IEnumerable<SelectListItem> GetMyFarm(int? selected)
@@ -142,16 +145,15 @@ namespace FarmMartUI.helper
         }
         public void SaveCropImage(object CropOrLivestockToSavePicture)
         {
-            if (CropOrLivestockToSavePicture is CropVariety)
+            if (CropOrLivestockToSavePicture is CropVariety cropVariety)
             {
-                CropVariety cropVariety = (CropVariety)CropOrLivestockToSavePicture;
                 SaveCrop(cropVariety);
             }
             if (CropOrLivestockToSavePicture is LivestockBreed)
             {
 
             }
-            void SaveCrop(CropVariety cropVariety)
+            void SaveCrop(CropVariety CropVariety)
             {
                 if (Request.Files.Count > 0)
                 {

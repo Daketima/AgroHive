@@ -1,4 +1,5 @@
-﻿using FarmMartBLL.Core;
+﻿using AutoMapper;
+using FarmMartBLL.Core;
 using FarmMartBLL.ServiceAPI;
 using FarmMartDAL.Model;
 using FarmMartUI.Areas.Farmer.Models;
@@ -70,7 +71,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         {
             FarmLivestockViewModel model = new FarmLivestockViewModel
             {
-                FarmLivestockList = FarmLivestockService.Get().Where(x => x.FarmId == farmId.Value && x.Farm.IsActive).ToList()
+                MyFarmLivestock = FarmLivestockService.Get().Where(x => x.FarmId == farmId.Value && x.Farm.IsActive).ToList()
             };
             return PartialView("_FarmLivestockList", model);
         }
@@ -78,9 +79,11 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         // GET: Livestock
         public ActionResult Index(int? farmId)
         {
-            var model = new FarmLivestockViewModel
+            string userId = User.Identity.GetUserId();
+
+            FarmLivestockViewModel model = new FarmLivestockViewModel
             {
-                FarmDropDown = base.GetMyFarm(null)
+                MyFarmLivestock = FarmLivestockService.Get().Where(x => x.Farm.ApplicationUserId == userId).ToList()
             };
             return View(model);
         }
@@ -91,10 +94,10 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             var model = new FarmLivestockViewModel
             {
                 LivestockBreedList = LivestockBreedService.Get().ToList(),
-                FarmId = farmId.Value
-
+                FarmId = farmId.Value,
+                AnimalGenderDropDown = GetMyAnimalGender(null)
             };
-            return View(model);
+            return PartialView(model);
         }
 
         // GET: Livestock/Create
@@ -149,6 +152,26 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             FarmLivestock LivestockAlreadyAdded(int breedId, int farmId) => FarmLivestockService.Get().Where(x => x.LivestockBreedId == breedId && x.FarmId == farmId).FirstOrDefault();
         }
 
+
+        public ActionResult EditLivestock(int id)
+        {
+            FarmLivestockViewModel model = null;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CropPrice, PriceViewModel>();
+            });
+
+            IMapper iMapper = config.CreateMapper();
+
+            FarmLivestock thisLivestock = FarmLivestockService.GetById(id);
+
+            model = iMapper.Map<FarmLivestock, FarmLivestockViewModel>(thisLivestock);
+
+            return PartialView("_AddCropToFarmDialog", model);
+
+        }
+
+
         // GET: Crop/Details/5
         public ActionResult Details(int? farmLivestockId)
         {
@@ -171,6 +194,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             };
             return View(model);
         }
+
+
 
         // POST: Pricing/Create
         [HttpPost]

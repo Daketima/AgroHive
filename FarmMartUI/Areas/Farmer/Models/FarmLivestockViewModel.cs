@@ -19,7 +19,7 @@ namespace FarmMartUI.Areas.Farmer.Models
 
         public List<Livestock> LivestockListItem { get; set; }
 
-        public List<FarmLivestock> FarmLivestockList { get; set; }
+        public List<FarmLivestock> MyFarmLivestock { get; set; }
 
         public List<LivestockBreed> LivestockBreedList { get; set; }
 

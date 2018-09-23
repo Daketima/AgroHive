@@ -63,7 +63,92 @@
     </script>
 }
 
-<div class="row">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Add Crop</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Name</th>
+                                <th>Livestock Type</th>
+                                <th>Livestock Breed</th>
+                                <th>Gender</th>
+                                <th>Quantity</th>
+                                <th>Available Quantity</th>
+                                <th>Average Weight</th>
+                                <th>Hit Market Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model.MyFarmLivestock != null)
+                            {
+                                int count = 0;
+                                foreach (var fL in Model.MyFarmLivestock)
+                                {
+                                    count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@fL.LivestockBreed.Livestock.Name</td>
+                                <td>@fL.LivestockBreed.Livestock.LivestockType.Name</td>
+                                <td>@fL.LivestockBreed.Name</td>
+                                <td>@fL.AnimalGender.Name</td>
+                                <td>@fL.Population</td>
+                                <td>@fL.QuantityAvailable</td>
+                                <td>@fL.Weight</td>
+                                <td>@fL.HitMarketDate.Value.ToShortDateString()</td>
+                               
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger">Actions</button>
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#" data-id="@fL.Id" name="UpdateCrop">Update Details</a></li>
+                                            <li><a href="#" data-id="@fL.Id" name="UpdatePlanting">Discontinue</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                    <div>
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+        </div>
+       
+    </div>
+    <div class="row">
+        <div id="addCropBox">
+
+        </div>
+
+        <div id="addPlantingBox">
+
+        </div>
+        <div id="rePlantingBox">
+
+        </div>
+        <div id="addPricingBox">
+
+        </div>
+    </div>
+
+@*<div class="row">
     <div class="col-md-6">
         <div class="box">
             <div class="box-header">
@@ -75,9 +160,9 @@
         </div><!-- /.box-body -->
 
     </div><!-- /.box -->
-</div>
+</div>*@
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-6">
         <div class="box">
             <div class="box-header">
@@ -89,7 +174,7 @@
         </div><!-- /.box-body -->
 
     </div><!-- /.box -->
-</div>
+</div>*@
 
 
 

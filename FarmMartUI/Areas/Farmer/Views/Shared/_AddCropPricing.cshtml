@@ -1,4 +1,4 @@
-﻿@model FarmMartUI.Areas.Farmer.Models.PricingViewModel
+﻿@model FarmMartUI.Areas.Farmer.Models.PriceViewModel
 
 @*<div class="example-modal" >*@
 <div class="modal" role="dialog" id="FormAddCropPricingDialog" aria-hidden="true" tabindex="-1">
@@ -14,27 +14,26 @@
                     @Html.HiddenFor(model => model.FarmCropId)
                     @Html.AntiForgeryToken()
                     <div class="form-horizontal">
-                        <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            <label class="control-label col-md-3">Measurement</label>
+                            <label class="control-label col-md-3">Measurement:</label>
                             <div class="col-md-9">
-                                @Html.DropDownListFor(model => model.MeasurementId, Model.MeasurementDropDown, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownListFor(model => model.MeasurementId, Model.MeasurementDropDown, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.MeasurementId, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3">Email Address</label>
+                            <label class="control-label col-md-3">Unit Price:</label>
                             <div class="col-md-9">
-                                @Html.TextBoxFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextBoxFor(model => model.UnitPrice,  new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Add Crop Price" class="btn btn-primary" />
                             </div>
                         </div>
                     </div>

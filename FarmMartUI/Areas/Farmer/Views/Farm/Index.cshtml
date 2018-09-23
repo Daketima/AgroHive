@@ -5,20 +5,26 @@
     Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
 }
 
-
-
-
 @section scripts{
+    
     <script src="~/backend/plugins/datatables/jquery.dataTables.js"></script>
     <link href="~/backend/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
     <!-- Slimscroll -->
-    <script src="~/backend/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='plugins/fastclick/fastclick.min.js'></script>
+    @*<script src="~/backend/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>*@
     <script src="~/backend/dist/js/app.min.js" type="text/javascript"></script>
     <script src="~/backend/dist/js/demo.js" type="text/javascript"></script>
-
+    <script src="~/backend/plugins/datepicker/bootstrap-datepicker.js"></script>
+    
     <script>
+        $('#HitMarketDate').datepicker(
+            {
+                format: 'dd/MM/yyyy'
+            });
+    </script>
+    
+    <script>
+
+        
 
             $('a[name = "FarmAdr"]').click(function () {
             var id = $(this).attr('data-id');
@@ -42,27 +48,10 @@
             });
         });
 
-        $('a[name = "FarmCr"]').click(function () {
-            var id = $(this).attr('data-id');
-            $.ajax({
-                url: "@Url.Action("Create", "Crop")",
-                data: { farmId: id },
-                dataType: "html",
-                type: "GET",
-                success: function (data) {
-                    var items = "";
-                    //$.each(data, function (i, item) {
-                    //    items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
-                    //});
-                    $("#FarmCropDialogContainer").html(data);
-                    $("#formAddFarmCropDialog").modal({ show: true });
 
-                },
-                error: function () {
-                    alert("An error occured");
-                },
-            });
-        });
+        //Ajax call to add a crop to the farm
+
+
 
         $('a[name = "FarmLs"]').click(function () {
             var id = $(this).attr('data-id');
@@ -84,6 +73,50 @@
                     alert("An error occured");
                 },
             });
+        });
+
+        $("#CropTypeId").change(function () {
+            var cropId = $("#CropTypeId option:selected").val();
+             $.ajax({
+                url: "@Url.Action("GetCropNew", "Crop")",
+                 data: { cropTypeId: cropId },
+                 dataType: "json",
+                 type: "POST",
+                 error: function (err) {
+                     alert("An error occured")
+                 },
+                 success: function (data) {
+                    var items = "";
+                    $.each(data, function (i, option) {
+                        items += "<option value=\"" + option.Value + "\">" + option.Text + "</option>";
+                        console.log(option)
+                     });
+                     $("#CropId").html(items);
+                }
+
+            });
+
+        });
+
+        $("#CropId").change(function () {
+            var cropId = $("#CropId option:selected").val();
+             $.ajax({
+                url: "@Url.Action("GetCropVarietyNew", "Crop")",
+                 data: { cropId: cropId },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var items = "";
+                    $.each(data, function (i, item) {
+                        items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                    });
+                    $("#CropVarietyId").html(items);
+                },
+                error: function () {
+                    alert("An error occured");
+                }
+            });
+
         });
 
 
@@ -117,81 +150,81 @@
                     <h3 class="box-title">My Farm</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Active</th>
+                                <th>Verified</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{var count = 0;}
+                            @foreach (var f in Model.MyFarm)
+                            {
+                                count++;
                                 <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Active</th>
-                                    <th>Verified</th>
-                                    <th>Action</th>
+                                    <td>@count</td>
+                                    <td>@f.FarmName</td>
+                                    @if (f.Address != null)
+                                    {
+                                        <td>@f.Address.FullAddress</td> }
+
+                                    else
+                                    {
+                                        <td>No Address Yet</td>}
+                                    @if (f.IsActive)
+                                    {
+                                        <td>Yes</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No</td>
+                                    }
+                                    @if (f.IsVerified)
+                                    {
+                                        <td>Yes</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Verified</td>
+                                    }
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger">Actions</button>
+                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                @if (!User.IsInRole("Admin"))
+                                                {
+                                                    <li><a href="@Url.Action("EditFarm", "Farm", new { farmId = @f.Id })">Update Farm</a></li>
+                                                    <li><a href="@Url.Action("AddFarmAddress", "Address", new { farmId = @f.Id })">Add/Edit Address</a></li>
+                                                    <li><a href="@Url.Action("DeleteFarm", "Farm", new { farmId = @f.Id })">Delete Farm</a></li>
+                                                    <li><a href="" data-toggle="modal">Add Crop</a></li>
+                                                    <li><a href="@Url.Action("AddFarmLivestock", "Livestock", new { farmId = f.Id})" name="FarmLs" data-id="@f.Id">Add Livestock</a></li>
+
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="@Url.Action("EditFarm","Farm", new { farmId = @f.Id})">Verify</a></li>
+                                                    <li><a href="@Url.Action("EditFarm","Farm", new { farmId = @f.Id})">Deactivate</a></li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @{var count = 0;}
-                                @foreach (var f in Model.MyFarm)
-                                {
-                                    count++;
-                                    <tr>
-                                        <td>@count</td>
-                                        <td>@f.FarmName</td>
-                                        @if (f.Address != null)
-                                        {
-                                            <td>@f.Address.FullAddress</td> }
+                            }
+                        </tbody>
 
-                                        else
-                                        {
-                                            <td>No Address Yet</td>}
-                                        @if (f.IsActive)
-                                        {
-                                            <td>Yes</td>
-                                        }
-                                        else
-                                        {
-                                            <td>No</td>
-                                        }
-                                        @if (f.IsVerified)
-                                        {
-                                            <td>Yes</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Not Verified</td>
-                                        }
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-danger">Actions</button>
-                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                                    <span class="caret"></span>
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    @if (!User.IsInRole("Admin"))
-                                                    {
-                                                        <li><a href="@Url.Action("EditFarm", "Farm", new { farmId = @f.Id })">Update Farm</a></li>
-                                                        <li><a href="@Url.Action("AddFarmAddress", "Address", new { farmId = @f.Id })">Add/Edit Address</a></li>
-                                                        <li><a href="@Url.Action("DeleteFarm", "Farm", new { farmId = @f.Id })">Delete Farm</a></li>
-                                                        <li><a href="@Url.Action("AddFarmCrop","Crop", new { farmId = @f.Id})">Add Crops</a></li>
-                                                        <li><a href="@Url.Action("AddFarmLivestock","Livestock", new { farmId = @f.Id})" name="FarmLs" data-id="@f.Id">Add Livestock</a></li>
+                    </table>
 
-                                                    }
-                                                    else
-                                                    {
-                                                        <li><a href="@Url.Action("EditFarm","Farm", new { farmId = @f.Id})">Verify</a></li>
-                                                        <li><a href="@Url.Action("EditFarm","Farm", new { farmId = @f.Id})">Deactivate</a></li>
-                                                    }
 
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-
-                        </table>
-
-                   
 
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
@@ -230,6 +263,6 @@ else
 </div>
 
 <div id="FarmLivestockDialogContainer">
-    @Html.Partial("_AddLivestockToFarmDialog", Model.FarmLivestock)
+    @Html.Partial("_AddLivestockDialog", Model.FarmLivestock)
 </div>
 

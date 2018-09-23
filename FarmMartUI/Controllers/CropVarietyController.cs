@@ -17,11 +17,6 @@ namespace FarmMartUI.Controllers
 
         public CropVarietyController(IRepositoryService<CropVariety> cropVarietyService) => CropVarietyService = cropVarietyService;
 
-
-        
-
-       
-
         // GET: Farmer/CropVariety
         public ActionResult Index()
         {
@@ -50,7 +45,7 @@ namespace FarmMartUI.Controllers
                 try
                 {
                     // TODO: Add insert logic here
-                    var crop = new CropVariety
+                    var cropVarity = new CropVariety
                     {
                         Name = model.Name,
                         PhotoPath = "upload.png",
@@ -58,11 +53,11 @@ namespace FarmMartUI.Controllers
                         DateCreated = DateTime.Now,
 
                     };
-                    crop = CropVarietyService.Create(crop);
+                    cropVarity = CropVarietyService.Create(cropVarity);
 
-                    if (crop != null)
+                    if (cropVarity != null)
                     {
-                       base.SaveCropImage(crop);
+                       base.SaveCropImage(cropVarity);
                     }
 
                     if (User.IsInRole("Admin"))

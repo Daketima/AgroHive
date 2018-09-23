@@ -57,13 +57,12 @@ namespace FarmMartUI.Controllers
         }
 
         // GET: Planting/Details/5
-        public ActionResult Details(int farmCropId)
+        public ActionResult Details(int Id)
         {
             PlantingViewModel model = new PlantingViewModel
             {
-                PlantingDetail = _plantingService.Get().Where(x => x.FarmCropId == farmCropId).ToList()
+                PlantingDetail = _plantingService.GetById(Id)
         };
-            
             return View(model);
         }
 
@@ -87,7 +86,7 @@ namespace FarmMartUI.Controllers
             {
                 var planting = new Planting
                 {
-                    FarmCropId = model.FarmCropId,
+                   
                     DatePlanted = model.DatePlanted,
                     ExpectedHarvestDate = model.DatePlanted.AddMonths(model.MonthToGrowId)
                 };

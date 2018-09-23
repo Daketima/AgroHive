@@ -11,31 +11,31 @@ using System.Threading.Tasks;
 
 namespace FarmMartBLL.ServiceAPI
 {
-    public class CropService : IRepositoryService<CropVariety>
+    public class CropService : IRepositoryService<Crop>
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        public IList<CropVariety> Get()
+        public IList<Crop> Get()
         {
             return unitOfWork.CropRepository.Get().ToList();
         }
 
-        public CropVariety GetById(int? id)
+        public Crop GetById(int? id)
         {
             return unitOfWork.CropRepository.GetByID(id);
         }
 
-        public CropVariety Create(CropVariety Crop)
+        public Crop Create(Crop Crop)
         {
           return  unitOfWork.CropRepository.Insert(Crop);
         }
 
-        public void Update(CropVariety Crop)
+        public void Update(Crop Crop)
         {
             unitOfWork.CropRepository.Update(Crop);
         }
 
-        public void Delete(CropVariety Crop)
+        public void Delete(Crop Crop)
         {
             unitOfWork.CropRepository.Delete(Crop);
         }

@@ -18,21 +18,13 @@ namespace FarmMartUI.Areas.Farmer.Models
         [Range(1, int.MaxValue, ErrorMessage = "Please Select due month")]
         public int MonthToGrowId { get; set; }
 
-        public System.DateTime DatePlanted { get; set; }
+        public DateTime DatePlanted { get; set; }
 
-        public System.DateTime ExpectedHarvestDate { get; set; }
+        public DateTime ExpectedHarvestDate { get; set; }
 
         public IEnumerable<SelectListItem> HarvestPeriodDropDown { get; set; }
 
-        [Required(ErrorMessage = "Please Due months")]
-        public string Hectarage { get; set; }
-
-        [Required(ErrorMessage = "Please enter yield per Hecter/Acre/Plot/Square meter")]
-        public string YieldPerHectar { get; set; }
-
-        public string Note { get; set; }
-
-        public List<Planting> PlantingDetail { get; set; }
+        public Planting PlantingDetail { get; set; }
 
 
     }

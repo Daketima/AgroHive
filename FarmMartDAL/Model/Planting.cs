@@ -14,14 +14,18 @@ namespace FarmMartDAL.Model
     
     public partial class Planting
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Planting()
+        {
+            this.FarmCrop = new HashSet<FarmCrop>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> FarmCropId { get; set; }
-        public string Hectarage { get; set; }
-        public string YieldPerHectar { get; set; }
         public System.DateTime DatePlanted { get; set; }
         public System.DateTime ExpectedHarvestDate { get; set; }
-        public string Note { get; set; }
+        public Nullable<int> FarmCropId { get; set; }
     
-        public virtual FarmCrop FarmCrop { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FarmCrop> FarmCrop { get; set; }
     }
 }

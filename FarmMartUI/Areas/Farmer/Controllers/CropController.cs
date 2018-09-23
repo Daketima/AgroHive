@@ -21,34 +21,19 @@ namespace FarmMartUI.Areas.Farmer.Controllers
     {
         private IRepositoryService<CropVariety> CropVarietyService;
         private IRepositoryService<FarmCrop> FarmCropService;
-        private IRepositoryService<Planting> PlantingService;
-        private IRepositoryService<CropPrice> CropPriceService;
-        private IRepositoryService<HarvestPeriod> HarvestMonthService;
         private IRepositoryService<Crop> CropService;
-        private IRepositoryService<CropType> CroparietyService;
+        private IRepositoryService<CropType> CropTypeService;
 
 
 
         public CropController(IRepositoryService<CropVariety> cropVarietyService,
-            IRepositoryService<FarmCrop> farmCropService, IRepositoryService<Planting> plantingService, IRepositoryService<CropPrice> cropPriceService, IRepositoryService<HarvestPeriod> harvestMonthService, IRepositoryService<Crop> cropService, IRepositoryService<CropType> cropTypeService)
+            IRepositoryService<FarmCrop> farmCropService, IRepositoryService<Planting> plantingService,  IRepositoryService<HarvestPeriod> harvestMonthService, IRepositoryService<Crop> cropService, IRepositoryService<CropType> cropTypeService)
         {
             CropVarietyService = cropVarietyService;
             FarmCropService = farmCropService;
-            PlantingService = plantingService;
-            CropPriceService = cropPriceService;
-            HarvestMonthService = harvestMonthService;
             CropService = cropService;
-            CroparietyService = cropTypeService;
-        }
+            CropTypeService = cropTypeService;
 
-        private IEnumerable<SelectListItem> GetCropDueMonths(int? selected)
-        {
-            if (!selected.HasValue)
-                selected = 0;
-
-            var allMeasurement = HarvestMonthService.Get().ToList();
-            allMeasurement.Insert(0, new HarvestPeriod { Id = 0, Name = "Please Select" });
-            return allMeasurement.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
         private IEnumerable<SelectListItem> GetCrop(int? selected)
@@ -56,8 +41,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             if (!selected.HasValue)
                 selected = 0;
 
-            var allCrop =  CropService.Get().ToList();
-            allCrop.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            var allCrop = CropService.Get().ToList();
+            allCrop.Insert(0, new Crop { Id = 0, Name = "--Please Select--" });
             return allCrop.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
@@ -66,8 +51,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             if (!selected.HasValue)
                 selected = 0;
 
-            var allCropType = CroparietyService.Get().ToList();
-            allCropType.Insert(0, new CropType { Id = 0, Name = "Please Select" });
+            var allCropType = CropTypeService.Get().ToList();
+            allCropType.Insert(0, new CropType { Id = 0, Name = "--Please Select--" });
             return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
@@ -91,21 +76,33 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
-        [HttpGet]
+        private IEnumerable<SelectListItem> GetCropVarietyEmpty(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropType = new List<CropVariety>();
+            allCropType.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
+            return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        [HttpPost]
         public ActionResult GetCropNew(int cropTypeId)
         {
             List<Crop> allCropType = CropService.Get().Where(x => x.CropTypeId == cropTypeId).ToList();
             allCropType.Insert(0, new Crop { Id = 0, Name = "Please Select" });
             return Json(new SelectList(allCropType, "Id", "Name"));
-            
         }
 
-
-
-        private List<CropVariety> GetCropList()
+        [HttpPost]
+        public ActionResult GetCropVarietyNew(int? cropId)
         {
-            return CropVarietyService.Get().ToList();
+            List<CropVariety> allCropVariety = CropVarietyService.Get().Where(x => x.CropId == cropId).ToList();
+            allCropVariety.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
+            return Json(new SelectList(allCropVariety, "Id", "Name"));
         }
+
+        private List<Crop> GetCropList() => CropService.Get().ToList();
 
         [HttpGet]
         public ActionResult GetFarmCropList(int? farmId)
@@ -114,7 +111,6 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             {
                 FarmCropList = FarmCropService.Get().Where(x => x.FarmId == farmId.Value && x.Farm.IsActive).ToList(),
                 FarmId = farmId.Value
-
             };
             return PartialView("_FarmCropList", model);
         }
@@ -123,6 +119,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         public ActionResult Index(int? farmId)
         {
             string userId = User.Identity.GetUserId();
+
             var model = new FarmCropViewModel
             {
                 FarmCropList = FarmCropService.Get().Where(x => x.Farm.ApplicationUserId == userId).ToList(),
@@ -134,25 +131,24 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             return View(model);
         }
 
+        //public ActionResult CropHarvest(int farmCropId)
+        //{
+        //    Planting _cropharvest = null;
+        //    var all = PlantingService.Get().Where(x => x.FarmCropId.Value == farmCropId).ToList();
 
-        public ActionResult CropHarvest(int farmCropId)
-        {
-            Planting _cropharvest = null;
-            var all = PlantingService.Get().Where(x => x.FarmCropId.Value == farmCropId).ToList();
+        //    if (all.Any())
+        //    {
+        //        _cropharvest = all.LastOrDefault();
+        //    }
 
-            if (all.Any())
-            {
-                _cropharvest = all.LastOrDefault();
-            }
+        //    var model = new FarmCropViewModel
+        //    {
+        //        Harvest = _cropharvest
+        //    };
 
-            var model = new FarmCropViewModel
-            {
-                Harvest = _cropharvest
-            };
-
-            //return PartialView("_CropHarvest", model);
-            return View(model);
-        }
+        //    //return PartialView("_CropHarvest", model);
+        //    return View(model);
+        //}
 
 
 
@@ -161,35 +157,69 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         {
             var model = new FarmCropViewModel
             {
-                CropListItem = GetCropList(),
+                CropTypeDropDown = GetCropType(null),
+                CropDropDown = GetCropEmpty(null),
+                CropVarietyDropDown = GetCropVariety(null),
                 FarmId = farmId.Value
             };
-            return View(model);
+            return PartialView("_AddCropToFarmDialog", model);
         }
 
         // POST: Crop/Create
         [HttpPost]
-        public ActionResult AddCropToFarm(int CropVarietyId, int FarmId)
+        public ActionResult AddCropToFarm(FarmCropViewModel model)
         {
             //SaveCrop(model.FarmId, model.CropId);
 
-            var farmCrop = new FarmCrop
+            if (ModelState.IsValid)
             {
-                FarmId = FarmId,
-                CropVarietyId = CropVarietyId,
-                DateCreated = DateTime.Now,
-                IsActive = true
-            };
+                if (model.Id > 0)
+                {
+                    FarmCrop farmCropToUpdate = FarmCropService.GetById(model.Id);
+                    farmCropToUpdate.Hectarage = model.Hectarage;
+                    farmCropToUpdate.YieldPerHectar = model.YieldPerHectar;
+                    farmCropToUpdate.CropVarietyNote = model.CropVarietyNote;
+                    farmCropToUpdate.IsActive = true;
 
-            FarmCropService.Create(farmCrop);
+                    FarmCropService.Update(farmCropToUpdate);
 
-            return View("AddFarmCrop", new { farmId = FarmId });
+                    return RedirectToAction("Index");
+                }
+
+                var farmCrop = new FarmCrop
+                {
+                    FarmId = model.FarmId,
+                    CropVarietyId = model.CropVarietyId,
+                    Hectarage = model.Hectarage,
+                    YieldPerHectar = model.YieldPerHectar,
+                    CropVarietyNote = model.CropVarietyNote,
+                    IsActive = true
+                };
+                FarmCropService.Create(farmCrop);
+
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Crop/Edit/5
-        public ActionResult Edit(int id)
+        public PartialViewResult EditCrop(int FarmCropId)
         {
-            return View();
+            FarmCrop farmCrop = FarmCropService.GetById(FarmCropId);
+
+            FarmCropViewModel model = new FarmCropViewModel
+            {
+                Id = farmCrop.Id,
+                CropId = farmCrop.CropVariety.Crop.Id,
+                CropVarietyId = farmCrop.CropVariety.Crop.Id,
+                CropTypeId = (int)farmCrop.CropVariety.Crop.CropTypeId,
+                CropDropDown = GetCrop(farmCrop.CropVariety.Crop.Id),
+                CropVarietyDropDown = GetCropVariety(farmCrop.CropVarietyId),
+                CropTypeDropDown = GetCropType(farmCrop.CropVariety.Crop.CropTypeId)
+            };
+
+            return PartialView("_AddCropToFarmDialog", model);
         }
 
 
@@ -204,56 +234,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             return View();
         }
 
-        public ActionResult AddCropPrice(int? Id, int? FarmCropId)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<CropPrice, CropPriceViewModel>();
-            });
-            CropPriceViewModel model = null;
-            IMapper iMapper = config.CreateMapper();
+       
 
-            if (Id.HasValue && Id.Value > 0)
-            {
-                CropPrice updateCropPrice = CropPriceService.GetById(Id.Value);
-                model = iMapper.Map<CropPrice, CropPriceViewModel>(updateCropPrice);
-                model.MeasurementDropDown = base.GetMeasurement(updateCropPrice.Id);
-
-                return View(model);
-            }
-
-            model = iMapper.Map<CropPrice, CropPriceViewModel>(new CropPrice());
-            model.FarmCropId = FarmCropId.Value;
-            model.MeasurementDropDown = base.GetMeasurement(null);
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult AddCropPrice(CropPriceViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                CropPrice cropPrice = new CropPrice
-                {
-                    MeasurementId = model.MeasurementId,
-                    UnitPrice = model.UnitPrice,
-                    DateCreated = DateTime.Now
-                };
-
-                cropPrice = CropPriceService.Create(cropPrice);
-
-                if (cropPrice != null)
-                {
-                    FarmCrop updateFarmCrop = FarmCropService.GetById(model.FarmCropId);
-                    updateFarmCrop.CropPriceId = cropPrice?.Id;
-
-                    FarmCropService.Update(updateFarmCrop);
-                }
-                return RedirectToAction("Index", "Crop");
-            }
-            model.MeasurementDropDown = base.GetMeasurement(model.MeasurementId);
-            return View(model);
-        }
 
         //private void SaveCrop(int farmId, int[] CropId)
         //{
@@ -296,52 +278,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         //}
 
 
-        public ActionResult PlantCrop(int? farmCropId, int? id)
-        {
-            PlantingViewModel model = null;
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Planting, PlantingViewModel>();
-            });
-
-            IMapper iMapper = config.CreateMapper();
-
-            if (id.HasValue && id.Value > 0)
-            {
-                Planting editPlanting = PlantingService.GetById(id.Value);
-                model = Mapper.Map<Planting, PlantingViewModel>(editPlanting);
-                model.HarvestPeriodDropDown = GetCropDueMonths(null);
-                return View(model);
-            }
-
-            model = iMapper.Map<Planting, PlantingViewModel>(new Planting());
-            model.FarmCropId = farmCropId;
-            model.HarvestPeriodDropDown = GetCropDueMonths(null);
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult PlantCrop(PlantingViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var plantCrop = new Planting
-                {
-                    FarmCropId = model.FarmCropId,
-                    Hectarage = model.Hectarage,
-                    YieldPerHectar = model.YieldPerHectar,
-                    DatePlanted = model.DatePlanted,
-                    ExpectedHarvestDate = model.DatePlanted.AddMonths(model.MonthToGrowId)
-                };
-
-                PlantingService.Create(plantCrop);
-
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
+        
 
 
     }

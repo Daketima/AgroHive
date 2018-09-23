@@ -17,13 +17,13 @@ namespace FarmMartUI.Controllers
         private IRepositoryService<FarmCrop> FarmCropService;
         private IRepositoryService<Farm> FarmService;
        
-        private IRepositoryService<CropVariety> CropVarietyService;
+        private IRepositoryService<Crop> CropVarietyService;
         private IRepositoryService<Livestock> LivestockService;
         private IRepositoryService<FarmLivestock> FarmLivestockService;
 
        
 
-        public HomeController(IRepositoryService<FarmCrop> farmCropService, IRepositoryService<Farm> farmService,  IRepositoryService<CropVariety> cropVarietyService, IRepositoryService<Livestock> livestockService, IRepositoryService<FarmLivestock> farmLivestockService)
+        public HomeController(IRepositoryService<FarmCrop> farmCropService, IRepositoryService<Farm> farmService,  IRepositoryService<Crop> cropVarietyService, IRepositoryService<Livestock> livestockService, IRepositoryService<FarmLivestock> farmLivestockService)
         {
             FarmCropService = farmCropService;
             FarmService = farmService;
@@ -87,7 +87,7 @@ namespace FarmMartUI.Controllers
         {
             var farmCrop = new List<FarmCrop>();
             var farmLivestock = new List<FarmLivestock>();
-            var cropList = new List<CropVariety>();
+            var cropList = new List<Crop>();
             var livestockList = new List<Livestock>();
             var farms = new List<Farm>();
 

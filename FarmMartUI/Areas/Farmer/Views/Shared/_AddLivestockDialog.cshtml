@@ -1,0 +1,97 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.FarmLivestockViewModel
+
+@*<div class="example-modal" >*@
+<div class="modal" role="dialog" id="formAddFarmLivestockDialog" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Livestock List</h4>
+            </div>
+            @*<div class="modal-body">
+            @using (Html.BeginForm("AddFarmLivestock", "FarmLivestock", FormMethod.Post, new { enctype = "multipart/form - data" }))
+            {
+                @Html.HiddenFor(model => Model.FarmId)
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="row col-md-offset-1" style="padding:10px">
+                        @foreach (var livestock in Model.LivestockListItem.OrderBy(x => x.Name))
+                        {
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <input type="checkbox" name="livestockId" id="chck_@livestock.Id" , value="@livestock.Id" />
+                                    <label for="chck_@livestock.Id">@livestock.Name</label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row col-md-offset-0">
+                        <div class="form-group">
+                            <br />
+                            <div class="col-md-offset-0 col-md-4">
+                                <input type="submit" value="Add Livestock" class="btn btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>*@
+            <div class="box-body">
+                @using (Html.BeginForm("AddLivestockToFarm", "Livestock", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.FarmId)
+                    @Html.HiddenFor(m => m.LivestockBreedId)
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Gender:</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.GenderId, Model.AnimalGenderDropDown,
+                               new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Population:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Population, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Population, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Quantity Available:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.QuantityAvailable, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.QuantityAvailable, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Weight:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Weight, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-3">Hit Market Date:</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.HitMarketDate, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.HitMarketDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Add Livestock" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.box-body -->
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*</div>*@<!-- /.example-modal -->

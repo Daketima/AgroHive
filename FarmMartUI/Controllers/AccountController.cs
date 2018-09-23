@@ -18,7 +18,7 @@ namespace FarmMartUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        IRepositoryService<Farm> FarmService;
+        //IRepositoryService<Farm> FarmService;
         readonly ApplicationDbContext db;
 
         public AccountController()

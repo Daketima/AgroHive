@@ -46,7 +46,7 @@ namespace FarmMartUI.App_Start
             container.RegisterInstance(superController);
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<IRepositoryService<Planting>, PlantingService>();
-            container.RegisterType<IRepositoryService<CropVariety>, CropService>();
+            container.RegisterType<IRepositoryService<Crop>, CropService>();
             container.RegisterType<IRepositoryService<Address>, AddressService>();
             container.RegisterType<IRepositoryService<FarmCrop>, FarmCropService>();
             container.RegisterType<IRepositoryService<FarmLivestock>, FarmLivestockService>();
@@ -57,7 +57,6 @@ namespace FarmMartUI.App_Start
             container.RegisterType<IRepositoryService<LivestockType>, LivestockTypeService>();
             container.RegisterType<IRepositoryService<LocalGovernment>, LocalGovermentService>();
             container.RegisterType<IRepositoryService<Measurement>, MeasurementService>();
-            
             container.RegisterType<IRepositoryService<CropPrice>, CropPriceService>();
             container.RegisterType<IRepositoryService<State>, StateService>();
             container.RegisterType<IRepositoryService<Messaging>, MessagingService>();
@@ -65,7 +64,7 @@ namespace FarmMartUI.App_Start
             container.RegisterType<IRepositoryService<CropVariety>, CropVarietyService>();
             container.RegisterType<IRepositoryService<LivestockBreed>, LivestockBreedService>();
             container.RegisterType<IRepositoryService<AnimalGender>, AnimalGenderService>();
-
+            container.RegisterType<IRepositoryService<CropType>, CropTypeService>();
         }
     }
 }

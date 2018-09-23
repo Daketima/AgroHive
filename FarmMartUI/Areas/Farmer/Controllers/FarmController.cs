@@ -19,25 +19,106 @@ namespace FarmMartUI.Areas.Farmer.Controllers
     {
         private readonly IRepositoryService<Farm> FarmService;
        
-        private readonly IRepositoryService<CropVariety> CropService;
+        private readonly IRepositoryService<Crop> CropService;
         private readonly IRepositoryService<State> StateService;
         private readonly IRepositoryService<LocalGovernment> LocalGovernmentService;
         private readonly IRepositoryService<Livestock> LivestockService;
+        private readonly IRepositoryService<HarvestPeriod> HarvestMonthService;
+        private readonly IRepositoryService<CropType> CropTypeService;
+        private readonly IRepositoryService<CropVariety> CropVarietyService;
+        private readonly IRepositoryService<AnimalGender> AnimalGenderService;
+
+
         ApplicationDbContext db = new ApplicationDbContext();
-        public FarmController(IRepositoryService<Farm> farmService,IRepositoryService<CropVariety> cropService, IRepositoryService<State> stateService, IRepositoryService<LocalGovernment> localGovernmentService, IRepositoryService<Livestock> livestockService)
+        public FarmController(IRepositoryService<Farm> farmService,IRepositoryService<Crop> cropService, IRepositoryService<State> stateService, IRepositoryService<LocalGovernment> localGovernmentService, IRepositoryService<Livestock> livestockService, IRepositoryService<HarvestPeriod> harvestMonthService, IRepositoryService<CropType> cropTypeService, IRepositoryService<CropVariety> cropVarietyService, IRepositoryService<AnimalGender> animalGenderService)
         {
             FarmService = farmService;
             CropService = cropService;
             StateService = stateService;
             LocalGovernmentService = localGovernmentService;
             LivestockService = livestockService;
+            HarvestMonthService = harvestMonthService;
+            CropTypeService = cropTypeService;
+            CropVarietyService = cropVarietyService;
+            AnimalGenderService = animalGenderService;
         }
 
-
-        private List<CropVariety> GetCropList()
+        private IEnumerable<SelectListItem> GetCrop(int? selected)
         {
-            return CropService.Get().ToList();
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCrop = CropService.Get().ToList();
+            allCrop.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            return allCrop.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
+
+        private IEnumerable<SelectListItem> GetCropType(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropType = CropTypeService.Get().ToList();
+            allCropType.Insert(0, new CropType { Id = 0, Name = "Please Select" });
+            return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetCropVariety(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropVariety = CropVarietyService.Get().ToList();
+            allCropVariety.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
+            return allCropVariety.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetCropEmpty(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropType = new List<Crop>();
+            allCropType.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetCropVarietyEmpty(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allCropType = new List<CropVariety>();
+            allCropType.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
+            return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetAnimalGender(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allAnimalGender = AnimalGenderService.Get();
+            allAnimalGender.Insert(0, new AnimalGender { Id = 0, Name = "Please Select" });
+            return allAnimalGender.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        [HttpGet]
+        public ActionResult GetCropNew(int cropTypeId)
+        {
+            List<Crop> allCropType = CropService.Get().Where(x => x.CropTypeId == cropTypeId).ToList();
+            allCropType.Insert(0, new Crop { Id = 0, Name = "Please Select" });
+            return Json(new SelectList(allCropType, "Id", "Name"));
+        }
+
+        public ActionResult GetCropVarietyNew(int? cropId)
+        {
+            List<CropVariety> allCropVariety = CropVarietyService.Get().Where(x => x.CropId == cropId).ToList();
+            allCropVariety.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
+            return Json(new SelectList(allCropVariety, "Id", "Name"));
+        }
+
+        private List<Crop> GetCropList() => CropService.Get().ToList();
 
         public void SaveCropFarm(Farm farm)
         {
@@ -71,6 +152,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             }
         }
         // GET: Farm
+
+
         public ActionResult Index()
         {
             FarmViewModel model;
@@ -87,7 +170,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                     },
                     FarmLivestock = new FarmLivestockViewModel
                     {
-                        LivestockListItem = LivestockService.Get().ToList()
+                        LivestockListItem = LivestockService.Get().ToList(),
+                        AnimalGenderDropDown = GetAnimalGender(null)
                     }
                 };
             }
@@ -104,11 +188,14 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                     MyFarm = thisUserFarm,
                     FarmCrop = new FarmCropViewModel
                     {
-                        CropListItem = GetCropList()
+                        CropListItem = GetCropList(),
+                        CropDropDown = GetCropEmpty(null),
+                        CropVarietyDropDown = GetCropVarietyEmpty(null),
+                        CropTypeDropDown = GetCropType(null)
                     },
                     FarmLivestock = new FarmLivestockViewModel
                     {
-                        LivestockListItem = LivestockService.Get().ToList()
+                       AnimalGenderDropDown = GetAnimalGender(null)
                     }
                 };
             }

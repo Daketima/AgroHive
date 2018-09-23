@@ -9,7 +9,7 @@ namespace FarmMartUI.Models
 {
     public class MessagingViewModel : BaseViewModel
     {
-        public int Id { get; set; }
+        
 
         [Required(ErrorMessage = "Write a Subject")]
         public string Subject { get; set; }

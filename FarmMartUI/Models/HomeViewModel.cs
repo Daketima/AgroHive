@@ -14,7 +14,7 @@ namespace FarmMartUI.Models
         
         public List<FarmCrop> FarmCrops { get; set; }
         public List<FarmLivestock> FarmLivestocks { get; set; }
-        public List<CropVariety> CropList { get; set; }
+        public List<Crop> CropList { get; set; }
        
         public List<Livestock> LivestockList { get;  set; }
         public List<CropPrice> CropPrice { get; set; }
