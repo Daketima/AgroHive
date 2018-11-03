@@ -9,7 +9,7 @@
 
 @section scripts{
     <script>
-            $('a[name="Pharvest"]').click(function () {
+            @*$('a[name="Pharvest"]').click(function () {
                 var id = $(this).attr('data-id');
 
                 $.ajax({
@@ -25,7 +25,7 @@
                         alert("An error occured");
                     }
                 });
-            });
+            });*@
 
     </script>
 }
@@ -48,13 +48,14 @@
             <p class="text-muted">
                 Availabel crops in @Model.ThisFarm.FarmName <a href="@Url.Action("Contact","Home")">Contact this farm</a>
             </p>
+            <p>This is farm is @Model.ThisFarm.Size of Land</p>
         </div>
     </div>
 </div>
 
 <div class="container">
 
-    <div class="col-md-6" id="customer-orders">
+    <div class="col-md-12" id="customer-orders">
         <div class="box">
             <h4>Crops in this Farm</h4>
             <hr>
@@ -66,6 +67,8 @@
                             <th>S/N</th>
                             <th>Image</th>
                             <th>Crop</th>
+                            <th>Crop Type</th>
+                            <th>Crop Variety</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -74,37 +77,38 @@
                         @if (Model.FarmCrops.Any())
                         {
                             var count = 0;
-                            foreach (var fc in Model.FarmCrops.OrderBy(x => x.Crop.Name))
+                            foreach (var fc in Model.FarmCrops.OrderBy(x => x.CropVariety.Name))
                             {
                                 count++;
-                                <tr>
-                                    <th>@count</th>
-                                    @if (!string.IsNullOrEmpty(fc.Crop.Photopath))
-                                    {
-                                        <td> <img src="~/CropProfile/@fc.Crop.Photopath" /></td>
-                                    }
-                                    else
-                                    {
-                                        <td> <img src="~/Front/img/fm.jpg" /></td>
-                                    }
-                                    <td>@fc.Crop.Name</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary btn-sm">You Can</button>
-                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                @*<li><a href=""  name="Pharvest" data-id="@fc.Id">Planting/Harvest</a></li>*@
-                                                <li><a href="@Url.Action("CropHarvest","FarmCrop", new { farmCropId = fc.Id})" name="Pharvest" data-id="@fc.Id">View Planting/Harvest date</a></li>
-                                                @*<li><a name="FarmCr" data-id="@fc.Id">Plant</a></li>*@
-                                                <li><a href="#">View Crop price</a></li>
-                                                <li><a href="#">Send Message to Farmer</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th>@count</th>
+                            @if (!string.IsNullOrEmpty(fc.CropVariety.PhotoPath))
+                            {
+                                <td> <img src="~/CropProfile/@fc.CropVariety.PhotoPath" /></td>
+                            }
+                            else
+                            {
+                                <td> <img src="~/Front/img/fm.jpg" /></td>
+                            }
+                            <td>@fc.CropVariety.Crop.Name</td>
+                            <td>@fc.CropVariety.Crop.CropType.Name</td>
+                            <td>@fc.CropVariety.Name</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-sm">You Can</button>
+                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="@Url.Action("Details","Planting", new { farmCropId = fc.Id})" name="Pharvest" data-id="@fc.Id">Planting Details</a></li>
+                                        @*<li><a name="FarmCr" data-id="@fc.Id">Plant</a></li>*@
+                                        <li><a href="@Url.Action("Details","Crop", new { farmCropId = fc.Id })">Compare Prices</a></li>
+                                        <li><a href="@Url.Action("SendMessage", "Messaging", new { messageRecipientId = fc.Farm.ApplicationUserId})">Message Farmer</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
                             }
 
                         }
@@ -122,7 +126,7 @@
         </div>
     </div>
     <!-- /.col-md-8 -->
-    <div class="col-md-6" id="customer-orders">
+    <div class="col-md-12" id="customer-orders">
         <div class="box">
             <h4>Livestock in this Farm</h4>
             <hr>
@@ -141,7 +145,7 @@
                     {
                         var count = 0;
                         <tbody style="overflow-y:auto; height:200px">
-                            @foreach (var fc in Model.FarmLivestocks.OrderBy(x => x.Livestock.Name))
+                            @foreach (var fc in Model.FarmLivestocks)
                             {
                                 count++;
                                 <tr>
@@ -163,8 +167,8 @@
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="" name="Pharvest" data-id="@fc.Id">See Selling Price</a></li>
-                                                <li><a href="#" name="Pharvest" data-id="@fc.Id">Send Message to Farmer</a></li>
+                     <li><a href="@Url.Action("PriceDetail","Livestock", new { farmLivestockId = fc.Id })">View Price Details</a></li>
+                                                <li><a href="#" name="Pharvest" data-id="@fc.Id">Message Farmer</a></li>
 
                                             </ul>
                                         </div>

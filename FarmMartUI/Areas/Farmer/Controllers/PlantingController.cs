@@ -63,7 +63,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             model.FarmCropId = (int)farmCropId;
             model.HarvestPeriodDropDown = GetCropDueMonth(null);
 
-            return PartialView("_AddCropPlantingDialog", model);
+            //return PartialView("_AddCropPlantingDialog", model);
+            return View(model);
         }
 
         // POST: Farmer/Planting/Create
@@ -122,7 +123,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             
             model.MonthToGrowId = editPlanting.ExpectedHarvestDate.Month - editPlanting.DatePlanted.Month;
             model.HarvestPeriodDropDown = GetCropDueMonth(model.MonthToGrowId);
-            return PartialView("_AddCropPlantingDialog", model);
+            // return PartialView("_AddCropPlantingDialog", model);
+            return View(model);
         }
 
 

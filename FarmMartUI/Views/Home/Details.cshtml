@@ -150,15 +150,15 @@
                                 count++;
                                 <tr>
                                     <th>@count</th>
-                                    @if (!string.IsNullOrEmpty(fc.LivestockBreed.PhotoPath))
+                                    @if (!string.IsNullOrEmpty(fc.Livestock.PhotoPath))
                                     {
-                                        <td> <img src="~/LivestockProfile/@fc.LivestockBreed.PhotoPath" /></td>
+                                        <td> <img src="~/LivestockProfile/@fc.Livestock.PhotoPath" /></td>
                                     }
                                     else
                                     {
                                         <td> <img src="~/Front/img/fm.jpg" /></td>
                                     }
-                                    <td>@fc.LivestockBreed.Name</td>
+                                    <td>@fc.Livestock.Name</td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm">You Can</button>

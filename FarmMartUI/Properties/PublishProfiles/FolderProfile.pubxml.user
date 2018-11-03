@@ -24,6 +24,129 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="ApplicationInsights.config">
       <publishTime>12/28/2017 06:47:07</publishTime>
     </File>
+    <File Include="Areas/Consumer/Views/Consumer/AddAddress.cshtml">
+      <publishTime>07/15/2018 03:03:05</publishTime>
+    </File>
+    <File Include="Areas/Consumer/Views/web.config">
+      <publishTime>05/04/2018 22:33:22</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Address/Add.cshtml">
+      <publishTime>10/27/2018 15:43:29</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Address/AddFarmAddress.cshtml">
+      <publishTime>07/01/2018 14:38:31</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Address/Edit.cshtml">
+      <publishTime>10/27/2018 23:14:20</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Address/EditFarmAddress.cshtml">
+      <publishTime>08/09/2018 21:52:05</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/Add.cshtml">
+      <publishTime>10/28/2018 09:28:17</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/AddCropPrice.cshtml">
+      <publishTime>10/21/2018 17:31:27</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/AddFarmCrop.cshtml">
+      <publishTime>10/15/2018 13:14:05</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/CropHarvest.cshtml">
+      <publishTime>05/11/2018 01:40:52</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/Details.cshtml">
+      <publishTime>05/11/2018 01:41:00</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/Index.cshtml">
+      <publishTime>10/27/2018 23:25:19</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Crop/PlantCrop.cshtml">
+      <publishTime>10/21/2018 17:34:34</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/CropPrice/AddCropPrice.cshtml">
+      <publishTime>10/21/2018 17:35:54</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Farm/Create.cshtml">
+      <publishTime>10/21/2018 17:38:26</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Farm/DeleteFarm.cshtml">
+      <publishTime>10/21/2018 17:40:19</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Farm/EditFarm.cshtml">
+      <publishTime>10/20/2018 08:13:33</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Farm/Index.cshtml">
+      <publishTime>10/27/2018 15:34:51</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Livestock/AddFarmLivestock.cshtml">
+      <publishTime>10/21/2018 17:45:17</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Livestock/AddLivestockPrice.cshtml">
+      <publishTime>08/01/2018 22:21:55</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Livestock/AddLivestockToFarm.cshtml">
+      <publishTime>10/21/2018 17:48:16</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Livestock/Details.cshtml">
+      <publishTime>05/11/2018 01:41:33</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Livestock/Index.cshtml">
+      <publishTime>10/28/2018 07:19:07</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Planting/PlantCrop.cshtml">
+      <publishTime>10/13/2018 18:06:07</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Planting/UdatePlanting.cshtml">
+      <publishTime>10/13/2018 18:02:42</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/EditorTemplate/_addCrop.cshtml">
+      <publishTime>08/14/2018 22:15:24</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_AddCropPlantingDialog.cshtml">
+      <publishTime>10/21/2018 17:50:10</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_AddCropPrice.cshtml">
+      <publishTime>10/21/2018 17:50:39</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_AddCropToFarmDialog.cshtml">
+      <publishTime>10/21/2018 01:31:04</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_AddFarmAddressDialog.cshtml">
+      <publishTime>10/21/2018 17:52:32</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_AddLivestockDialog.cshtml">
+      <publishTime>10/21/2018 17:55:33</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_CropHarvest.cshtml">
+      <publishTime>05/05/2018 00:46:03</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_FarmCropList.cshtml">
+      <publishTime>08/03/2018 20:56:14</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_FarmLivestockList.cshtml">
+      <publishTime>07/31/2018 21:56:20</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/Shared/_PlantCropDialog.cshtml">
+      <publishTime>09/08/2018 16:57:01</publishTime>
+    </File>
+    <File Include="Areas/Farmer/Views/web.config">
+      <publishTime>05/04/2018 22:33:00</publishTime>
+    </File>
+    <File Include="Areas/Logistics/Views/Consumer/AddAddress.cshtml">
+      <publishTime>05/12/2018 12:11:06</publishTime>
+    </File>
+    <File Include="Areas/Logistics/Views/Home/Index.cshtml">
+      <publishTime>06/18/2018 02:18:25</publishTime>
+    </File>
+    <File Include="Areas/Logistics/Views/web.config">
+      <publishTime>05/04/2018 22:33:53</publishTime>
+    </File>
+    <File Include="Areas/ResearchInstitute/Views/Home/Index.cshtml">
+      <publishTime>06/18/2018 02:19:37</publishTime>
+    </File>
+    <File Include="Areas/ResearchInstitute/Views/web.config">
+      <publishTime>05/04/2018 22:34:32</publishTime>
+    </File>
     <File Include="backend/bootstrap/css/bootstrap.css">
       <publishTime>02/25/2015 07:13:10</publishTime>
     </File>
@@ -2023,7 +2146,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/28/2017 06:47:07</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
-      <publishTime>12/06/2017 15:08:08</publishTime>
+      <publishTime>06/18/2018 13:00:14</publishTime>
+    </File>
+    <File Include="bin/AutoMapper.pdb">
+      <publishTime>06/18/2018 13:00:14</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -2032,25 +2158,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/FarmMartBLL.dll">
-      <publishTime>03/07/2018 14:47:41</publishTime>
+      <publishTime>10/25/2018 06:23:28</publishTime>
     </File>
     <File Include="bin/FarmMartBLL.pdb">
-      <publishTime>03/07/2018 14:47:41</publishTime>
+      <publishTime>10/25/2018 06:23:28</publishTime>
     </File>
     <File Include="bin/FarmMartDAL.dll">
-      <publishTime>03/07/2018 14:47:41</publishTime>
+      <publishTime>10/25/2018 06:23:27</publishTime>
     </File>
     <File Include="bin/FarmMartDAL.dll.config">
       <publishTime>12/28/2017 06:52:29</publishTime>
     </File>
     <File Include="bin/FarmMartDAL.pdb">
-      <publishTime>03/07/2018 14:47:41</publishTime>
+      <publishTime>10/25/2018 06:23:27</publishTime>
     </File>
     <File Include="bin/FarmMartUI.dll">
-      <publishTime>03/07/2018 14:47:46</publishTime>
+      <publishTime>11/02/2018 01:33:15</publishTime>
     </File>
     <File Include="bin/FarmMartUI.pdb">
-      <publishTime>03/07/2018 14:47:46</publishTime>
+      <publishTime>11/02/2018 01:33:15</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
@@ -2111,6 +2237,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
       <publishTime>02/13/2015 13:16:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
+      <publishTime>04/24/2013 21:44:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.dll">
+      <publishTime>04/24/2013 21:44:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Mvc.dll">
+      <publishTime>04/24/2013 21:44:14</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>01/05/2012 11:08:46</publishTime>
@@ -2265,6 +2400,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>04/13/2017 15:47:48</publishTime>
     </File>
+    <File Include="bin/System.ValueTuple.dll">
+      <publishTime>05/15/2018 13:29:52</publishTime>
+    </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
@@ -2286,17 +2424,50 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>10/05/2016 13:11:52</publishTime>
+    </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>09/10/2013 17:28:38</publishTime>
     </File>
     <File Include="Content/404.css">
       <publishTime>03/04/2018 09:22:49</publishTime>
     </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>12/28/2017 06:46:38</publishTime>
+      <publishTime>10/20/2018 09:09:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>10/20/2018 09:09:03</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>12/28/2017 06:46:38</publishTime>
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>10/20/2018 09:09:02</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>12/28/2017 06:46:13</publishTime>
@@ -2655,11 +2826,53 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="LivestockProfile/5_0_detailbig2.jpg">
       <publishTime>02/24/2018 20:23:58</publishTime>
     </File>
+    <File Include="Scripts/bootstrap.bundle.js">
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js.map">
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js">
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js.map">
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>12/28/2017 06:46:38</publishTime>
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js.map">
+      <publishTime>10/20/2018 09:09:02</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>12/28/2017 06:46:38</publishTime>
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js.map">
+      <publishTime>10/20/2018 09:09:02</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.js">
+      <publishTime>10/20/2018 09:08:57</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.js.map">
+      <publishTime>10/20/2018 09:08:57</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.min.js">
+      <publishTime>10/20/2018 09:08:57</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.min.js.map">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.js">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.js.map">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.min.js">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.min.js.map">
+      <publishTime>10/20/2018 09:08:56</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>12/28/2017 06:46:39</publishTime>
@@ -2669,6 +2882,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
       <publishTime>12/28/2017 06:46:39</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.js">
+      <publishTime>10/20/2018 09:08:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.min.js">
+      <publishTime>10/20/2018 09:08:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.min.map">
+      <publishTime>10/20/2018 09:08:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.slim.js">
+      <publishTime>10/20/2018 09:08:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.slim.min.js">
+      <publishTime>10/20/2018 09:08:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.slim.min.map">
+      <publishTime>10/20/2018 09:08:36</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>12/28/2017 06:46:54</publishTime>
@@ -2685,11 +2916,62 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>12/28/2017 06:46:52</publishTime>
     </File>
+    <File Include="Scripts/popper-utils.js">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/popper-utils.js.map">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/popper-utils.min.js">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/popper-utils.min.js.map">
+      <publishTime>10/20/2018 09:08:56</publishTime>
+    </File>
+    <File Include="Scripts/popper.js">
+      <publishTime>10/20/2018 09:08:55</publishTime>
+    </File>
+    <File Include="Scripts/popper.js.map">
+      <publishTime>10/20/2018 09:08:55</publishTime>
+    </File>
+    <File Include="Scripts/popper.min.js">
+      <publishTime>10/20/2018 09:08:55</publishTime>
+    </File>
+    <File Include="Scripts/popper.min.js.map">
+      <publishTime>10/20/2018 09:08:55</publishTime>
+    </File>
+    <File Include="Scripts/README.md">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
     <File Include="Scripts/respond.js">
       <publishTime>12/28/2017 06:46:53</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
       <publishTime>12/28/2017 06:46:53</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.js">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.js.map">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.min.js">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.min.js.map">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.js">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.js.map">
+      <publishTime>10/20/2018 09:08:54</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.min.js">
+      <publishTime>10/20/2018 09:08:53</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.min.js.map">
+      <publishTime>10/20/2018 09:08:53</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>12/28/2017 06:46:56</publishTime>
@@ -2707,10 +2989,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/28/2017 06:46:56</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>03/07/2018 14:40:43</publishTime>
+      <publishTime>07/01/2018 13:48:02</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
-      <publishTime>01/08/2018 21:25:51</publishTime>
+      <publishTime>07/01/2018 13:56:08</publishTime>
     </File>
     <File Include="Views/Account/ResetPassword.cshtml">
       <publishTime>12/28/2017 06:46:57</publishTime>
@@ -2728,7 +3010,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/28/2017 06:46:56</publishTime>
     </File>
     <File Include="Views/AdminLte/Dashboard.cshtml">
-      <publishTime>02/23/2018 06:55:44</publishTime>
+      <publishTime>08/09/2018 21:11:05</publishTime>
+    </File>
+    <File Include="Views/AdminLte/UpdateProfile.cshtml">
+      <publishTime>07/15/2018 03:03:22</publishTime>
     </File>
     <File Include="Views/Crop/AddCrop.cshtml">
       <publishTime>02/23/2018 00:50:03</publishTime>
@@ -2737,7 +3022,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/23/2018 05:07:08</publishTime>
     </File>
     <File Include="Views/Crop/Index.cshtml">
-      <publishTime>01/23/2018 05:02:42</publishTime>
+      <publishTime>08/02/2018 20:16:16</publishTime>
     </File>
     <File Include="Views/Error/Error404.cshtml">
       <publishTime>03/03/2018 12:27:09</publishTime>
@@ -2782,13 +3067,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/27/2018 23:40:23</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>01/14/2018 06:54:21</publishTime>
+      <publishTime>06/17/2018 23:20:04</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>02/09/2018 08:10:42</publishTime>
     </File>
     <File Include="Views/Home/Details.cshtml">
-      <publishTime>03/04/2018 07:05:57</publishTime>
+      <publishTime>10/21/2018 07:04:32</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>02/27/2018 08:21:46</publishTime>
@@ -2808,6 +3093,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Livestock/Index.cshtml">
       <publishTime>02/28/2018 00:18:36</publishTime>
     </File>
+    <File Include="Views/Livestock/PriceDetail.cshtml">
+      <publishTime>08/02/2018 20:09:27</publishTime>
+    </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>12/28/2017 06:46:57</publishTime>
     </File>
@@ -2826,6 +3114,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
       <publishTime>12/28/2017 06:46:57</publishTime>
     </File>
+    <File Include="Views/Messaging/SendMessage.cshtml">
+      <publishTime>07/15/2018 03:03:22</publishTime>
+    </File>
+    <File Include="Views/Planting/Details.cshtml">
+      <publishTime>07/15/2018 07:49:01</publishTime>
+    </File>
     <File Include="Views/Planting/PlantCrop.cshtml">
       <publishTime>03/07/2018 14:37:53</publishTime>
     </File>
@@ -2839,10 +3133,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2018 21:37:42</publishTime>
     </File>
     <File Include="Views/Shared/FarmerDashboard.cshtml">
-      <publishTime>02/27/2018 21:08:26</publishTime>
+      <publishTime>05/11/2018 01:14:25</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
       <publishTime>12/28/2017 06:46:57</publishTime>
+    </File>
+    <File Include="Views/Shared/LogisticsDashboard.cshtml">
+      <publishTime>06/18/2018 02:18:52</publishTime>
+    </File>
+    <File Include="Views/Shared/ResearchInstituteDashboard.cshtml">
+      <publishTime>08/09/2018 21:13:38</publishTime>
     </File>
     <File Include="Views/Shared/_AddCropPricing.cshtml">
       <publishTime>01/07/2018 07:15:26</publishTime>
@@ -2857,13 +3157,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/04/2018 06:24:18</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLteLayout.cshtml">
-      <publishTime>02/23/2018 07:52:29</publishTime>
+      <publishTime>09/08/2018 18:51:45</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLteLeftMenu.cshtml">
-      <publishTime>02/27/2018 21:29:13</publishTime>
+      <publishTime>07/01/2018 14:22:24</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLteTopMenu.cshtml">
-      <publishTime>02/27/2018 20:56:46</publishTime>
+      <publishTime>07/15/2018 01:25:39</publishTime>
     </File>
     <File Include="Views/Shared/_AdminMenu.cshtml">
       <publishTime>01/22/2018 12:10:18</publishTime>
@@ -2878,19 +3178,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/04/2018 07:06:46</publishTime>
     </File>
     <File Include="Views/Shared/_FarmerMenu.cshtml">
-      <publishTime>02/27/2018 23:23:25</publishTime>
+      <publishTime>07/31/2018 21:58:52</publishTime>
     </File>
     <File Include="Views/Shared/_FarmLivestockList.cshtml">
       <publishTime>03/04/2018 07:06:34</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/27/2018 07:25:24</publishTime>
+      <publishTime>07/01/2018 14:18:19</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>12/28/2017 06:46:57</publishTime>
     </File>
+    <File Include="Views/Shared/_LogisticsMenu.cshtml">
+      <publishTime>07/01/2018 11:07:35</publishTime>
+    </File>
+    <File Include="Views/Shared/_ResearchInstituteMenu.cshtml">
+      <publishTime>06/18/2018 23:14:53</publishTime>
+    </File>
     <File Include="Views/Shared/_UserProfileDropdown.cshtml">
-      <publishTime>02/27/2018 21:28:06</publishTime>
+      <publishTime>07/15/2018 02:46:19</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>12/28/2017 06:46:13</publishTime>
@@ -2899,7 +3205,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/28/2017 06:46:13</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/03/2018 12:58:07</publishTime>
+      <publishTime>11/02/2018 01:33:16</publishTime>
+    </File>
+    <File Include="_ViewStart.cshtml">
+      <publishTime>05/11/2018 00:33:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

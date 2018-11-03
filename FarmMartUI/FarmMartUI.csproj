@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -26,6 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,8 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -66,6 +68,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -209,7 +214,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Consumer\ConsumerAreaRegistration.cs" />
     <Compile Include="Areas\Farmer\Controllers\PlantingController.cs" />
-    <Compile Include="Areas\Farmer\Controllers\PricingController.cs" />
+    <Compile Include="Areas\Farmer\Controllers\CropPriceController.cs" />
     <Compile Include="Controllers\CropVarietyController.cs" />
     <Compile Include="Areas\Farmer\FarmerAreaRegistration.cs" />
     <Compile Include="Areas\Logistics\Controllers\HomeController.cs" />
@@ -229,6 +234,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlantingController.cs" />
     <Compile Include="Extensions\HtmlHelperExtension.cs" />
+    <Compile Include="Factory\Core\AreaFactory.cs" />
+    <Compile Include="Factory\FarmerArea.cs" />
+    <Compile Include="Factory\Core\FactoryBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -248,7 +256,7 @@
     <Compile Include="Models\LivestockViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Areas\Farmer\Models\PlantingViewModel.cs" />
-    <Compile Include="Areas\Farmer\Models\PriceViewModel.cs" />
+    <Compile Include="Areas\Farmer\Models\CropPriceViewModel.cs" />
     <Compile Include="Models\MessagingViewModel.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -923,6 +931,10 @@
     <Content Include="backend\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="backend\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\404.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="CropProfile\3_0_download %281%29.jpg" />
@@ -932,7 +944,6 @@
     <Content Include="FarmProfile\4_0_images.png" />
     <Content Include="FarmProfile\5_0_detailbig2.jpg" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Front\404.html" />
     <Content Include="Front\basket.html" />
     <Content Include="Front\blog.html" />
@@ -1041,8 +1052,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="LivestockProfile\5_0_detailbig2.jpg" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1057,24 +1066,60 @@
     <Content Include="Areas\Farmer\Views\Crop\PlantCrop.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\AddLivestockToFarm.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\AddLivestockPrice.cshtml" />
-    <Content Include="Areas\Farmer\Views\Pricing\AddCropPrice.cshtml" />
+    <Content Include="Areas\Farmer\Views\CropPrice\AddCropPrice.cshtml" />
     <Content Include="Areas\Farmer\Views\Crop\AddCropPrice.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\EditorTemplate\_addCrop.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\_AddCropPlantingDialog.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\_PlantCropDialog.cshtml" />
+    <Content Include="Areas\Farmer\Views\Planting\PlantCrop.cshtml" />
+    <Content Include="Areas\Farmer\Views\Planting\UdatePlanting.cshtml" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Properties\PublishProfiles\farmsonline - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1118,9 +1163,9 @@
     <Content Include="Areas\Farmer\Views\Shared\_FarmCropList.cshtml" />
     <Content Include="Areas\Farmer\Views\Crop\Index.cshtml" />
     <Content Include="Areas\Farmer\Views\Farm\Index.cshtml" />
-    <Content Include="Areas\Farmer\Views\Address\AddFarmAddress.cshtml" />
+    <Content Include="Areas\Farmer\Views\Address\Add.cshtml" />
     <Content Include="Areas\Farmer\Views\Farm\Create.cshtml" />
-    <Content Include="Areas\Farmer\Views\Shared\_AddCropPricing.cshtml" />
+    <Content Include="Areas\Farmer\Views\Shared\_AddCropPrice.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\_CropHarvest.cshtml" />
@@ -1137,7 +1182,7 @@
     <Content Include="Areas\Farmer\Views\Farm\EditFarm.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\AddFarmLivestock.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\_AddLivestockDialog.cshtml" />
-    <Content Include="Areas\Farmer\Views\Address\EditFarmAddress.cshtml" />
+    <Content Include="Areas\Farmer\Views\Address\Edit.cshtml" />
     <Content Include="Views\Shared\_UserProfileDropdown.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\Index.cshtml" />
     <Content Include="Areas\Farmer\Views\Shared\_FarmLivestockList.cshtml" />
@@ -1145,7 +1190,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
-    <Content Include="Areas\Farmer\Views\Crop\AddFarmCrop.cshtml" />
+    <Content Include="Areas\Farmer\Views\Crop\Add.cshtml" />
     <Content Include="Areas\Farmer\Views\Crop\Details.cshtml" />
     <Content Include="Areas\Farmer\Views\Livestock\Details.cshtml" />
     <Content Include="Areas\Farmer\Views\Farm\DeleteFarm.cshtml" />
@@ -1158,6 +1203,15 @@
     <Content Include="Views\AdminLte\UpdateProfile.cshtml" />
     <Content Include="Views\Planting\Details.cshtml" />
     <Content Include="Views\Livestock\PriceDetail.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1165,7 +1219,6 @@
     <Folder Include="Areas\Consumer\Models\" />
     <Folder Include="Areas\Consumer\Views\Shared\" />
     <Folder Include="Areas\Farmer\Views\CropVariety\" />
-    <Folder Include="Areas\Farmer\Views\Planting\" />
     <Folder Include="Areas\Logistics\Models\" />
     <Folder Include="Areas\Logistics\Views\Shared\" />
     <Folder Include="Areas\ResearchInstitute\Models\" />
@@ -1173,17 +1226,7 @@
     <Folder Include="Views\DropDown\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FarmMartBLL\FarmMartBLL.csproj">
@@ -1195,11 +1238,18 @@
       <Name>FarmMartDAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

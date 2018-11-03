@@ -51,7 +51,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             if (!selected.HasValue)
                 selected = 0;
 
-            var allCropType = CropTypeService.Get().ToList();
+            var allCropType = CropTypeService.Get().OrderBy(x => x.Name).ToList();
             allCropType.Insert(0, new CropType { Id = 0, Name = "--Please Select--" });
             return allCropType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
@@ -89,7 +89,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         [HttpPost]
         public ActionResult GetCropNew(int cropTypeId)
         {
-            List<Crop> allCropType = CropService.Get().Where(x => x.CropTypeId == cropTypeId).ToList();
+            List<Crop> allCropType = CropService.Get().Where(x => x.CropTypeId == cropTypeId).OrderBy(x => x.Name).ToList();
             allCropType.Insert(0, new Crop { Id = 0, Name = "Please Select" });
             return Json(new SelectList(allCropType, "Id", "Name"));
         }
@@ -97,7 +97,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         [HttpPost]
         public ActionResult GetCropVarietyNew(int? cropId)
         {
-            List<CropVariety> allCropVariety = CropVarietyService.Get().Where(x => x.CropId == cropId).ToList();
+            List<CropVariety> allCropVariety = CropVarietyService.Get().Where(x => x.CropId == cropId).OrderBy(x => x.Name).ToList();
             allCropVariety.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
             return Json(new SelectList(allCropVariety, "Id", "Name"));
         }
@@ -122,7 +122,9 @@ namespace FarmMartUI.Areas.Farmer.Controllers
 
             var model = new FarmCropViewModel
             {
-                FarmCropList = FarmCropService.Get().Where(x => x.Farm.ApplicationUserId == userId).ToList(),
+                FarmCropList = FarmCropService.Get().Where(
+                    x => x.Farm.ApplicationUserId == userId && x.IsActive
+                    ).ToList(),
                 //FarmDropDown = base.GetMyFarm(null)
                 CropDropDown = GetCrop(null),
                 CropTypeDropDown = GetCropType(null),
@@ -153,7 +155,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
 
 
         // GET: Crop/Create
-        public ActionResult AddFarmCrop(int? farmId)
+        public ActionResult Add(int? farmId)
         {
             var model = new FarmCropViewModel
             {
@@ -162,12 +164,12 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                 CropVarietyDropDown = GetCropVariety(null),
                 FarmId = farmId.Value
             };
-            return PartialView("_AddCropToFarmDialog", model);
+            return View(model);
         }
 
         // POST: Crop/Create
         [HttpPost]
-        public ActionResult AddCropToFarm(FarmCropViewModel model)
+        public ActionResult Add(FarmCropViewModel model)
         {
             //SaveCrop(model.FarmId, model.CropId);
 
@@ -218,7 +220,6 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                 CropVarietyDropDown = GetCropVariety(farmCrop.CropVarietyId),
                 CropTypeDropDown = GetCropType(farmCrop.CropVariety.Crop.CropTypeId)
             };
-
             return PartialView("_AddCropToFarmDialog", model);
         }
 

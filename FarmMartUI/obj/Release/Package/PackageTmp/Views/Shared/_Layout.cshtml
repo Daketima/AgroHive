@@ -49,20 +49,30 @@
             <div class="col-md-6 offer" data-animate="fadeInDown">
                 @*<a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>*@
             </div>
-            <div class="col-md-6" data-animate="fadeInDown">
+            <div class="col-md-6" data-animate="fadeInDown" style="z-index:10">
                 <ul class="menu">
                     <li>
                         <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Register", "Account")">Register</a>
+                        <a href="@Url.Action("Register", "Account", new { area = "" })">Register</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Contact", "Home")">Contact</a>
+                        <a href="@Url.Action("Contact", "Home", new { area = "" })">Contact</a>
                     </li>
-                    @*<li>
-                            <a href="#">Recently viewed</a>
-                        </li>*@
+                    @if (User.IsInRole("Buyer"))
+                    {
+                        <li class="dropdown yamm-fw" style="z-index:20">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">User Actions<b class="caret"></b></a>
+                            <ul class="dropdown-menu yamm-content" role="menu">
+                                <li> <a href="#">Profile</a> </li>
+                                <li> <a href="#">View Replies</a> </li>
+                                <li role="presentation" class="divider"></li>
+                                <li > <a href="@Url.Action("LogOff", "Account", new { area = "" })">Log Out</a> </li>
+                            </ul>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -105,7 +115,7 @@
         <div class="container">
             <div class="navbar-header">
 
-                <a class="navbar-brand home" href="@Url.Action("Index", "Home")">
+                <a class="navbar-brand home" href="@Url.Action("Index", "Home", new { area = ""})">
                     <img src="~/Front/img/fm.jpg" alt="app logo" class="hidden-xs">
                     <img src="~/Front/img/fm.jpj" alt="app logo" class="visible-xs"><span class="sr-only">App - go to homepage</span>
                 </a>
@@ -275,17 +285,17 @@
                                                 </ul>*@
                                         </div>
                                         @*<div class="col-sm-3">
-                                            <div class="banner">
+                                                <div class="banner">
+                                                        <a href="#">
+                                                            <img src="img/banner.jpg" class="img img-responsive" alt="">
+                                                        </a>
+                                                    </div>
+                                                <div class="banner">
                                                     <a href="#">
-                                                        <img src="img/banner.jpg" class="img img-responsive" alt="">
+                                                        <img src="img/banner2.jpg" class="img img-responsive" alt="">
                                                     </a>
                                                 </div>
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="img/banner2.jpg" class="img img-responsive" alt="">
-                                                </a>
-                                            </div>
-                                        </div>*@
+                                            </div>*@
                                     </div>
                                 </div>
                                 <!-- /.yamm-content -->
@@ -293,104 +303,56 @@
                         </ul>
                     </li>
 
-                    @*<li class="dropdown yamm-fw">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
+                    <li class="dropdown yamm-fw">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Logistics and Delievery <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="yamm-content">
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <h5>Shop</h5>
+                                                <h5>Logistics Company</h5>
                                                 <ul>
                                                     <li>
-                                                        <a href="index.html">Homepage</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="category.html">Category - sidebar left</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="category-right.html">Category - sidebar right</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="category-full.html">Category - full width</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="detail.html">Product detail</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h5>User</h5>
-                                                <ul>
-                                                    <li>
-                                                        <a href="register.html">Register / login</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="customer-orders.html">Orders history</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="customer-order.html">Order history detail</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="customer-wishlist.html">Wishlist</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="customer-account.html">Customer account / change password</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h5>Order process</h5>
-                                                <ul>
-                                                    <li>
-                                                        <a href="basket.html">Shopping cart</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout1.html">Checkout - step 1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout2.html">Checkout - step 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout3.html">Checkout - step 3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout4.html">Checkout - step 4</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h5>Pages and blog</h5>
-                                                <ul>
-                                                    <li>
-                                                        <a href="blog.html">Blog listing</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="post.html">Blog Post</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="faq.html">FAQ</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="text.html">Text page</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="text-right.html">Text page - right sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="404.html">404 page</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="contact.html">Contact</a>
+                                                        <a href="">Chisco Transport</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                     /.yamm-content
+                                    <!-- /.yamm-content -->
                                 </li>
                             </ul>
-                        </li>*@
+                        </li>
+                    <li class="dropdown yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Seed<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5>Research Institutues</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="index.html">IITA</a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Where To Buy</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="">IITA</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 
             </div>

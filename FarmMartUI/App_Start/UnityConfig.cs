@@ -62,9 +62,9 @@ namespace FarmMartUI.App_Start
             container.RegisterType<IRepositoryService<Messaging>, MessagingService>();
             container.RegisterType<IRepositoryService<MessageReply>, MessageReplyService>();
             container.RegisterType<IRepositoryService<CropVariety>, CropVarietyService>();
-            container.RegisterType<IRepositoryService<LivestockBreed>, LivestockBreedService>();
             container.RegisterType<IRepositoryService<AnimalGender>, AnimalGenderService>();
             container.RegisterType<IRepositoryService<CropType>, CropTypeService>();
+            container.RegisterType<IRepositoryService<FarmSizeUnit>, FarmSizeUnitService>();
         }
     }
 }

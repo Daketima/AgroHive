@@ -10,6 +10,7 @@ using FarmMartUI.Models;
 using FarmMartDAL.Model;
 using FarmMartBLL.ServiceAPI;
 using FarmMartBLL.Core;
+using FarmMartUI.Factory;
 
 namespace FarmMartUI.Controllers
 {
@@ -180,10 +181,12 @@ namespace FarmMartUI.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     var role = await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
 
-                    if (!model.UserRole.Equals("Buyer"))
-                        return RedirectToAction("Dashboard", "AdminLte", new { area = "" });
-                    else
-                        return RedirectToAction("AddAddress", "Consumer", new { area = "Consumer", id = user.Id });
+                    //if (!model.UserRole.Equals("Buyer"))
+                    //    return RedirectToAction("Dashboard", "AdminLte", new { area = "" });
+                    //else
+                    //    return RedirectToAction("AddAddress", "Consumer", new { area = "Consumer", id = user.Id });
+                    AreaFactory GotoArea = new AreaFactory();
+                    return GotoArea.GetArea(model.UserRole).RedirectToArea(model.UserRole);
                 }
                 AddErrors(result);
             }

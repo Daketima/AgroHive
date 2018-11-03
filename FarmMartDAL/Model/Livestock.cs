@@ -17,7 +17,7 @@ namespace FarmMartDAL.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Livestock()
         {
-            this.LivestockBreed = new HashSet<LivestockBreed>();
+            this.FarmLivestock = new HashSet<FarmLivestock>();
         }
     
         public int Id { get; set; }
@@ -27,8 +27,8 @@ namespace FarmMartDAL.Model
         public string PhotoPath { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
     
-        public virtual LivestockType LivestockType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LivestockBreed> LivestockBreed { get; set; }
+        public virtual ICollection<FarmLivestock> FarmLivestock { get; set; }
+        public virtual LivestockType LivestockType { get; set; }
     }
 }

@@ -30,14 +30,25 @@ namespace FarmMartDAL.Implementation
         private GenericRepository<Messaging> _messageRepository;
         private GenericRepository<MessageReply> _messageReplyRepository;
         private GenericRepository<CropVariety> _cropVarietyReplyRepository;
-        private GenericRepository<LivestockBreed> _livestockBreedReplyRepository;
         private GenericRepository<AnimalGender> _animalGenderRepository;
         private GenericRepository<CropType> _cropTypeRepository;
+        private GenericRepository<FarmSizeUnit> _farmSizeUnitRepository;
 
 
 
 
+        public GenericRepository<FarmSizeUnit> FarmSizeUnitRepository
+        {
+            get
+            {
+                if (this._farmSizeUnitRepository == null)
+                {
+                    this._farmSizeUnitRepository = new GenericRepository<FarmSizeUnit>(_context);
+                }
 
+                return _farmSizeUnitRepository;
+            }
+        }
 
         public GenericRepository<CropType> CropTypeRepository
         {
@@ -62,19 +73,6 @@ namespace FarmMartDAL.Implementation
                 }
 
                 return _animalGenderRepository;
-            }
-        }
-
-        public GenericRepository<LivestockBreed> LivestockBreedRepository
-        {
-            get
-            {
-                if (this._livestockBreedReplyRepository == null)
-                {
-                    this._livestockBreedReplyRepository = new GenericRepository<LivestockBreed>(_context);
-                }
-
-                return _livestockBreedReplyRepository;
             }
         }
 

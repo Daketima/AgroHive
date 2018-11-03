@@ -16,10 +16,10 @@
     <EntitySet Name="Farm" EntityType="FarmerMartModel.Farm" />
     <EntitySet Name="FarmCrop" EntityType="FarmerMartModel.FarmCrop" />
     <EntitySet Name="FarmLivestock" EntityType="FarmerMartModel.FarmLivestock" />
+    <EntitySet Name="FarmSizeUnit" EntityType="FarmerMartModel.FarmSizeUnit" />
     <EntitySet Name="HarvestPeriod" EntityType="FarmerMartModel.HarvestPeriod" />
     <EntitySet Name="LgisticsOffice" EntityType="FarmerMartModel.LgisticsOffice" />
     <EntitySet Name="Livestock" EntityType="FarmerMartModel.Livestock" />
-    <EntitySet Name="LivestockBreed" EntityType="FarmerMartModel.LivestockBreed" />
     <EntitySet Name="LivestockPrice" EntityType="FarmerMartModel.LivestockPrice" />
     <EntitySet Name="LivestockType" EntityType="FarmerMartModel.LivestockType" />
     <EntitySet Name="Measurement" EntityType="FarmerMartModel.Measurement" />
@@ -93,6 +93,10 @@
       <End Role="CropVariety" EntitySet="CropVariety" />
       <End Role="FarmCrop" EntitySet="FarmCrop" />
     </AssociationSet>
+    <AssociationSet Name="FK_Farm_FarmSideUnit" Association="FarmerMartModel.FK_Farm_FarmSideUnit">
+      <End Role="FarmSizeUnit" EntitySet="FarmSizeUnit" />
+      <End Role="Farm" EntitySet="Farm" />
+    </AssociationSet>
     <AssociationSet Name="FK_FarmCrop_Farm" Association="FarmerMartModel.FK_FarmCrop_Farm">
       <End Role="Farm" EntitySet="Farm" />
       <End Role="FarmCrop" EntitySet="FarmCrop" />
@@ -105,21 +109,17 @@
       <End Role="Planting" EntitySet="Planting" />
       <End Role="FarmCrop" EntitySet="FarmCrop" />
     </AssociationSet>
-    <AssociationSet Name="FK_FarmLivestock_LivestockBreed" Association="FarmerMartModel.FK_FarmLivestock_LivestockBreed">
-      <End Role="LivestockBreed" EntitySet="LivestockBreed" />
+    <AssociationSet Name="FK_FarmLivestock_Livestock" Association="FarmerMartModel.FK_FarmLivestock_Livestock">
+      <End Role="Livestock" EntitySet="Livestock" />
       <End Role="FarmLivestock" EntitySet="FarmLivestock" />
     </AssociationSet>
     <AssociationSet Name="FK_FarmLivestock_Price" Association="FarmerMartModel.FK_FarmLivestock_Price">
       <End Role="LivestockPrice" EntitySet="LivestockPrice" />
       <End Role="FarmLivestock" EntitySet="FarmLivestock" />
     </AssociationSet>
-    <AssociationSet Name="FK_Livestock_LivestockTyper" Association="FarmerMartModel.FK_Livestock_LivestockTyper">
+    <AssociationSet Name="FK_Livestock_LivestockType" Association="FarmerMartModel.FK_Livestock_LivestockType">
       <End Role="LivestockType" EntitySet="LivestockType" />
       <End Role="Livestock" EntitySet="Livestock" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LivestockBreed_Livestock" Association="FarmerMartModel.FK_LivestockBreed_Livestock">
-      <End Role="Livestock" EntitySet="Livestock" />
-      <End Role="LivestockBreed" EntitySet="LivestockBreed" />
     </AssociationSet>
     <AssociationSet Name="FK_LivestockPricing_Measurement" Association="FarmerMartModel.FK_LivestockPricing_Measurement">
       <End Role="Measurement" EntitySet="Measurement" />
@@ -294,12 +294,14 @@
     <Property Name="EmailAddress" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="PhotoPath" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Size" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FarmSideUnitId" Type="Int32" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="IsVerified" Type="Boolean" Nullable="false" />
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
     <Property Name="AddressId" Type="Int32" />
     <NavigationProperty Name="Address" Relationship="FarmerMartModel.FK_Farm_Farm_Address" FromRole="Farm" ToRole="Address" />
     <NavigationProperty Name="AspNetUsers" Relationship="FarmerMartModel.FK_Farm_Farm_ApplicationUser" FromRole="Farm" ToRole="AspNetUsers" />
+    <NavigationProperty Name="FarmSizeUnit" Relationship="FarmerMartModel.FK_Farm_FarmSideUnit" FromRole="Farm" ToRole="FarmSizeUnit" />
     <NavigationProperty Name="FarmCrop" Relationship="FarmerMartModel.FK_FarmCrop_Farm" FromRole="Farm" ToRole="FarmCrop" />
     <NavigationProperty Name="FarmLivestock" Relationship="FarmerMartModel.FK_FarmLivestock_Farm" FromRole="Farm" ToRole="FarmLivestock" />
   </EntityType>
@@ -327,19 +329,30 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FarmId" Type="Int32" Nullable="false" />
-    <Property Name="LivestockBreedId" Type="Int32" Nullable="false" />
+    <Property Name="LivestockId" Type="Int32" />
+    <Property Name="Other" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Breed" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="GenderId" Type="Int32" Nullable="false" />
     <Property Name="Population" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="QuantityAvailable" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Weight" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="HitMarketDate" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsAvailable" Type="Boolean" />
     <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="LivestockPriceId" Type="Int32" />
     <NavigationProperty Name="AnimalGender" Relationship="FarmerMartModel.FK_FarmLivestock_Gender" FromRole="FarmLivestock" ToRole="AnimalGender" />
     <NavigationProperty Name="Farm" Relationship="FarmerMartModel.FK_FarmLivestock_Farm" FromRole="FarmLivestock" ToRole="Farm" />
-    <NavigationProperty Name="LivestockBreed" Relationship="FarmerMartModel.FK_FarmLivestock_LivestockBreed" FromRole="FarmLivestock" ToRole="LivestockBreed" />
+    <NavigationProperty Name="Livestock" Relationship="FarmerMartModel.FK_FarmLivestock_Livestock" FromRole="FarmLivestock" ToRole="Livestock" />
     <NavigationProperty Name="LivestockPrice" Relationship="FarmerMartModel.FK_FarmLivestock_Price" FromRole="FarmLivestock" ToRole="LivestockPrice" />
+  </EntityType>
+  <EntityType Name="FarmSizeUnit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Farm" Relationship="FarmerMartModel.FK_Farm_FarmSideUnit" FromRole="FarmSizeUnit" ToRole="Farm" />
   </EntityType>
   <EntityType Name="HarvestPeriod">
     <Key>
@@ -367,23 +380,11 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="LivestockTypeId" Type="Int32" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="PhotoPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="LivestockType" Relationship="FarmerMartModel.FK_Livestock_LivestockTyper" FromRole="Livestock" ToRole="LivestockType" />
-    <NavigationProperty Name="LivestockBreed" Relationship="FarmerMartModel.FK_LivestockBreed_Livestock" FromRole="Livestock" ToRole="LivestockBreed" />
-  </EntityType>
-  <EntityType Name="LivestockBreed">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="LivestockId" Type="Int32" />
-    <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="PhotoPath" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="FarmLivestock" Relationship="FarmerMartModel.FK_FarmLivestock_LivestockBreed" FromRole="LivestockBreed" ToRole="FarmLivestock" />
-    <NavigationProperty Name="Livestock" Relationship="FarmerMartModel.FK_LivestockBreed_Livestock" FromRole="LivestockBreed" ToRole="Livestock" />
+    <NavigationProperty Name="FarmLivestock" Relationship="FarmerMartModel.FK_FarmLivestock_Livestock" FromRole="Livestock" ToRole="FarmLivestock" />
+    <NavigationProperty Name="LivestockType" Relationship="FarmerMartModel.FK_Livestock_LivestockType" FromRole="Livestock" ToRole="LivestockType" />
   </EntityType>
   <EntityType Name="LivestockPrice">
     <Key>
@@ -404,7 +405,7 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Livestock" Relationship="FarmerMartModel.FK_Livestock_LivestockTyper" FromRole="LivestockType" ToRole="Livestock" />
+    <NavigationProperty Name="Livestock" Relationship="FarmerMartModel.FK_Livestock_LivestockType" FromRole="LivestockType" ToRole="Livestock" />
   </EntityType>
   <EntityType Name="Measurement">
     <Key>
@@ -679,6 +680,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Farm_FarmSideUnit">
+    <End Type="FarmerMartModel.FarmSizeUnit" Role="FarmSizeUnit" Multiplicity="0..1" />
+    <End Type="FarmerMartModel.Farm" Role="Farm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmSizeUnit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Farm">
+        <PropertyRef Name="FarmSideUnitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FarmCrop_Farm">
     <End Type="FarmerMartModel.Farm" Role="Farm" Multiplicity="1" />
     <End Type="FarmerMartModel.FarmCrop" Role="FarmCrop" Multiplicity="*" />
@@ -715,15 +728,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FarmLivestock_LivestockBreed">
-    <End Type="FarmerMartModel.LivestockBreed" Role="LivestockBreed" Multiplicity="1" />
+  <Association Name="FK_FarmLivestock_Livestock">
+    <End Type="FarmerMartModel.Livestock" Role="Livestock" Multiplicity="0..1" />
     <End Type="FarmerMartModel.FarmLivestock" Role="FarmLivestock" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="LivestockBreed">
+      <Principal Role="Livestock">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="FarmLivestock">
-        <PropertyRef Name="LivestockBreedId" />
+        <PropertyRef Name="LivestockId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -739,7 +752,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Livestock_LivestockTyper">
+  <Association Name="FK_Livestock_LivestockType">
     <End Type="FarmerMartModel.LivestockType" Role="LivestockType" Multiplicity="0..1" />
     <End Type="FarmerMartModel.Livestock" Role="Livestock" Multiplicity="*" />
     <ReferentialConstraint>
@@ -748,18 +761,6 @@
       </Principal>
       <Dependent Role="Livestock">
         <PropertyRef Name="LivestockTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LivestockBreed_Livestock">
-    <End Type="FarmerMartModel.Livestock" Role="Livestock" Multiplicity="0..1" />
-    <End Type="FarmerMartModel.LivestockBreed" Role="LivestockBreed" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Livestock">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="LivestockBreed">
-        <PropertyRef Name="LivestockId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

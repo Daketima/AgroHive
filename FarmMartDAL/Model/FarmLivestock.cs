@@ -16,19 +16,22 @@ namespace FarmMartDAL.Model
     {
         public int Id { get; set; }
         public int FarmId { get; set; }
-        public int LivestockBreedId { get; set; }
+        public Nullable<int> LivestockId { get; set; }
+        public string Other { get; set; }
+        public string Breed { get; set; }
         public int GenderId { get; set; }
         public string Population { get; set; }
         public string QuantityAvailable { get; set; }
         public string Weight { get; set; }
         public Nullable<System.DateTime> HitMarketDate { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<bool> IsAvailable { get; set; }
         public System.DateTime DateCreated { get; set; }
         public Nullable<int> LivestockPriceId { get; set; }
     
         public virtual AnimalGender AnimalGender { get; set; }
         public virtual Farm Farm { get; set; }
-        public virtual LivestockBreed LivestockBreed { get; set; }
+        public virtual Livestock Livestock { get; set; }
         public virtual LivestockPrice LivestockPrice { get; set; }
     }
 }

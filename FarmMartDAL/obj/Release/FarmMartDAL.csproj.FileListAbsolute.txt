@@ -8,3 +8,15 @@ C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartDAL\bin\
 C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartDAL\obj\Release\FarmMartDAL.csproj.CoreCompileInputs.cache
 C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartDAL\obj\Release\FarmMartDAL.dll
 C:\Users\tesli\Documents\Visual Studio 2017\Projects\FarmMartUI\FarmMartDAL\obj\Release\FarmMartDAL.pdb
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\FarmMartDAL.dll.config
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\FarmMartDAL.dll
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\FarmMartDAL.pdb
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\EntityFramework.dll
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\EntityFramework.xml
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\obj\Release\FarmMartDAL.csprojAssemblyReference.cache
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\obj\Release\FarmMartDAL.csproj.CoreCompileInputs.cache
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\obj\Release\FarmMartDAL.csproj.CopyComplete
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\obj\Release\FarmMartDAL.dll
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartDAL\obj\Release\FarmMartDAL.pdb

@@ -139,6 +139,7 @@
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FarmSideUnitId" ColumnName="FarmSideUnitId" />
           <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
@@ -168,14 +169,25 @@
         <MappingFragment StoreEntitySet="FarmLivestock">
           <ScalarProperty Name="LivestockPriceId" ColumnName="LivestockPriceId" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="HitMarketDate" ColumnName="HitMarketDate" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="QuantityAvailable" ColumnName="QuantityAvailable" />
           <ScalarProperty Name="Population" ColumnName="Population" />
           <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-          <ScalarProperty Name="LivestockBreedId" ColumnName="LivestockBreedId" />
+          <ScalarProperty Name="Breed" ColumnName="Breed" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="LivestockId" ColumnName="LivestockId" />
           <ScalarProperty Name="FarmId" ColumnName="FarmId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmSizeUnit">
+      <EntityTypeMapping TypeName="FarmerMartModel.FarmSizeUnit">
+        <MappingFragment StoreEntitySet="FarmSizeUnit">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -206,17 +218,6 @@
           <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="LivestockTypeId" ColumnName="LivestockTypeId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LivestockBreed">
-      <EntityTypeMapping TypeName="FarmerMartModel.LivestockBreed">
-        <MappingFragment StoreEntitySet="LivestockBreed">
-          <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="LivestockId" ColumnName="LivestockId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

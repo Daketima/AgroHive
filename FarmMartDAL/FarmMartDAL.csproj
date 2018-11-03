@@ -108,6 +108,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FarmMartModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\FarmSizeUnit.cs">
+      <DependentUpon>FarmMartModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\HarvestPeriod.cs">
       <DependentUpon>FarmMartModel.tt</DependentUpon>
     </Compile>
@@ -115,9 +118,6 @@
       <DependentUpon>FarmMartModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Livestock.cs">
-      <DependentUpon>FarmMartModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\LivestockBreed.cs">
       <DependentUpon>FarmMartModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\LivestockPrice.cs">

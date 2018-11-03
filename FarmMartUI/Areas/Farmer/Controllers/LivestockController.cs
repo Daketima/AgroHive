@@ -20,50 +20,69 @@ namespace FarmMartUI.Areas.Farmer.Controllers
     {
         private IRepositoryService<Livestock> LivestockService;
         private IRepositoryService<FarmLivestock> FarmLivestockService;
-        private readonly IRepositoryService<LivestockBreed> LivestockBreedService;
+        private readonly IRepositoryService<LivestockPrice> LivestockPriceService;
+        private IRepositoryService<LivestockType> LivestockTypeService;
+        private IRepositoryService<AnimalGender> GenderService;
 
-        private IRepositoryService<LivestockPrice> LivestockPriceService;
-
-
-        public LivestockController(IRepositoryService<Livestock> livestockService, IRepositoryService<FarmLivestock> farmLivestockService, IRepositoryService<LivestockPrice> livestockPriceService, IRepositoryService<LivestockBreed> farmLivestockBreedService)
+        public LivestockController(IRepositoryService<Livestock> livestockService, IRepositoryService<FarmLivestock> farmLivestockService, IRepositoryService<LivestockPrice> livestockPriceService, IRepositoryService<LivestockType> livestockTypeService, IRepositoryService<AnimalGender> genderService)
         {
             LivestockService = livestockService;
             FarmLivestockService = farmLivestockService;
-            LivestockBreedService = farmLivestockBreedService;
             LivestockPriceService = livestockPriceService;
-
+            LivestockTypeService = livestockTypeService;
+            GenderService = genderService;
         }
 
         private List<Livestock> GetLivestockList() => LivestockService.Get().ToList();
 
-        public IEnumerable<SelectListItem> GetLivestockBreed(int? selected)
-        {
-            string userId = User.Identity.GetUserId();
 
 
-            if (!selected.HasValue)
-                selected = 0;
-
-            var allFarms = LivestockBreedService.Get().ToList();
-            allFarms.Insert(0, new LivestockBreed { Id = 0, Name = "Please Select" });
-            return allFarms.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
-        }
-
-        public IEnumerable<SelectListItem> GetLivestockBreedEmpty(int? selected)
+        public IEnumerable<SelectListItem> GetLivestockType(int? selected)
         {
             if (!selected.HasValue)
                 selected = 0;
 
-            var allFarms = new List<LivestockBreed>();
-            allFarms.Insert(0, new LivestockBreed { Id = 0, Name = "Please Select" });
-            return allFarms.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+            var allLivestockType = LivestockTypeService.Get().ToList();
+            allLivestockType.Insert(0, new LivestockType { Id = 0, Name = "Please Select" });
+            return allLivestockType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
-        [HttpGet]
-        public ActionResult GetLivestockBreedNew(int? LivestockId)
+        private IEnumerable<SelectListItem> GetLivestockEmpty(int? selected)
         {
-            var allFarms = this.LivestockBreedService.Get().Where(x => x.LivestockId == LivestockId.Value).ToList();
-            return Json(allFarms, JsonRequestBehavior.AllowGet);
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allLivestock = new List<Livestock>();
+            allLivestock.Insert(0, new Livestock { Id = 0, Name = "Please Select" });
+            return allLivestock.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetLivestock(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allLivestock = LivestockService.Get().ToList();
+            allLivestock.Insert(0, new Livestock { Id = 0, Name = "Please Select" });
+            return allLivestock.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        [HttpPost]
+        public ActionResult GetLivestockNew(int livestockTypeId)
+        {
+            List<Livestock> allCropType = LivestockService.Get().Where(x => x.LivestockTypeId == livestockTypeId).ToList();
+            allCropType.Insert(0, new Livestock { Id = 0, Name = "Please Select" });
+            return Json(new SelectList(allCropType, "Id", "Name"));
+        }
+
+        private IEnumerable<SelectListItem> GetAnimalGender(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allAnimalGender = GenderService.Get().ToList();
+            allAnimalGender.Insert(0, new AnimalGender { Id = 0, Name = "Please Select" });
+            return allAnimalGender.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
         [HttpGet]
@@ -83,7 +102,9 @@ namespace FarmMartUI.Areas.Farmer.Controllers
 
             FarmLivestockViewModel model = new FarmLivestockViewModel
             {
-                MyFarmLivestock = FarmLivestockService.Get().Where(x => x.Farm.ApplicationUserId == userId).ToList()
+                MyFarmLivestock = FarmLivestockService.Get().Where(
+                    x => x.Farm.ApplicationUserId == userId && x.IsActive
+                    ).ToList()
             };
             return View(model);
         }
@@ -93,44 +114,53 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         {
             var model = new FarmLivestockViewModel
             {
-                LivestockBreedList = LivestockBreedService.Get().ToList(),
+
                 FarmId = farmId.Value,
-                AnimalGenderDropDown = GetMyAnimalGender(null)
-            };
-            return PartialView(model);
-        }
-
-        // GET: Livestock/Create
-
-        public ActionResult AddLivestockToFarm(int farmId, int? BreedId)
-        {
-
-            var model = new FarmLivestockViewModel
-            {
-                FarmId = farmId,
-                AnimalGenderDropDown = base.GetMyAnimalGender(null),
-                LivestockBreedId = BreedId.Value
+                AnimalGenderDropDown = GetMyAnimalGender(null),
+               /// LivestockTypeDropDown = GetLivestockType(null),
+                //LivestockDropDown = GetLivestockEmpty(null)
+                LivestockDropDown = GetLivestock(null)
             };
             return View(model);
         }
 
+        //// GET: Livestock/Create
+        //public ActionResult AddLivestockToFarm(int farmId, int? BreedId)
+        //{
+        //    var model = new FarmLivestockViewModel
+        //    {
+        //        FarmId = farmId,
+        //        AnimalGenderDropDown = base.GetMyAnimalGender(null),
+        //        LivestockBreedId = BreedId.Value
+        //    };
+        //    return View(model);
+        //}
+
         [HttpPost]
         public ActionResult AddLivestockToFarm(FarmLivestockViewModel model)
         {
-            FarmLivestock checkFarmLivestock = LivestockAlreadyAdded(model.LivestockBreedId, model.FarmId);
-
-            if (checkFarmLivestock != null)
-            {
-                model.AnimalGenderDropDown = GetMyAnimalGender(model.GenderId);
-
-                return RedirectToAction("AddFarmLivestock", new { farmId = model.FarmId, BreedId = model.LivestockBreedId });
-            }
 
             if (ModelState.IsValid)
             {
+                if(model.Id > 0)
+                {
+                    FarmLivestock updateDetail = FarmLivestockService.GetById(model.Id);
+
+                    updateDetail.Breed = model.Breed;
+                    updateDetail.LivestockId = model.LivestockId;
+                    updateDetail.Population = model.Population;
+                    updateDetail.QuantityAvailable = model.QuantityAvailable;
+                    updateDetail.Weight = model.Weight;
+                    updateDetail.GenderId = model.GenderId;
+                    updateDetail.HitMarketDate = model.HitMarketDate;
+                    updateDetail.Other = model.Other;
+                    FarmLivestockService.Update(updateDetail);
+
+                    return RedirectToAction("Index", new { farmid = model.FarmId });
+                }
                 var newFarmLivestock = new FarmLivestock
                 {
-                    LivestockBreedId = model.LivestockBreedId,
+                    Breed = model.Breed,
                     FarmId = model.FarmId,
                     GenderId = model.GenderId,
                     Population = model.Population,
@@ -138,27 +168,28 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                     Weight = model.Weight,
                     HitMarketDate = model.HitMarketDate,
                     IsActive = true,
-                    DateCreated = DateTime.Now
+                    DateCreated = DateTime.Now,
+                    Other = model.Other,
+                    LivestockId = model.LivestockId,
+                    IsAvailable = false
+                    
                 };
 
                 FarmLivestockService.Create(newFarmLivestock);
-                return RedirectToAction("AddFarmLivestock", new { farmId = model.FarmId, BreedId = model.LivestockBreedId });
+                return RedirectToAction("Index", new { farmid = model.FarmId});
             }
             model.AnimalGenderDropDown = GetMyAnimalGender(model.GenderId);
             return View(model);
-
-            //Local method to get a ducplicate livestock already added to 
-            // a particular farm
-            FarmLivestock LivestockAlreadyAdded(int breedId, int farmId) => FarmLivestockService.Get().Where(x => x.LivestockBreedId == breedId && x.FarmId == farmId).FirstOrDefault();
         }
 
 
-        public ActionResult EditLivestock(int id)
+        public ActionResult UpdateDetail(int id)
         {
             FarmLivestockViewModel model = null;
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CropPrice, PriceViewModel>();
+                cfg.CreateMap<FarmLivestock, FarmLivestockViewModel>()
+                .ReverseMap();
             });
 
             IMapper iMapper = config.CreateMapper();
@@ -166,61 +197,73 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             FarmLivestock thisLivestock = FarmLivestockService.GetById(id);
 
             model = iMapper.Map<FarmLivestock, FarmLivestockViewModel>(thisLivestock);
-
-            return PartialView("_AddCropToFarmDialog", model);
-
+            //model.LivestockTypeId = thisLivestock.Livestock.LivestockTypeId.Value;
+            //model.LivestockTypeDropDown = GetLivestockType(model.LivestockTypeId);
+            model.LivestockDropDown = GetLivestock(thisLivestock.LivestockId);
+            model.AnimalGenderDropDown = GetAnimalGender(thisLivestock.GenderId);
+            return View("AddFarmLivestock", model);
         }
 
 
         // GET: Crop/Details/5
-        public ActionResult Details(int? farmLivestockId)
+        public JsonResult Delete(int id)
         {
-            //var livestockPrice = LivestockPriceService.Get().Where(x => x.FarmLivestockId.Equals(farmLivestockId));
+            FarmLivestock deleteFarmlivestock = FarmLivestockService.GetById(id);
+            deleteFarmlivestock.IsActive = false;
 
-            //var model = new HomeViewModel
-            //{
-            //    LivestockPrice = livestockPrice.ToList()
-            //};
-            return View();
+            FarmLivestockService.Update(deleteFarmlivestock);
+            
+            return Json(new { Message = "Deleted"},JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AddLivestockPrice(int? farmLivestockId, int? farmId)
+        public JsonResult Discontinue(int id)
         {
-            var model = new LivestockPriceViewModel
-            {
-                FarmLivestockId = farmLivestockId.Value,
-                FarmId = farmId.Value,
-                MeasurementDropDown = base.GetMeasurement(null)
-            };
-            return View(model);
+            FarmLivestock discontinueFarmlivestock = FarmLivestockService.GetById(id);
+            discontinueFarmlivestock.IsAvailable = false;
+
+            FarmLivestockService.Update(discontinueFarmlivestock);
+
+
+            return Json(new { Message = "Discontinued" }, JsonRequestBehavior.AllowGet);
         }
+
+        //public ActionResult AddLivestockPrice(int? farmLivestockId, int? farmId)
+        //{
+        //    var model = new LivestockPriceViewModel
+        //    {
+        //        FarmLivestockId = farmLivestockId.Value,
+        //        FarmId = farmId.Value,
+        //        MeasurementDropDown = base.GetMeasurement(null)
+        //    };
+        //    return View(model);
+        //}
 
 
 
         // POST: Pricing/Create
-        [HttpPost]
-        public ActionResult AddLivestockPrice(LivestockPriceViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var pricing = new LivestockPrice
-                {
-                    MeasurementId = model.MeasurementId,
-                    UnitPrice = model.UnitPrice,
-                    DateCreated = DateTime.Now
-                };
+        //[HttpPost]
+        //public ActionResult AddLivestockPrice(LivestockPriceViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var pricing = new LivestockPrice
+        //        {
+        //            MeasurementId = model.MeasurementId,
+        //            UnitPrice = model.UnitPrice,
+        //            DateCreated = DateTime.Now
+        //        };
 
-                LivestockPrice livestockPrice = LivestockPriceService.Create(pricing);
+        //        LivestockPrice livestockPrice = LivestockPriceService.Create(pricing);
 
-                if (livestockPrice != null)
-                {
-                    FarmLivestock updateFarmLivestock = FarmLivestockService.Get().Where(x => x.FarmId == model.FarmId).FirstOrDefault();
-                    updateFarmLivestock.LivestockPriceId = livestockPrice?.Id;
-                }
-                return RedirectToAction("Index", "Livestock");
-            }
-            return RedirectToAction("Index", "Livestock");
-        }
+        //        if (livestockPrice != null)
+        //        {
+        //            FarmLivestock updateFarmLivestock = FarmLivestockService.Get().Where(x => x.FarmId == model.FarmId).FirstOrDefault();
+        //            updateFarmLivestock.LivestockPriceId = livestockPrice?.Id;
+        //        }
+        //        return RedirectToAction("Index", "Livestock");
+        //    }
+        //    return RedirectToAction("Index", "Livestock");
+        //}
 
         //private void SaveLivestock(int farmId, int[] LivestockId)
         //{

@@ -27,10 +27,12 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         private readonly IRepositoryService<CropType> CropTypeService;
         private readonly IRepositoryService<CropVariety> CropVarietyService;
         private readonly IRepositoryService<AnimalGender> AnimalGenderService;
+        private readonly IRepositoryService<LivestockType> LivestockTypeService;
+        private readonly IRepositoryService<FarmSizeUnit> FarmSizeUnitService;
 
 
         ApplicationDbContext db = new ApplicationDbContext();
-        public FarmController(IRepositoryService<Farm> farmService,IRepositoryService<Crop> cropService, IRepositoryService<State> stateService, IRepositoryService<LocalGovernment> localGovernmentService, IRepositoryService<Livestock> livestockService, IRepositoryService<HarvestPeriod> harvestMonthService, IRepositoryService<CropType> cropTypeService, IRepositoryService<CropVariety> cropVarietyService, IRepositoryService<AnimalGender> animalGenderService)
+        public FarmController(IRepositoryService<Farm> farmService,IRepositoryService<Crop> cropService, IRepositoryService<State> stateService, IRepositoryService<LocalGovernment> localGovernmentService, IRepositoryService<Livestock> livestockService, IRepositoryService<HarvestPeriod> harvestMonthService, IRepositoryService<CropType> cropTypeService, IRepositoryService<CropVariety> cropVarietyService, IRepositoryService<AnimalGender> animalGenderService, IRepositoryService<LivestockType> livestockTypeService, IRepositoryService<FarmSizeUnit> farmSizeUnitService)
         {
             FarmService = farmService;
             CropService = cropService;
@@ -41,6 +43,19 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             CropTypeService = cropTypeService;
             CropVarietyService = cropVarietyService;
             AnimalGenderService = animalGenderService;
+            LivestockTypeService = livestockTypeService;
+            FarmSizeUnitService = farmSizeUnitService;
+        }
+
+
+        private IEnumerable<SelectListItem> GetFarmSizeUnit(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allFarmSizeUnit = FarmSizeUnitService.Get();
+            allFarmSizeUnit.Insert(0, new FarmSizeUnit { Id = 0, Name = "Please Select" });
+            return allFarmSizeUnit.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
         }
 
         private IEnumerable<SelectListItem> GetCrop(int? selected)
@@ -117,6 +132,46 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             allCropVariety.Insert(0, new CropVariety { Id = 0, Name = "Please Select" });
             return Json(new SelectList(allCropVariety, "Id", "Name"));
         }
+
+        public IEnumerable<SelectListItem> GetLivestockType(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allLivestockType = LivestockTypeService.Get().ToList();
+            allLivestockType.Insert(0, new LivestockType { Id = 0, Name = "Please Select" });
+            return allLivestockType.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetLivestockEmpty(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allLivestock = new List<Livestock>();
+            allLivestock.Insert(0, new Livestock { Id = 0, Name = "Please Select" });
+            return allLivestock.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        private IEnumerable<SelectListItem> GetLivestock(int? selected)
+        {
+            if (!selected.HasValue)
+                selected = 0;
+
+            var allLivestock = LivestockService.Get().ToList();
+            allLivestock.Insert(0, new Livestock { Id = 0, Name = "Please Select" });
+            return allLivestock.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == selected });
+        }
+
+        [HttpPost]
+        public ActionResult GetLivestockNew(int livestockTypeId)
+        {
+            List<Livestock> allCropType = LivestockService.Get().Where(x => x.LivestockTypeId == livestockTypeId).ToList();
+            allCropType.Insert(0, new Livestock { Id = 0, Name = "Please Select" });
+            return Json(new SelectList(allCropType, "Id", "Name"));
+        }
+
+       
 
         private List<Crop> GetCropList() => CropService.Get().ToList();
 
@@ -195,7 +250,9 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                     },
                     FarmLivestock = new FarmLivestockViewModel
                     {
-                       AnimalGenderDropDown = GetAnimalGender(null)
+                        AnimalGenderDropDown = GetAnimalGender(null),
+                        LivestockTypeDropDown = GetLivestockType(null),
+                        LivestockDropDown = GetLivestockEmpty(null)
                     }
                 };
             }
@@ -218,7 +275,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             var model = new FarmViewModel
             {
                 ApplicationUserId = userId,
-                EmailAddress = thisUser.Email
+                EmailAddress = thisUser.Email,
+                FarmSizeUnitDropDown = GetFarmSizeUnit(null)
             };
             return View(model);
         }
@@ -239,7 +297,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                         Size = model.Size,
                         IsActive = true,
                         DateCreated = DateTime.Now,
-                        IsVerified = false
+                        IsVerified = false,
+                        FarmSideUnitId = model.FarmSizeUnitId
                     };
 
                     newFarm = FarmService.Create(newFarm);
@@ -248,19 +307,22 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                     {
                         SaveCropFarm(newFarm);
                     }
-                    return RedirectToAction("AddFarmAddress", "FarmAddress", new { farmId = newFarm.Id });
+                    return RedirectToAction("Add", "Address", new { farmId = newFarm.Id });
                 }
                 catch
                 {
+                    model.FarmSizeUnitDropDown = GetFarmSizeUnit(null);
                     return View();
                 }
             }
+            model.FarmSizeUnitDropDown = GetFarmSizeUnit(null);
             return View();
         }
 
         // GET: Farm/Edit/5
         public ActionResult EditFarm(int? farmId)
         {
+            FarmViewModel model = null;
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Farm, FarmViewModel>()
@@ -273,17 +335,11 @@ namespace FarmMartUI.Areas.Farmer.Controllers
 
             IMapper iMapper = config.CreateMapper();
 
-            var farm = FarmService.GetById(farmId.Value);
+            Farm updateFarm = FarmService.GetById(farmId.Value);
 
-            var model = iMapper.Map<Farm, FarmViewModel>(farm);
-            
+            model = iMapper.Map<Farm, FarmViewModel>(updateFarm);
+            model.FarmSizeUnitDropDown = GetFarmSizeUnit(updateFarm.FarmSideUnitId.HasValue == true ? updateFarm.FarmSideUnitId.Value : 1);
 
-            //var model = new FarmViewModel {
-            //    Id = farm.Id,
-            //    FarmName = farm.FarmName,
-            //    EmailAddress = farm.Person.EmailAddress,
-                
-            //};
             return View(model);
         }
 
@@ -301,6 +357,8 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                 farm.IsVerified = model.IsVerified;
                 farm.PhotoPath = model.PhotoPath;
                 farm.IsActive = farm.IsActive;
+                farm.FarmSideUnitId = model.FarmSizeUnitId;
+                farm.Size = model.Size;
 
                 FarmService.Update(farm);
 

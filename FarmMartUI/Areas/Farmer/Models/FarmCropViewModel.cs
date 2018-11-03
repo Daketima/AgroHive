@@ -12,10 +12,13 @@ namespace FarmMartUI.Areas.Farmer.Models
     {
         public int FarmId { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a Crop")]
         public int CropId { get; set; }
 
+        [Range(1,int.MaxValue, ErrorMessage ="Please select a Crop Type")]
         public int CropTypeId { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a Crop Variety")]
         public int CropVarietyId { get; set; }
 
         [Required(ErrorMessage = "Please Due months")]

@@ -18,6 +18,7 @@ namespace FarmMartUI.Areas.Farmer.Models
         [Range(1, int.MaxValue, ErrorMessage = "Please Select due month")]
         public int MonthToGrowId { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DatePlanted { get; set; }
 
         public DateTime ExpectedHarvestDate { get; set; }

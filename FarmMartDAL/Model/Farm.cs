@@ -27,6 +27,7 @@ namespace FarmMartDAL.Model
         public string EmailAddress { get; set; }
         public string PhotoPath { get; set; }
         public string Size { get; set; }
+        public Nullable<int> FarmSideUnitId { get; set; }
         public bool IsActive { get; set; }
         public bool IsVerified { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
@@ -34,6 +35,7 @@ namespace FarmMartDAL.Model
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual FarmSizeUnit FarmSizeUnit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FarmCrop> FarmCrop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

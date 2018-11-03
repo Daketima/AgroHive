@@ -17,10 +17,10 @@ namespace FarmMartUI.Controllers
     
     public class LivestockController : SuperBaseController
     {
-        private IRepositoryService<Livestock> LivestockService;
-        private IRepositoryService<LivestockPrice> LivestockPriceService;
-        private IRepositoryService<FarmLivestock> FarmLivestockService;
-        private IRepositoryService<Measurement> MeasurementService;
+        private readonly IRepositoryService<Livestock> LivestockService;
+        private readonly IRepositoryService<LivestockPrice> LivestockPriceService;
+        private readonly IRepositoryService<FarmLivestock> FarmLivestockService;
+        private readonly IRepositoryService<Measurement> MeasurementService;
 
         public LivestockController(IRepositoryService<Livestock> livestockService,
         IRepositoryService<LivestockPrice> livestockPriceService,
@@ -32,8 +32,6 @@ namespace FarmMartUI.Controllers
             FarmLivestockService = farmLivestockService;
             MeasurementService = measurementService;
         }
-
-
 
         public void SaveLivestockImage(Livestock Livestock)
         {
@@ -257,20 +255,20 @@ namespace FarmMartUI.Controllers
             return RedirectToAction("Index", "FarmLivestock");
         }
 
-        public ActionResult PriceDetail(int? farmLivestockId)
-        {
-            FarmLivestock fLivestock = FarmLivestockService.GetById(farmLivestockId);
+        //public ActionResult PriceDetail(int? farmLivestockId)
+        //{
+        //    FarmLivestock fLivestock = FarmLivestockService.GetById(farmLivestockId);
 
-            LivestockViewModel model = new LivestockViewModel
-            {
-                Photopath = fLivestock.LivestockBreed.PhotoPath,
-                Name = fLivestock.LivestockBreed.Name,
-                BreedNote = fLivestock.LivestockBreed.Note,
-                PriceDetail = fLivestock.LivestockPrice,
-                farmLivestock = fLivestock
-            };
-            return View(model);
-        }
+        //    LivestockViewModel model = new LivestockViewModel
+        //    {
+        //        Photopath = fLivestock.Breed,
+        //        Name = fLivestock.Breed,
+        //        BreedNote = fLivestock.Breed,
+        //        PriceDetail = fLivestock.LivestockPrice,
+        //        farmLivestock = fLivestock
+        //    };
+        //    return View(model);
+        //}
 
 
     }

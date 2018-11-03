@@ -131,6 +131,7 @@
     <Property Name="EmailAddress" Type="nvarchar" MaxLength="128" />
     <Property Name="PhotoPath" Type="nvarchar" MaxLength="128" />
     <Property Name="Size" Type="nvarchar" MaxLength="128" />
+    <Property Name="FarmSideUnitId" Type="int" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsVerified" Type="bit" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" />
@@ -156,15 +157,25 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FarmId" Type="int" Nullable="false" />
-    <Property Name="LivestockBreedId" Type="int" Nullable="false" />
+    <Property Name="LivestockId" Type="int" />
+    <Property Name="Other" Type="nvarchar" MaxLength="128" />
+    <Property Name="Breed" Type="nvarchar" MaxLength="128" />
     <Property Name="GenderId" Type="int" Nullable="false" />
     <Property Name="Population" Type="nvarchar" MaxLength="128" />
     <Property Name="QuantityAvailable" Type="nvarchar" MaxLength="128" />
     <Property Name="Weight" Type="nvarchar" MaxLength="128" />
     <Property Name="HitMarketDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsAvailable" Type="bit" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="LivestockPriceId" Type="int" />
+  </EntityType>
+  <EntityType Name="FarmSizeUnit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="HarvestPeriod">
     <Key>
@@ -190,19 +201,9 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="128" />
     <Property Name="LivestockTypeId" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
     <Property Name="PhotoPath" Type="nvarchar" MaxLength="500" />
     <Property Name="DateCreated" Type="datetime" />
-  </EntityType>
-  <EntityType Name="LivestockBreed">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="128" />
-    <Property Name="LivestockId" Type="int" />
-    <Property Name="Note" Type="nvarchar" MaxLength="500" />
-    <Property Name="PhotoPath" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="LivestockPrice">
     <Key>
@@ -403,6 +404,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Farm_FarmSideUnit">
+    <End Role="FarmSizeUnit" Type="Self.FarmSizeUnit" Multiplicity="0..1" />
+    <End Role="Farm" Type="Self.Farm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmSizeUnit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Farm">
+        <PropertyRef Name="FarmSideUnitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FarmAddress_LocalGovernment">
     <End Role="LocalGovernment" Type="Self.LocalGovernment" Multiplicity="0..1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
@@ -499,15 +512,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FarmLivestock_LivestockBreed">
-    <End Role="LivestockBreed" Type="Self.LivestockBreed" Multiplicity="1" />
+  <Association Name="FK_FarmLivestock_Livestock">
+    <End Role="Livestock" Type="Self.Livestock" Multiplicity="0..1" />
     <End Role="FarmLivestock" Type="Self.FarmLivestock" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="LivestockBreed">
+      <Principal Role="Livestock">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="FarmLivestock">
-        <PropertyRef Name="LivestockBreedId" />
+        <PropertyRef Name="LivestockId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -547,7 +560,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Livestock_LivestockTyper">
+  <Association Name="FK_Livestock_LivestockType">
     <End Role="LivestockType" Type="Self.LivestockType" Multiplicity="0..1" />
     <End Role="Livestock" Type="Self.Livestock" Multiplicity="*" />
     <ReferentialConstraint>
@@ -556,18 +569,6 @@
       </Principal>
       <Dependent Role="Livestock">
         <PropertyRef Name="LivestockTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LivestockBreed_Livestock">
-    <End Role="Livestock" Type="Self.Livestock" Multiplicity="0..1" />
-    <End Role="LivestockBreed" Type="Self.LivestockBreed" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Livestock">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="LivestockBreed">
-        <PropertyRef Name="LivestockId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -659,10 +660,10 @@
     <EntitySet Name="Farm" EntityType="Self.Farm" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FarmCrop" EntityType="Self.FarmCrop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FarmLivestock" EntityType="Self.FarmLivestock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FarmSizeUnit" EntityType="Self.FarmSizeUnit" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HarvestPeriod" EntityType="Self.HarvestPeriod" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LgisticsOffice" EntityType="Self.LgisticsOffice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Livestock" EntityType="Self.Livestock" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="LivestockBreed" EntityType="Self.LivestockBreed" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LivestockPrice" EntityType="Self.LivestockPrice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LivestockType" EntityType="Self.LivestockType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LocalGovernment" EntityType="Self.LocalGovernment" Schema="dbo" store:Type="Tables" />
@@ -705,6 +706,10 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Farm" EntitySet="Farm" />
     </AssociationSet>
+    <AssociationSet Name="FK_Farm_FarmSideUnit" Association="Self.FK_Farm_FarmSideUnit">
+      <End Role="FarmSizeUnit" EntitySet="FarmSizeUnit" />
+      <End Role="Farm" EntitySet="Farm" />
+    </AssociationSet>
     <AssociationSet Name="FK_FarmAddress_LocalGovernment" Association="Self.FK_FarmAddress_LocalGovernment">
       <End Role="LocalGovernment" EntitySet="LocalGovernment" />
       <End Role="Address" EntitySet="Address" />
@@ -737,8 +742,8 @@
       <End Role="AnimalGender" EntitySet="AnimalGender" />
       <End Role="FarmLivestock" EntitySet="FarmLivestock" />
     </AssociationSet>
-    <AssociationSet Name="FK_FarmLivestock_LivestockBreed" Association="Self.FK_FarmLivestock_LivestockBreed">
-      <End Role="LivestockBreed" EntitySet="LivestockBreed" />
+    <AssociationSet Name="FK_FarmLivestock_Livestock" Association="Self.FK_FarmLivestock_Livestock">
+      <End Role="Livestock" EntitySet="Livestock" />
       <End Role="FarmLivestock" EntitySet="FarmLivestock" />
     </AssociationSet>
     <AssociationSet Name="FK_FarmLivestock_Price" Association="Self.FK_FarmLivestock_Price">
@@ -753,13 +758,9 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="LgisticsOffice" EntitySet="LgisticsOffice" />
     </AssociationSet>
-    <AssociationSet Name="FK_Livestock_LivestockTyper" Association="Self.FK_Livestock_LivestockTyper">
+    <AssociationSet Name="FK_Livestock_LivestockType" Association="Self.FK_Livestock_LivestockType">
       <End Role="LivestockType" EntitySet="LivestockType" />
       <End Role="Livestock" EntitySet="Livestock" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LivestockBreed_Livestock" Association="Self.FK_LivestockBreed_Livestock">
-      <End Role="Livestock" EntitySet="Livestock" />
-      <End Role="LivestockBreed" EntitySet="LivestockBreed" />
     </AssociationSet>
     <AssociationSet Name="FK_LivestockPricing_Measurement" Association="Self.FK_LivestockPricing_Measurement">
       <End Role="Measurement" EntitySet="Measurement" />

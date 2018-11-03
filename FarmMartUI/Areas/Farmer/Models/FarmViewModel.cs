@@ -25,6 +25,9 @@ namespace FarmMartUI.Areas.Farmer.Models
 
         public string Size { get; set; }
 
+        [Range(1, int.MaxValue)]
+        public int FarmSizeUnitId { get; set; }
+
         public List<Farm> MyFarm { get; internal set; }
 
         public FarmCropViewModel FarmCrop { get; set; }
@@ -33,6 +36,7 @@ namespace FarmMartUI.Areas.Farmer.Models
 
         public bool IsVerified { get; set; }
 
-        
+        public IEnumerable<System.Web.Mvc.SelectListItem> FarmSizeUnitDropDown { get; set; }
+
     }
 }

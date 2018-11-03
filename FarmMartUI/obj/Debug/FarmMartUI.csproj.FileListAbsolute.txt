@@ -256,3 +256,6 @@ C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\obj\Debug\FarmMartUI.csproj.
 C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\obj\Debug\FarmMartUI.csproj.CopyComplete
 C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\obj\Debug\FarmMartUI.dll
 C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\obj\Debug\FarmMartUI.pdb
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\bin\System.ValueTuple.dll
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\bin\AutoMapper.pdb
+C:\Users\tesli\Documents\GitHub\AgroHive\FarmMartUI\bin\System.ValueTuple.xml

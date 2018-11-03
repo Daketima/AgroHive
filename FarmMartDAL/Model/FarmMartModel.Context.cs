@@ -40,10 +40,10 @@ namespace FarmMartDAL.Model
         public virtual DbSet<Farm> Farm { get; set; }
         public virtual DbSet<FarmCrop> FarmCrop { get; set; }
         public virtual DbSet<FarmLivestock> FarmLivestock { get; set; }
+        public virtual DbSet<FarmSizeUnit> FarmSizeUnit { get; set; }
         public virtual DbSet<HarvestPeriod> HarvestPeriod { get; set; }
         public virtual DbSet<LgisticsOffice> LgisticsOffice { get; set; }
         public virtual DbSet<Livestock> Livestock { get; set; }
-        public virtual DbSet<LivestockBreed> LivestockBreed { get; set; }
         public virtual DbSet<LivestockPrice> LivestockPrice { get; set; }
         public virtual DbSet<LivestockType> LivestockType { get; set; }
         public virtual DbSet<Measurement> Measurement { get; set; }

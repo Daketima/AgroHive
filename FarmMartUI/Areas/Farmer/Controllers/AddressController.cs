@@ -87,13 +87,13 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         }
 
         // GET: FarmAddress/Create
-        public ActionResult AddFarmAddress(int? farmId)
+        public ActionResult Add(int? farmId)
         {
             var farm = FarmService.GetById(farmId.Value);
 
             if (farm.Address != null)
             {
-                return RedirectToAction("EditFarmAddress", new {
+                return RedirectToAction("Edit", new {
                     addressId = farm.Address.Id
                 });
             }
@@ -109,7 +109,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
 
         // POST: FarmAddress/Create
         [HttpPost]
-        public ActionResult AddFarmAddress(AddressViewModel model)
+        public ActionResult Add(AddressViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -136,7 +136,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
         }
 
         // GET: FarmAddress/Edit/5
-        public ActionResult EditFarmAddress(int? addressId)
+        public ActionResult Edit(int? addressId)
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -151,12 +151,12 @@ namespace FarmMartUI.Areas.Farmer.Controllers
             model.LocalGovernmentAreaDropDown = GetLocalGovernment(_address.LocalGovermentId);
             model.StateDropDown = GetState(_address.StateId);
 
-            return View("EditFarmAddress", model);
+            return View("Edit", model);
         }
 
         // POST: FarmAddress/Edit/5
         [HttpPost]
-        public ActionResult EditFarmAddress(AddressViewModel model)
+        public ActionResult Edit(AddressViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -168,6 +168,7 @@ namespace FarmMartUI.Areas.Farmer.Controllers
                 addrress.StateId = model.StateId;
                 addrress.LocalGovermentId = model.LocalGovermentId;
                 addrress.DateCreated = addrress.DateCreated;
+                addrress.LandMark = model.LandMark;
 
                 AddressService.Update(addrress);
             }

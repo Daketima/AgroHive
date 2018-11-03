@@ -25,7 +25,7 @@ namespace FarmMartUI.helper
         private IRepositoryService<AnimalGender> AnimalGengerService;
         private IRepositoryService<Livestock> LivetockService;
         private IRepositoryService<Measurement> MeasurementService;
-        private IRepositoryService<CropType> CropTypeService;
+        private readonly IRepositoryService<CropType> CropTypeService;
         
 
         public SuperBaseController()
@@ -149,10 +149,10 @@ namespace FarmMartUI.helper
             {
                 SaveCrop(cropVariety);
             }
-            if (CropOrLivestockToSavePicture is LivestockBreed)
-            {
+            //if (CropOrLivestockToSavePicture is LivestockBreed)
+            //{
 
-            }
+            //}
             void SaveCrop(CropVariety CropVariety)
             {
                 if (Request.Files.Count > 0)

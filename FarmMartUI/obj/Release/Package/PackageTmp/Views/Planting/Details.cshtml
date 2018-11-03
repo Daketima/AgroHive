@@ -1,0 +1,44 @@
+﻿@model FarmMartUI.Areas.Farmer.Models.PlantingViewModel
+
+@{
+    ViewBag.Title = "Planting > Details";
+    ViewBag.Controller = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-12" id="customer-orders">
+        <div class="box">
+            <h4>Crops in this Farm</h4>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date Planted</th>
+                            <th>Expected Harvest</th>
+                            <th>Planted On</th>
+                            <th>Yield Per Acer</th>
+                        </tr>
+                    </thead>
+                    <tbody style="overflow-y:auto; height:200px">
+                        @if (Model.PlantingDetail.Any())
+                        {
+                            foreach (var planting in Model.PlantingDetail)
+                            {
+                                <tr>
+                                    <td>@planting.DatePlanted</td>
+                                    <td>@planting.ExpectedHarvestDate</td>
+                                    <td>@planting.Hectarage</td>
+                                    <td>@planting.YieldPerHectar</td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-8 -->
+    </div>

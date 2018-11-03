@@ -50,8 +50,8 @@
     <Compile Include="ServiceAPI\FarmLivestockService.cs" />
     <Compile Include="ServiceAPI\FarmService.cs" />
     <Compile Include="ServiceAPI\AnimalGenderService.cs" />
+    <Compile Include="ServiceAPI\FarmSizeUnitService.cs" />
     <Compile Include="ServiceAPI\HarvestPeriodService.cs" />
-    <Compile Include="ServiceAPI\LivestockBreedService.cs" />
     <Compile Include="ServiceAPI\LivestockPriceService.cs" />
     <Compile Include="ServiceAPI\LivestockService.cs" />
     <Compile Include="ServiceAPI\LivestockTypeService.cs" />

@@ -14,12 +14,11 @@ namespace FarmMartUI.Controllers
 {
     public class HomeController : SuperBaseController
     {
-        private IRepositoryService<FarmCrop> FarmCropService;
-        private IRepositoryService<Farm> FarmService;
-       
-        private IRepositoryService<Crop> CropVarietyService;
-        private IRepositoryService<Livestock> LivestockService;
-        private IRepositoryService<FarmLivestock> FarmLivestockService;
+        private readonly IRepositoryService<FarmCrop> FarmCropService;
+        private readonly IRepositoryService<Farm> FarmService;
+        private readonly IRepositoryService<Crop> CropVarietyService;
+        private readonly IRepositoryService<Livestock> LivestockService;
+        private readonly IRepositoryService<FarmLivestock> FarmLivestockService;
 
        
 
@@ -27,7 +26,6 @@ namespace FarmMartUI.Controllers
         {
             FarmCropService = farmCropService;
             FarmService = farmService;
-            
             CropVarietyService = cropVarietyService;
             LivestockService = livestockService;
             FarmLivestockService = farmLivestockService;
@@ -99,12 +97,12 @@ namespace FarmMartUI.Controllers
                 {
                     cropList = CropVarietyService.Get().ToList();
                 }
-                if (!farmCrop.Any())
-                {
-                    farmLivestock = FarmLivestockService.Get().Where(x => x.IsActive && x.LivestockBreed.Livestock.Name.ToUpper().Contains(searchWord.ToUpper()) || x.Farm.FarmName.ToUpper().Contains(searchWord.ToUpper())).ToList();
+                //if (!farmCrop.Any())
+                //{
+                //    farmLivestock = FarmLivestockService.Get().Where(x => x.IsActive && x.LivestockBreed.Livestock.Name.ToUpper().Contains(searchWord.ToUpper()) || x.Farm.FarmName.ToUpper().Contains(searchWord.ToUpper())).ToList();
 
-                    livestockList = LivestockService.Get().ToList();
-                }
+                //    livestockList = LivestockService.Get().ToList();
+                //}
             }
 
             if (cropId.HasValue)
@@ -112,11 +110,11 @@ namespace FarmMartUI.Controllers
                 farmCrop = FarmCropService.Get().Where(x => x.CropVarietyId == cropId.Value && x.IsActive).ToList();
             }
 
-            if (livestockId.HasValue)
-            {
-                farmLivestock = FarmLivestockService.Get().Where(x => x.LivestockBreedId.Equals(livestockId.Value) && x.IsActive).ToList();
-                livestockList = LivestockService.Get().ToList();
-            }
+            //if (livestockId.HasValue)
+            //{
+            //    farmLivestock = FarmLivestockService.Get().Where(x => x.LivestockBreedId.Equals(livestockId.Value) && x.IsActive).ToList();
+            //    livestockList = LivestockService.Get().ToList();
+            //}
 
             if (farmCrop.Any())
             {
